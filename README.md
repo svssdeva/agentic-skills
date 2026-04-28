@@ -1,6 +1,6 @@
 # agentic-skills
 
-> A curated library of **69 skills** for Claude Code — drop-in behavioral modules that make your AI agent smarter, faster, and domain-aware.
+> A curated library of **75 skills** for Claude Code — drop-in behavioral modules that make your AI agent smarter, faster, and domain-aware.
 
 Skills are plain markdown files (`SKILL.md`) that Claude reads before acting. Each one encodes expert knowledge, workflows, and guardrails for a specific domain. No code to install — just point Claude at the folder.
 
@@ -138,7 +138,7 @@ Using spec-driven-development + test-driven-development, implement this feature.
 | [`social-content`](social-content/SKILL.md) | Social-first content with engagement hooks |
 | [`product-marketing-context`](product-marketing-context/SKILL.md) | Product marketing framing and messaging |
 
-### Development Methodology `16 skills`
+### Development Methodology `18 skills`
 
 | Skill | What it does |
 |---|---|
@@ -158,8 +158,18 @@ Using spec-driven-development + test-driven-development, implement this feature.
 | [`security-and-hardening`](security-and-hardening/SKILL.md) | Security review, threat modeling, hardening |
 | [`git-workflow-and-versioning`](git-workflow-and-versioning/SKILL.md) | Branching, commits, tagging, release flow |
 | [`shipping-and-launch`](shipping-and-launch/SKILL.md) | Launch checklist, rollout strategy, monitoring |
+| [`system-design`](system-design/SKILL.md) | Structured system design — requirements to trade-off analysis |
+| [`systematic-debugging`](systematic-debugging/SKILL.md) | Four-phase debugging with enforced root cause investigation |
 
-### Frontend & Design `4 skills`
+### Go `3 skills`
+
+| Skill | What it does |
+|---|---|
+| [`golang-pro`](golang-pro/SKILL.md) | Concurrent Go dev with goroutines, microservices, pprof optimization |
+| [`golang-patterns`](golang-patterns/SKILL.md) | Idiomatic Go patterns, error handling, concurrency, interfaces |
+| [`golang-testing`](golang-testing/SKILL.md) | Table-driven tests, benchmarks, fuzzing, TDD workflows |
+
+### Frontend & Design `5 skills`
 
 | Skill | What it does |
 |---|---|
@@ -167,6 +177,7 @@ Using spec-driven-development + test-driven-development, implement this feature.
 | [`web-design-guidelines`](web-design-guidelines/SKILL.md) | Visual design, typography, spacing, accessibility |
 | [`performance-optimization`](performance-optimization/SKILL.md) | Frontend and backend performance — measure first |
 | [`remotion-best-practices`](remotion-best-practices/SKILL.md) | Programmatic video with Remotion |
+| [`extract-design-system`](extract-design-system/SKILL.md) | Reverse-engineer a website's design tokens via Playwright |
 
 ### Testing `2 skills`
 
