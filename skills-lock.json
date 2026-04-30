@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "secure-linux-web-hosting": {
+      "source": "xixu-me/skills",
+      "sourceType": "github",
+      "skillPath": "skills/secure-linux-web-hosting/SKILL.md",
+      "computedHash": "49e4837b94e43d1c9e50f7e73063a3c5ffa0fc6d1a0708145f50c432cafac2d4"
+    }
+  }
+}
