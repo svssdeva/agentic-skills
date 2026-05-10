@@ -1,21 +1,42 @@
 # agentic-skills
 
-A curated library of 75+ drop-in skills for Claude Code. Each skill is a `SKILL.md` file that encodes expert knowledge, workflows, and guardrails for a specific domain.
+A curated library of 76 drop-in skills for Claude Code. Each skill is a `SKILL.md` file that encodes expert knowledge, workflows, and guardrails for a specific domain.
 
 ## Structure
 
 ```
-<skill-name>/
-└── SKILL.md
+<category>/
+└── <skill-name>/
+    └── SKILL.md
 ```
 
-Skills are flat at the repo root — one kebab-case folder per skill, each containing exactly one `SKILL.md`. No nesting.
+Skills live inside category folders at the repo root. Each category is a lowercase kebab-case folder; each skill inside it is also a lowercase kebab-case folder containing exactly one `SKILL.md`.
+
+## Categories
+
+| Folder | Domain |
+|---|---|
+| `angular/` | Angular framework skills |
+| `astro/` | Astro framework skills |
+| `bun/` | Bun runtime and tooling |
+| `cloud/` | AWS, Vercel, CI/CD, Linux hosting |
+| `engineering/` | Development methodology and practices |
+| `frontend/` | UI engineering, design systems, performance |
+| `golang/` | Go language skills |
+| `mobile/` | Ionic, Capacitor, Expo |
+| `rust/` | Rust language skills |
+| `seo/` | SEO, content strategy, marketing |
+| `tailwind/` | Tailwind CSS skills |
+| `testing/` | Testing tools and practices |
+| `typescript/` | TypeScript skills |
+| `utils/` | Utilities and meta-skills (compression, skill discovery, site audit) |
 
 ## Conventions
 
-- Folder names: lowercase kebab-case (`golang-pro`, `extract-design-system`)
+- Category folder names: lowercase kebab-case (`golang`, `engineering`, `mobile`)
+- Skill folder names: lowercase kebab-case (`golang-pro`, `extract-design-system`)
 - Each `SKILL.md` starts with an HTML source comment (`<!-- Source: ... -->`) and optionally YAML frontmatter
-- README.md groups skills by category (Angular, Go, Rust, etc.) — grouping is documentation-only, not reflected in directory structure
+- Source/Install comments track upstream provenance — do not modify them
 - Skill count in README headline must stay accurate when adding/removing skills
 
 ## Knowledge Graph
@@ -36,7 +57,8 @@ Rebuild after adding skills:
 
 ## Adding a Skill
 
-1. Create `my-skill/SKILL.md` with source comment header
-2. Add the skill to the appropriate category table in `README.md`
-3. Bump the skill count in the README headline
-4. Run `/graphify . --update` to refresh the knowledge graph
+1. Place the skill in the appropriate category: `<category>/my-skill/SKILL.md`
+2. Add `<!-- Source: ... -->` and `<!-- Install: ... -->` header comments
+3. Add the skill to the appropriate category table in `README.md` with the nested path link
+4. Bump the skill count in the README headline
+5. Run `/graphify . --update` to refresh the knowledge graph

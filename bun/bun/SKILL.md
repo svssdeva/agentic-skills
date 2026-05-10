@@ -1,5 +1,5 @@
 <!-- Source: https://skills.sh/site/bun.sh/bun -->
-<!-- Install: npx skills add https://bun.sh/docs -->
+<!-- Install: npx skills add https://github.com/svssdeva/agentic-skills --skill bun -->
 
 # Bun Skill Reference
 

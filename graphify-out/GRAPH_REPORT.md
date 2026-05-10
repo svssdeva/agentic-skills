@@ -1,112 +1,145 @@
-# Graph Report - .  (2026-04-28)
+# Graph Report - .  (2026-05-10)
 
 ## Corpus Check
-- 77 files · ~89,025 words
+- 82 files · ~92,351 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 90 nodes · 153 edges · 9 communities detected
-- Extraction: 18% EXTRACTED · 82% INFERRED · 0% AMBIGUOUS · INFERRED: 126 edges (avg confidence: 0.84)
+- 355 nodes · 493 edges · 17 communities detected
+- Extraction: 84% EXTRACTED · 16% INFERRED · 0% AMBIGUOUS · INFERRED: 80 edges (avg confidence: 0.83)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
-- [[_COMMUNITY_Go & Design Patterns|Go & Design Patterns]]
-- [[_COMMUNITY_Code Quality & Testing|Code Quality & Testing]]
-- [[_COMMUNITY_Astro & Performance|Astro & Performance]]
-- [[_COMMUNITY_Engineering Methodology|Engineering Methodology]]
-- [[_COMMUNITY_DevOps & Tooling|DevOps & Tooling]]
-- [[_COMMUNITY_Angular & TypeScript|Angular & TypeScript]]
-- [[_COMMUNITY_Mobile & CSS Frameworks|Mobile & CSS Frameworks]]
-- [[_COMMUNITY_SEO & Content Strategy|SEO & Content Strategy]]
-- [[_COMMUNITY_Context Compression|Context Compression]]
+- [[_COMMUNITY_Context Engineering & Docs|Context Engineering & Docs]]
+- [[_COMMUNITY_SEO & Generative Discovery|SEO & Generative Discovery]]
+- [[_COMMUNITY_Angular + Claude Code Tools|Angular + Claude Code Tools]]
+- [[_COMMUNITY_Code Review & Quality|Code Review & Quality]]
+- [[_COMMUNITY_Systems Programming (Rust & Go)|Systems Programming (Rust & Go)]]
+- [[_COMMUNITY_Mobile & Cross-Platform Testing|Mobile & Cross-Platform Testing]]
+- [[_COMMUNITY_Angular Framework|Angular Framework]]
+- [[_COMMUNITY_Debugging & Error Recovery|Debugging & Error Recovery]]
+- [[_COMMUNITY_API & Interface Design|API & Interface Design]]
+- [[_COMMUNITY_Astro Architecture & Deployment|Astro Architecture & Deployment]]
+- [[_COMMUNITY_CICD & Release Automation|CI/CD & Release Automation]]
+- [[_COMMUNITY_Git Workflow & Versioning|Git Workflow & Versioning]]
+- [[_COMMUNITY_CSS, Tailwind & Mobile UI|CSS, Tailwind & Mobile UI]]
+- [[_COMMUNITY_Linux Hosting & Security|Linux Hosting & Security]]
+- [[_COMMUNITY_Bun Runtime Ecosystem|Bun Runtime Ecosystem]]
+- [[_COMMUNITY_AWS & Infrastructure as Code|AWS & Infrastructure as Code]]
+- [[_COMMUNITY_Rust Anti-Patterns|Rust Anti-Patterns]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `Angular Developer` - 9 edges
-2. `Go Development Patterns` - 9 edges
-3. `README.md — Skill Library Index` - 8 edges
-4. `Golang Pro` - 8 edges
-5. `Test-Driven Development` - 7 edges
-6. `SEO Audit` - 7 edges
-7. `Spec-Driven Development` - 7 edges
-8. `CI/CD and Automation` - 6 edges
-9. `Performance Optimization` - 6 edges
-10. `Go Testing Patterns` - 6 edges
+1. `agentic-skills README` - 25 edges
+2. `Skill Library (76 skills)` - 15 edges
+3. `test-driven-development` - 13 edges
+4. `Angular Signals` - 12 edges
+5. `spec-driven-development` - 11 edges
+6. `m15-anti-pattern Skill` - 11 edges
+7. `AI SEO (Generative Engine Optimization)` - 10 edges
+8. `incremental-implementation` - 10 edges
+9. `code-review-and-quality` - 10 edges
+10. `security-and-hardening` - 10 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Remotion Video Engineering` --conceptually_related_to--> `Web Design Guidelines`  [INFERRED]
-  remotion-best-practices/SKILL.md → web-design-guidelines/SKILL.md
-- `AWS Architecture Diagrams` --conceptually_related_to--> `Documentation and ADRs`  [INFERRED]
-  aws-diagrams/SKILL.md → documentation-and-adrs/SKILL.md
-- `Angular Tooling` --conceptually_related_to--> `Angular Developer`  [INFERRED]
-  angular-tooling/SKILL.md → angular-developer/SKILL.md
-- `Extract Design System` --semantically_similar_to--> `System Design`  [INFERRED] [semantically similar]
-  extract-design-system/SKILL.md → system-design/SKILL.md
-- `Root Cause Investigation Methodology` --semantically_similar_to--> `Trade-off Analysis`  [INFERRED] [semantically similar]
-  systematic-debugging/SKILL.md → system-design/SKILL.md
-
-## Hyperedges (group relationships)
-- **Go Language Skill Cluster** — skill_golang_patterns, skill_golang_pro, skill_golang_testing [EXTRACTED 1.00]
-- **Systematic Analysis Methodologies** — skill_systematic_debugging, skill_system_design, concept_tradeoff_analysis, concept_root_cause_analysis [INFERRED 0.75]
-- **Testing and Quality Assurance Practices** — skill_golang_testing, skill_systematic_debugging, concept_tdd_workflow, concept_table_driven_tests [INFERRED 0.75]
+- `SKILL.md format` --instantiates--> `m15-anti-pattern Skill`  [INFERRED]
+  README.md → rust/m15-anti-pattern/SKILL.md
+- `Engineering Practices skills category (18 skills)` --overlaps_with--> `Rust Anti-Pattern detection and remediation`  [INFERRED]
+  README.md → rust/m15-anti-pattern/SKILL.md
+- `rust-best-practices Skill` --sourced_from--> `apollographql/skills (upstream source)`  [EXTRACTED]
+  rust/rust-best-practices/SKILL.md → README.md
+- `Lighthouse Auditing (95+ score target)` --measured_by--> `Core Web Vitals (LCP, INP, CLS)`  [INFERRED]
+  astro/perf-astro/SKILL.md → seo/seo-audit/SKILL.md
+- `agentic-skills README` --lists_skill--> `typescript-advanced-types Skill`  [EXTRACTED]
+  README.md → typescript/typescript-advanced-types/SKILL.md
 
 ## Communities
 
-### Community 0 - "Go & Design Patterns"
-Cohesion: 0.17
-Nodes (21): CLAUDE.md — Repo Conventions, Concurrency Patterns (goroutines, channels, context), Context Propagation and Cancellation, Design Tokens Extraction, Error Handling Patterns, Functional Options Pattern, Graphify Knowledge Graph, Interface Design (small, focused, consumer-side) (+13 more)
+### Community 0 - "Context Engineering & Docs"
+Cohesion: 0.08
+Nodes (42): CLAUDE.md Project Instructions, agentic-skills CLAUDE.md, Async/Await Patterns, Claude Code, Clippy / cargo linting, Concurrency Patterns, Design Tokens, Error Handling (+34 more)
 
-### Community 1 - "Code Quality & Testing"
-Cohesion: 0.25
-Nodes (11): Angular Testing, Code Review and Quality, Code Simplification, Debugging and Error Recovery, M15 Anti-Pattern Detection, Playwright E2E Testing, Rust Async Patterns, Rust Best Practices (+3 more)
+### Community 1 - "SEO & Generative Discovery"
+Cohesion: 0.06
+Nodes (39): Confusion Management (Surface Ambiguity), Context Hierarchy (Rules-Spec-Source-Error-History), Inline Planning Pattern, MCP Integrations (Context7, DevTools, GitHub), Rules Files (CLAUDE.md), context-engineering, ADR Lifecycle (Proposed-Accepted-Superseded), ADR Template (Context-Decision-Alternatives-Consequences) (+31 more)
 
-### Community 2 - "Astro & Performance"
+### Community 2 - "Angular + Claude Code Tools"
+Cohesion: 0.07
+Nodes (36): Change Sizing (~100 lines ideal), Dead Code Hygiene, Dependency Discipline in Review, Five-Axis Review (Correctness-Readability-Architecture-Security-Performance), Honesty in Review (No Rubber-Stamping), Multi-Model Review Pattern, Review Comment Severity Labels (Critical-Nit-Optional-FYI), code-review-and-quality (+28 more)
+
+### Community 3 - "Code Review & Quality"
+Cohesion: 0.08
+Nodes (35): AI Citation Share Monitoring (Otterly, Peec AI, ZipTie), Machine-Readable Files (/pricing.md, /llms.txt), Princeton GEO Research (KDD 2024, Perplexity study), Schema Markup for AI (Article, HowTo, FAQPage, Product), AI SEO (Generative Engine Optimization), AI SEO Three Pillars (Structure, Authority, Presence), Canonical URLs, Open Graph Meta Tags (+27 more)
+
+### Community 4 - "Systems Programming (Rust & Go)"
+Cohesion: 0.1
+Nodes (32): Angular Developer Guidelines, Angular Directives, Angular Signals, Angular Tooling, Angular skills category (9 skills), Accessibility / WCAG, Angular CLI, Angular Dependency Injection (+24 more)
+
+### Community 5 - "Mobile & Cross-Platform Testing"
+Cohesion: 0.11
+Nodes (24): Chesterton's Fence (Understand Before Removing), Five Simplification Principles, Preserve Behavior Exactly, Rule of 500 (Automate Large Refactors), code-simplification, debugging-and-error-recovery, Regression Guard (Post-Bug Test), Root Cause Analysis (+16 more)
+
+### Community 6 - "Angular Framework"
+Cohesion: 0.11
+Nodes (21): Astro skills category (5 skills), Bun skills category (3 skills), Cloud & DevOps skills category (6 skills), Engineering Practices skills category (18 skills), Frontend & Design skills category (5 skills), Go skills category (3 skills), Mobile & Cross-Platform skills category (4 skills), Rust skills category (5 skills) (+13 more)
+
+### Community 7 - "Debugging & Error Recovery"
+Cohesion: 0.13
+Nodes (19): Accessibility (a11y), Biometric Authentication, Capacitor, Chrome DevTools MCP, Core Web Vitals, Ionic UI Components, Live Updates (Capacitor Updater), Playwright E2E Testing (+11 more)
+
+### Community 8 - "API & Interface Design"
+Cohesion: 0.12
+Nodes (17): Validate at Boundaries (Not Internally), Branded Types for IDs, Contract-First API Design, Hyrum's Law, One-Version Rule, Pagination on List Endpoints, Prefer Addition Over Modification, api-and-interface-design (+9 more)
+
+### Community 9 - "Astro Architecture & Deployment"
+Cohesion: 0.14
+Nodes (16): Astro Deployment Adapters (Vercel, Netlify, Cloudflare, Node), Cloudflare Pages Deploy Target, GTM / GA4 Analytics Integration, Astro i18n (multi-language hreflang), Astro Architecture Skill, Tailwind CSS (utility-first, mobile-first), Astro CLI Commands, Astro Content Collections (Zod schemas) (+8 more)
+
+### Community 10 - "CI/CD & Release Automation"
+Cohesion: 0.13
+Nodes (15): Feature Flags, GitHub Actions, Playwright E2E Testing, Quality Gate Pipeline, CI/CD and Automation, Staged Rollouts, Compound Components Pattern, React 19 APIs (use instead of forwardRef) (+7 more)
+
+### Community 11 - "Git Workflow & Versioning"
+Cohesion: 0.16
+Nodes (15): Excessive .clone() anti-pattern, Quick Review Checklist (Rust anti-patterns), Layer 2: Design Choices (Rust skill layers), Rust Anti-Pattern detection and remediation, Rust Anti-Patterns, Rust domain design (m09-domain), Rust error handling (m06-error-handling), Rust mental models (m14-mental-model) (+7 more)
+
+### Community 12 - "CSS, Tailwind & Mobile UI"
+Cohesion: 0.23
+Nodes (14): CSS Container Queries, CSS Grid Layout, Class Variance Authority (CVA), Dark Mode, Expo, Mobile-First Design, NativeWind, react-native-css (+6 more)
+
+### Community 13 - "Linux Hosting & Security"
 Cohesion: 0.27
-Nodes (11): Astro Framework, Astro Architecture, Astro Expert, Astro SEO, Website Audit, Browser Testing with DevTools, Astro Performance, Performance Optimization (+3 more)
+Nodes (10): BBR / Kernel Network Tuning (Optional), Firewall Posture (deny-by-default), Let's Encrypt / ACME TLS, Nginx Web Server, Distro Routing Reference, Nginx Patterns Reference, Security and TLS Reference, Workflow Map Reference (+2 more)
 
-### Community 3 - "Engineering Methodology"
-Cohesion: 0.38
-Nodes (10): API and Interface Design, Context Engineering, Deprecation and Migration, Documentation and ADRs, Idea Refinement, Incremental Implementation, Planning and Task Breakdown, Source-Driven Development (+2 more)
-
-### Community 4 - "DevOps & Tooling"
-Cohesion: 0.27
-Nodes (10): Angular Tooling, AWS Architecture Diagrams, AWS Solution Architecture, Bun Fundamentals, Bun Development Workflows, Bun Runtime Internals, CI/CD and Automation, Git Workflow and Versioning (+2 more)
-
-### Community 5 - "Angular & TypeScript"
-Cohesion: 0.39
-Nodes (9): Angular Components, Angular Developer, Angular Dependency Injection, Angular Directives, Angular Forms, Angular HTTP Client, Angular Signals, TypeScript Advanced Types (+1 more)
-
-### Community 6 - "Mobile & CSS Frameworks"
+### Community 14 - "Bun Runtime Ecosystem"
 Cohesion: 0.42
-Nodes (9): Capacitor Native Bridge, Expo with Tailwind (NativeWind), Frontend UI Engineering, Ionic Framework, Ionic Design System, Tailwind CSS Patterns, Tailwind Design System, Tailwind Advanced Layouts (+1 more)
+Nodes (9): Bun Development, Bun Runtime, Bun Skill Reference, Bun Bundler, Bun Package Manager, Bun JavaScript Runtime, Bun Test Runner, Elysia Framework (+1 more)
 
-### Community 7 - "SEO & Content Strategy"
-Cohesion: 0.57
-Nodes (7): AI-First SEO, Content Strategy, Product Marketing Context, Programmatic SEO, SEO Audit, Geo-Targeted SEO, Social Content Strategy
+### Community 15 - "AWS & Infrastructure as Code"
+Cohesion: 0.32
+Nodes (8): CDK TypeScript, CloudFormation YAML Templates, Terraform Templates, AWS CloudFormation (diagrams input), Eraser API (cloud-architecture-diagram), Eraser DSL, AWS Diagram Generator, AWS Solution Architect
 
-### Community 8 - "Context Compression"
+### Community 16 - "Rust Anti-Patterns"
 Cohesion: 1.0
-Nodes (2): Aggressive Context Compression, Context Compression
+Nodes (3): Token Compression (Caveman Speak), Caveman Compress (caveman-compress), Caveman Compress (compress)
 
 ## Knowledge Gaps
-- **5 isolated node(s):** `Context Compression`, `Aggressive Context Compression`, `TypeScript Advanced Types`, `Design Tokens Extraction`, `Functional Options Pattern`
+- **156 isolated node(s):** `CLAUDE.md Project Instructions`, `Claude Code`, `Angular inject() Function`, `Playwright (browser automation)`, `Clippy / cargo linting` (+151 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **Thin community `Context Compression`** (2 nodes): `Aggressive Context Compression`, `Context Compression`
-  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Performance Optimization` connect `Astro & Performance` to `Mobile & CSS Frameworks`?**
-  _High betweenness centrality (0.188) - this node is a cross-community bridge._
-- **Why does `Test-Driven Development` connect `Code Quality & Testing` to `Engineering Methodology`, `Angular & TypeScript`?**
-  _High betweenness centrality (0.173) - this node is a cross-community bridge._
-- **Why does `Angular Testing` connect `Code Quality & Testing` to `Angular & TypeScript`?**
-  _High betweenness centrality (0.163) - this node is a cross-community bridge._
-- **Are the 9 inferred relationships involving `Angular Developer` (e.g. with `Angular Testing` and `TypeScript Expert`) actually correct?**
-  _`Angular Developer` has 9 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 2 inferred relationships involving `Go Development Patterns` (e.g. with `Golang Pro` and `Go Testing Patterns`) actually correct?**
-  _`Go Development Patterns` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 2 inferred relationships involving `Golang Pro` (e.g. with `Go Development Patterns` and `Go Testing Patterns`) actually correct?**
-  _`Golang Pro` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 7 inferred relationships involving `Test-Driven Development` (e.g. with `Debugging and Error Recovery` and `Spec-Driven Development`) actually correct?**
-  _`Test-Driven Development` has 7 INFERRED edges - model-reasoned connections that need verification._
+- **Why does `agentic-skills README` connect `Context Engineering & Docs` to `Systems Programming (Rust & Go)`, `Angular Framework`?**
+  _High betweenness centrality (0.119) - this node is a cross-community bridge._
+- **Why does `Angular Developer Guidelines` connect `Systems Programming (Rust & Go)` to `CSS, Tailwind & Mobile UI`, `Debugging & Error Recovery`?**
+  _High betweenness centrality (0.050) - this node is a cross-community bridge._
+- **Are the 3 inferred relationships involving `test-driven-development` (e.g. with `incremental-implementation` and `Preserve Behavior Exactly`) actually correct?**
+  _`test-driven-development` has 3 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 2 inferred relationships involving `Angular Signals` (e.g. with `angular-di Skill` and `Zoneless Change Detection`) actually correct?**
+  _`Angular Signals` has 2 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 4 inferred relationships involving `spec-driven-development` (e.g. with `idea-refine` and `planning-and-task-breakdown`) actually correct?**
+  _`spec-driven-development` has 4 INFERRED edges - model-reasoned connections that need verification._
+- **What connects `CLAUDE.md Project Instructions`, `Claude Code`, `Angular inject() Function` to the rest of the system?**
+  _156 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Context Engineering & Docs` be split into smaller, more focused modules?**
+  _Cohesion score 0.08 - nodes in this community are weakly interconnected._

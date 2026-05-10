@@ -1,8 +1,6 @@
 # Knowledge graph - ignore cache and temp files, keep outputs
 graphify-out/cache/
 graphify-out/.graphify_*
-graphify-out/manifest.json
-graphify-out/cost.json
 
 # macOS
 .DS_Store
