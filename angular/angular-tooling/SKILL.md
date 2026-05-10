@@ -3,106 +3,202 @@
 
 # Angular Tooling
 
-Essential commands and configuration for Angular v20+ development.
+Use Angular CLI and development tools for efficient Angular v20+ development.
 
-## Angular CLI Commands
+## Project Setup
 
-### Project Creation
+### Create New Project
 
 ```bash
-# Create new project
-ng new my-app --routing --style=css
+# Create new standalone project (default in v20+)
+ng new my-app
 
 # With specific options
-ng new my-app \
-  --routing=true \
-  --style=scss \
-  --ssr=true \
-  --skip-tests=false
+ng new my-app --style=scss --routing --ssr=false
+
+# Skip tests
+ng new my-app --skip-tests
+
+# Minimal setup
+ng new my-app --minimal --inline-style --inline-template
 ```
 
-### Generators
+### Project Structure
 
-```bash
-# Components (standalone by default in v20+)
-ng generate component features/user-list
-ng g c features/user-card
-ng g c shared/button --skip-tests
-
-# Services
-ng generate service core/auth
-ng g s features/user
-
-# Directives
-ng g d shared/highlight
-ng g d features/tooltip
-
-# Pipes
-ng g pipe shared/capitalize
-ng g p features/filter-by
-
-# Interfaces & Types
-ng g interface core/models/user
-ng g i core/models/product
-
-# Guards
-ng g guard core/auth
-ng g g core/admin --functional
-
-# Resolvers
-ng g resolver features/user
-
-# Interceptors
-ng g interceptor core/auth
-ng g i core/error --functional
+```
+my-app/
+├── src/
+│   ├── app/
+│   │   ├── app.component.ts
+│   │   ├── app.config.ts
+│   │   └── app.routes.ts
+│   ├── index.html
+│   ├── main.ts
+│   └── styles.scss
+├── public/                  # Static assets
+├── angular.json             # CLI configuration
+├── package.json
+├── tsconfig.json
+└── tsconfig.app.json
 ```
 
-### Build & Serve
+## Code Generation
+
+### Components
 
 ```bash
-# Development server
+# Generate component
+ng generate component features/user-profile
+ng g c features/user-profile  # Short form
+
+# With options
+ng g c shared/button --inline-template --inline-style
+ng g c features/dashboard --skip-tests
+ng g c features/settings --change-detection=OnPush
+
+# Flat (no folder)
+ng g c shared/icon --flat
+
+# Dry run (preview)
+ng g c features/checkout --dry-run
+```
+
+### Services
+
+```bash
+# Generate service (providedIn: 'root' by default)
+ng g service services/auth
+ng g s services/user
+
+# Skip tests
+ng g s services/api --skip-tests
+```
+
+### Other Schematics
+
+```bash
+# Directive
+ng g directive directives/highlight
+ng g d directives/tooltip
+
+# Pipe
+ng g pipe pipes/truncate
+ng g p pipes/date-format
+
+# Guard (functional by default)
+ng g guard guards/auth
+
+# Interceptor (functional by default)
+ng g interceptor interceptors/auth
+
+# Interface
+ng g interface models/user
+
+# Enum
+ng g enum models/status
+
+# Class
+ng g class models/product
+```
+
+### Generate with Path Alias
+
+```bash
+# Components in feature folders
+ng g c @features/products/product-list
+ng g c @shared/ui/button
+```
+
+## Development Server
+
+```bash
+# Start dev server
 ng serve
-ng serve --port 4300 --open
-ng serve --configuration=development
+ng s  # Short form
 
-# Build
-ng build
-ng build --configuration=production
-ng build --watch  # Rebuild on changes
+# With options
+ng serve --port 4201
+ng serve --open  # Open browser
+ng serve --host 0.0.0.0  # Expose to network
 
-# Specific configuration
-ng build --base-href=/app/ --optimization=true
+# Production mode locally
+ng serve --configuration=production
+
+# With SSL
+ng serve --ssl --ssl-key ./ssl/key.pem --ssl-cert ./ssl/cert.pem
 ```
 
-### Testing
+## Building
+
+### Development Build
+
+```bash
+ng build
+```
+
+### Production Build
+
+```bash
+ng build --configuration=production
+ng build -c production  # Short form
+
+# With specific options
+ng build -c production --source-map=false
+ng build -c production --named-chunks
+```
+
+### Build Output
+
+```
+dist/my-app/
+├── browser/
+│   ├── index.html
+│   ├── main-[hash].js
+│   ├── polyfills-[hash].js
+│   └── styles-[hash].css
+└── server/              # If SSR enabled
+    └── main.js
+```
+
+## Testing
+
+### Unit Tests
 
 ```bash
 # Run tests
-ng test                    # Watch mode
-ng test --watch=false      # Single run
-ng test --code-coverage    # With coverage
+ng test
+ng t  # Short form
 
-# E2E tests
+# Single run (CI)
+ng test --watch=false --browsers=ChromeHeadless
+
+# With coverage
+ng test --code-coverage
+
+# Specific file
+ng test --include=**/user.service.spec.ts
+```
+
+### E2E Tests
+
+```bash
+# Run e2e (if configured)
 ng e2e
 ```
 
-### Analysis
+## Linting
 
 ```bash
-# Bundle analysis
-ng build --stats-json
-npx webpack-bundle-analyzer dist/my-app/stats.json
-
-# Lint
+# Run linter
 ng lint
+
+# Fix auto-fixable issues
 ng lint --fix
 ```
 
-## Vite/esbuild Configuration
+## Configuration
 
-Angular v17+ uses Vite/esbuild by default via `@angular/build`:
-
-### angular.json Build Config
+### angular.json Key Sections
 
 ```json
 {
@@ -110,19 +206,14 @@ Angular v17+ uses Vite/esbuild by default via `@angular/build`:
     "my-app": {
       "architect": {
         "build": {
-          "builder": "@angular/build:application",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/my-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
+            "assets": ["{ \"glob\": \"**/*\", \"input\": \"public\" }"],
             "styles": ["src/styles.scss"],
             "scripts": []
           },
@@ -135,15 +226,12 @@ Angular v17+ uses Vite/esbuild by default via `@angular/build`:
                   "maximumError": "1MB"
                 }
               ],
-              "outputHashing": "all",
-              "sourceMap": false,
-              "optimization": true
+              "outputHashing": "all"
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+              "sourceMap": true
             }
           }
         }
@@ -153,73 +241,25 @@ Angular v17+ uses Vite/esbuild by default via `@angular/build`:
 }
 ```
 
-## Zoneless Change Detection
-
-Angular v20 supports zoneless mode for better performance:
+### Environment Configuration
 
 ```typescript
-// app.config.ts
-import { ApplicationConfig, provideExperimentalZonelessChangeDetection } from '@angular/core';
-
-export const appConfig: ApplicationConfig = {
-  providers: [
-    provideExperimentalZonelessChangeDetection(),
-    // Other providers...
-  ],
-};
-```
-
-### Remove Zone.js
-
-```typescript
-// main.ts - No zone.js import needed
-import { bootstrapApplication } from '@angular/platform-browser';
-import { AppComponent } from './app/app.component';
-import { appConfig } from './app/app.config';
-
-bootstrapApplication(AppComponent, appConfig)
-  .catch(err => console.error(err));
-```
-
-### Remove from polyfills
-
-```json
-// angular.json - Remove zone.js from polyfills
-{
-  "polyfills": []  // Empty array for zoneless
-}
-```
-
-## Environment Configuration
-
-### Environment Files
-
-```typescript
-// src/environments/environment.ts (development)
+// src/environments/environment.ts
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:3000/api',
-  features: {
-    analytics: false,
-    debugMode: true,
-  },
 };
 
 // src/environments/environment.prod.ts
 export const environment = {
   production: true,
   apiUrl: 'https://api.example.com',
-  features: {
-    analytics: true,
-    debugMode: false,
-  },
 };
 ```
 
-### File Replacements
+Configure in angular.json:
 
 ```json
-// angular.json
 {
   "configurations": {
     "production": {
@@ -234,298 +274,77 @@ export const environment = {
 }
 ```
 
-### Usage
+## Adding Libraries
 
-```typescript
-import { environment } from '../environments/environment';
-
-@Injectable({ providedIn: 'root' })
-export class Api {
-  private baseUrl = environment.apiUrl;
-
-  getData() {
-    if (environment.features.debugMode) {
-      console.log('Fetching data...');
-    }
-    return this.http.get(`${this.baseUrl}/data`);
-  }
-}
-```
-
-## TypeScript Configuration
-
-### tsconfig.json
-
-```json
-{
-  "compileOnSave": false,
-  "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "sourceMap": true,
-    "declaration": false,
-    "experimentalDecorators": true,
-    "moduleResolution": "bundler",
-    "importHelpers": true,
-    "target": "ES2022",
-    "module": "ES2022",
-    "lib": ["ES2022", "dom"],
-    "useDefineForClassFields": false,
-    "paths": {
-      "@app/*": ["src/app/*"],
-      "@shared/*": ["src/app/shared/*"],
-      "@core/*": ["src/app/core/*"]
-    }
-  },
-  "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
-  }
-}
-```
-
-## Build Optimization
-
-### Budgets
-
-```json
-{
-  "budgets": [
-    {
-      "type": "initial",
-      "maximumWarning": "500kB",
-      "maximumError": "1MB"
-    },
-    {
-      "type": "anyComponentStyle",
-      "maximumWarning": "4kB",
-      "maximumError": "8kB"
-    },
-    {
-      "type": "bundle",
-      "name": "vendor",
-      "maximumWarning": "300kB"
-    }
-  ]
-}
-```
-
-### Lazy Loading
-
-```typescript
-// app.routes.ts
-export const routes: Routes = [
-  {
-    path: 'admin',
-    loadChildren: () => import('./features/admin/admin.routes')
-      .then(m => m.ADMIN_ROUTES),
-  },
-  {
-    path: 'profile',
-    loadComponent: () => import('./features/profile/profile')
-      .then(m => m.Profile),
-  },
-];
-
-// features/admin/admin.routes.ts
-export const ADMIN_ROUTES: Routes = [
-  {
-    path: '',
-    loadComponent: () => import('./dashboard')
-      .then(m => m.Dashboard),
-  },
-  {
-    path: 'users',
-    loadComponent: () => import('./users')
-      .then(m => m.Users),
-  },
-];
-```
-
-### Preloading Strategies
-
-```typescript
-// app.config.ts
-import { provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
-
-export const appConfig: ApplicationConfig = {
-  providers: [
-    provideRouter(
-      routes,
-      withPreloading(PreloadAllModules)
-    ),
-  ],
-};
-
-// Custom preloading
-import { QuicklinkStrategy } from 'ngx-quicklink';
-provideRouter(routes, withPreloading(QuicklinkStrategy));
-```
-
-## Development Tools
-
-### Angular DevTools
-
-Install: Chrome/Firefox extension "Angular DevTools"
-
-Features:
-
-* Component tree inspection
-* Signal state viewer
-* Profiler for change detection
-* Route tree visualization
-
-### ESLint Configuration
-
-```json
-// eslint.config.js
-{
-  "extends": [
-    "eslint:recommended",
-    "@angular-eslint/recommended",
-    "@angular-eslint/template/recommended"
-  ],
-  "rules": {
-    "@angular-eslint/prefer-standalone": "error",
-    "@angular-eslint/prefer-signals": "warn",
-    "@angular-eslint/no-input-rename": "error",
-    "@angular-eslint/no-output-rename": "error",
-    "@angular-eslint/use-lifecycle-interface": "error"
-  }
-}
-```
-
-### Prettier Configuration
-
-```json
-// .prettierrc
-{
-  "tabWidth": 2,
-  "useTabs": false,
-  "singleQuote": true,
-  "trailingComma": "es5",
-  "printWidth": 100,
-  "bracketSpacing": true,
-  "arrowParens": "avoid",
-  "overrides": [
-    {
-      "files": "*.html",
-      "options": {
-        "parser": "angular"
-      }
-    }
-  ]
-}
-```
-
-## Schematics
-
-### Update Angular
+### Angular Libraries
 
 ```bash
-ng update @angular/cli @angular/core
+# Add Angular Material
+ng add @angular/material
 
+# Add Angular PWA
+ng add @angular/pwa
+
+# Add Angular SSR
+ng add @angular/ssr
+
+# Add Angular Localize
+ng add @angular/localize
+```
+
+### Third-Party Libraries
+
+```bash
+# Install and configure
+npm install @ngrx/signals
+
+# Some libraries have schematics
+ng add @ngrx/store
+```
+
+## Update Angular
+
+```bash
 # Check for updates
 ng update
+
+# Update Angular core and CLI
+ng update @angular/core @angular/cli
 
 # Update all packages
 ng update --all
 
-# Preview changes
-ng update --dry-run
+# Force update (skip peer dependency checks)
+ng update @angular/core @angular/cli --force
 ```
 
-### Add Packages
+## Performance Analysis
 
 ```bash
-# Official packages
-ng add @angular/material
-ng add @angular/pwa
-ng add @angular/ssr
+# Build with stats
+ng build -c production --stats-json
 
-# Third-party
-ng add @ngrx/store
-ng add @analogjs/astro-angular
+# Analyze bundle (install esbuild-visualizer)
+npx esbuild-visualizer --metadata dist/my-app/browser/stats.json --open
 ```
 
-### Migration Schematics
+## Caching
 
 ```bash
-# Migrate to standalone
-ng generate @angular/core:standalone
-
-# Migrate to signal inputs
-ng generate @angular/core:signal-input-migration
-
-# Migrate to signal queries
-ng generate @angular/core:signal-queries-migration
-
-# Migrate to self-closing tags
-ng generate @angular/core:self-closing-tags-migration
-
-# Migrate to control flow
-ng generate @angular/core:control-flow
-
-# Migrate to inject()
-ng generate @angular/core:inject
-```
-
-## Performance Monitoring
-
-### Bundle Analysis
-
-```bash
-# Generate stats
-ng build --stats-json
-
-# Analyze
-npx webpack-bundle-analyzer dist/my-app/stats.json
-```
-
-### Source Maps
-
-```json
-// angular.json
+# Enable persistent build cache (default in v20+)
+# Configured in angular.json:
 {
-  "configurations": {
-    "production": {
-      "sourceMap": {
-        "scripts": true,
-        "styles": true,
-        "hidden": true,
-        "vendor": true
-      }
+  "cli": {
+    "cache": {
+      "enabled": true,
+      "path": ".angular/cache",
+      "environment": "all"
     }
   }
 }
+
+# Clear cache
+rm -rf .angular/cache
 ```
 
-## Useful Dev Scripts
-
-```json
-// package.json
-{
-  "scripts": {
-    "start": "ng serve",
-    "build": "ng build --configuration=production",
-    "test": "ng test",
-    "test:watch": "ng test --watch",
-    "test:coverage": "ng test --code-coverage",
-    "lint": "ng lint",
-    "lint:fix": "ng lint --fix",
-    "format": "prettier --write \"src/**/*.{ts,html,css,scss}\"",
-    "analyze": "ng build --stats-json && webpack-bundle-analyzer dist/my-app/stats.json"
-  }
-}
-```
-
-For advanced configuration patterns, see references/tooling-patterns.md.
+For advanced configuration, see [references/tooling-patterns.md](references/tooling-patterns.md).

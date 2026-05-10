@@ -7,10 +7,10 @@ Idiomatic Go patterns and best practices for building robust, efficient, and mai
 
 ## When to Activate
 
-* Writing new Go code
-* Reviewing Go code
-* Refactoring existing Go code
-* Designing Go packages/modules
+- Writing new Go code
+- Reviewing Go code
+- Refactoring existing Go code
+- Designing Go packages/modules
 
 ## Core Principles
 
@@ -27,6 +27,17 @@ func GetUser(id string) (*User, error) {
     }
     return user, nil
 }
+
+// Bad: Overly clever
+func GetUser(id string) (*User, error) {
+    return func() (*User, error) {
+        if u, e := db.FindUser(id); e == nil {
+            return u, nil
+        } else {
+            return nil, e
+        }
+    }()
+}
 ```
 
 ### 2. Make the Zero Value Useful
@@ -34,15 +45,25 @@ func GetUser(id string) (*User, error) {
 Design types so their zero value is immediately usable without initialization.
 
 ```go
+// Good: Zero value is useful
 type Counter struct {
     mu    sync.Mutex
-    count int
+    count int // zero value is 0, ready to use
 }
 
 func (c *Counter) Inc() {
     c.mu.Lock()
     c.count++
     c.mu.Unlock()
+}
+
+// Good: bytes.Buffer works with zero value
+var buf bytes.Buffer
+buf.WriteString("hello")
+
+// Bad: Requires initialization
+type BadCounter struct {
+    counts map[string]int // nil map will panic
 }
 ```
 
@@ -51,12 +72,18 @@ func (c *Counter) Inc() {
 Functions should accept interface parameters and return concrete types.
 
 ```go
+// Good: Accepts interface, returns concrete type
 func ProcessData(r io.Reader) (*Result, error) {
     data, err := io.ReadAll(r)
     if err != nil {
         return nil, err
     }
     return &Result{Data: data}, nil
+}
+
+// Bad: Returns interface (hides implementation details unnecessarily)
+func ProcessData(r io.Reader) (io.Reader, error) {
+    // ...
 }
 ```
 
@@ -65,6 +92,7 @@ func ProcessData(r io.Reader) (*Result, error) {
 ### Error Wrapping with Context
 
 ```go
+// Good: Wrap errors with context
 func LoadConfig(path string) (*Config, error) {
     data, err := os.ReadFile(path)
     if err != nil {
@@ -83,6 +111,7 @@ func LoadConfig(path string) (*Config, error) {
 ### Custom Error Types
 
 ```go
+// Define domain-specific errors
 type ValidationError struct {
     Field   string
     Message string
@@ -92,6 +121,7 @@ func (e *ValidationError) Error() string {
     return fmt.Sprintf("validation failed on %s: %s", e.Field, e.Message)
 }
 
+// Sentinel errors for common cases
 var (
     ErrNotFound     = errors.New("resource not found")
     ErrUnauthorized = errors.New("unauthorized")
@@ -103,11 +133,13 @@ var (
 
 ```go
 func HandleError(err error) {
+    // Check for specific error
     if errors.Is(err, sql.ErrNoRows) {
         log.Println("No records found")
         return
     }
 
+    // Check for error type
     var validationErr *ValidationError
     if errors.As(err, &validationErr) {
         log.Printf("Validation error on field %s: %s",
@@ -115,8 +147,25 @@ func HandleError(err error) {
         return
     }
 
+    // Unknown error
     log.Printf("Unexpected error: %v", err)
 }
+```
+
+### Never Ignore Errors
+
+```go
+// Bad: Ignoring error with blank identifier
+result, _ := doSomething()
+
+// Good: Handle or explicitly document why it's safe to ignore
+result, err := doSomething()
+if err != nil {
+    return err
+}
+
+// Acceptable: When error truly doesn't matter (rare)
+_ = writer.Close() // Best-effort cleanup, error logged elsewhere
 ```
 
 ## Concurrency Patterns
@@ -195,7 +244,7 @@ func FetchAll(ctx context.Context, urls []string) ([][]byte, error) {
     results := make([][]byte, len(urls))
 
     for i, url := range urls {
-        i, url := i, url
+        i, url := i, url // Capture loop variables
         g.Go(func() error {
             data, err := FetchWithTimeout(ctx, url)
             if err != nil {
@@ -216,9 +265,19 @@ func FetchAll(ctx context.Context, urls []string) ([][]byte, error) {
 ### Avoiding Goroutine Leaks
 
 ```go
+// Bad: Goroutine leak if context is cancelled
+func leakyFetch(ctx context.Context, url string) <-chan []byte {
+    ch := make(chan []byte)
+    go func() {
+        data, _ := fetch(url)
+        ch <- data // Blocks forever if no receiver
+    }()
+    return ch
+}
+
 // Good: Properly handles cancellation
 func safeFetch(ctx context.Context, url string) <-chan []byte {
-    ch := make(chan []byte, 1)
+    ch := make(chan []byte, 1) // Buffered channel
     go func() {
         data, err := fetch(url)
         if err != nil {
@@ -238,6 +297,7 @@ func safeFetch(ctx context.Context, url string) <-chan []byte {
 ### Small, Focused Interfaces
 
 ```go
+// Good: Single-method interfaces
 type Reader interface {
     Read(p []byte) (n int, err error)
 }
@@ -246,6 +306,11 @@ type Writer interface {
     Write(p []byte) (n int, err error)
 }
 
+type Closer interface {
+    Close() error
+}
+
+// Compose interfaces as needed
 type ReadWriteCloser interface {
     Reader
     Writer
@@ -259,6 +324,7 @@ type ReadWriteCloser interface {
 // In the consumer package, not the provider
 package service
 
+// UserStore defines what this service needs
 type UserStore interface {
     GetUser(id string) (*User, error)
     SaveUser(user *User) error
@@ -267,6 +333,9 @@ type UserStore interface {
 type Service struct {
     store UserStore
 }
+
+// Concrete implementation can be in another package
+// It doesn't need to know about this interface
 ```
 
 ### Optional Behavior with Type Assertions
@@ -281,6 +350,7 @@ func WriteAndFlush(w io.Writer, data []byte) error {
         return err
     }
 
+    // Flush if supported
     if f, ok := w.(Flusher); ok {
         return f.Flush()
     }
@@ -296,25 +366,46 @@ func WriteAndFlush(w io.Writer, data []byte) error {
 myproject/
 ├── cmd/
 │   └── myapp/
-│       └── main.go
+│       └── main.go           # Entry point
 ├── internal/
-│   ├── handler/
-│   ├── service/
-│   ├── repository/
-│   └── config/
+│   ├── handler/              # HTTP handlers
+│   ├── service/              # Business logic
+│   ├── repository/           # Data access
+│   └── config/               # Configuration
 ├── pkg/
-│   └── client/
+│   └── client/               # Public API client
 ├── api/
-│   └── v1/
-├── testdata/
+│   └── v1/                   # API definitions (proto, OpenAPI)
+├── testdata/                 # Test fixtures
 ├── go.mod
 ├── go.sum
 └── Makefile
 ```
 
+### Package Naming
+
+```go
+// Good: Short, lowercase, no underscores
+package http
+package json
+package user
+
+// Bad: Verbose, mixed case, or redundant
+package httpHandler
+package json_parser
+package userService // Redundant 'Service' suffix
+```
+
 ### Avoid Package-Level State
 
 ```go
+// Bad: Global mutable state
+var db *sql.DB
+
+func init() {
+    db, _ = sql.Open("postgres", os.Getenv("DATABASE_URL"))
+}
+
 // Good: Dependency injection
 type Server struct {
     db *sql.DB
@@ -353,14 +444,20 @@ func WithLogger(l *log.Logger) Option {
 func NewServer(addr string, opts ...Option) *Server {
     s := &Server{
         addr:    addr,
-        timeout: 30 * time.Second,
-        logger:  log.Default(),
+        timeout: 30 * time.Second, // default
+        logger:  log.Default(),    // default
     }
     for _, opt := range opts {
         opt(s)
     }
     return s
 }
+
+// Usage
+server := NewServer(":8080",
+    WithTimeout(60*time.Second),
+    WithLogger(customLogger),
+)
 ```
 
 ### Embedding for Composition
@@ -375,8 +472,8 @@ func (l *Logger) Log(msg string) {
 }
 
 type Server struct {
-    *Logger
-    addr string
+    *Logger // Embedding - Server gets Log method
+    addr    string
 }
 
 func NewServer(addr string) *Server {
@@ -385,6 +482,10 @@ func NewServer(addr string) *Server {
         addr:   addr,
     }
 }
+
+// Usage
+s := NewServer(":8080")
+s.Log("Starting...") // Calls embedded Logger.Log
 ```
 
 ## Memory and Performance
@@ -392,6 +493,16 @@ func NewServer(addr string) *Server {
 ### Preallocate Slices When Size is Known
 
 ```go
+// Bad: Grows slice multiple times
+func processItems(items []Item) []Result {
+    var results []Result
+    for _, item := range items {
+        results = append(results, process(item))
+    }
+    return results
+}
+
+// Good: Single allocation
 func processItems(items []Item) []Result {
     results := make([]Result, 0, len(items))
     for _, item := range items {
@@ -418,6 +529,7 @@ func ProcessRequest(data []byte) []byte {
     }()
 
     buf.Write(data)
+    // Process...
     return buf.Bytes()
 }
 ```
@@ -425,13 +537,17 @@ func ProcessRequest(data []byte) []byte {
 ### Avoid String Concatenation in Loops
 
 ```go
-// Best: Use standard library
+// Bad: Creates many string allocations
 func join(parts []string) string {
-    return strings.Join(parts, ",")
+    var result string
+    for _, p := range parts {
+        result += p + ","
+    }
+    return result
 }
 
 // Good: Single allocation with strings.Builder
-func joinCustom(parts []string) string {
+func join(parts []string) string {
     var sb strings.Builder
     for i, p := range parts {
         if i > 0 {
@@ -441,6 +557,11 @@ func joinCustom(parts []string) string {
     }
     return sb.String()
 }
+
+// Best: Use standard library
+func join(parts []string) string {
+    return strings.Join(parts, ",")
+}
 ```
 
 ## Go Tooling Integration
@@ -448,32 +569,78 @@ func joinCustom(parts []string) string {
 ### Essential Commands
 
 ```bash
+# Build and run
 go build ./...
+go run ./cmd/myapp
+
+# Testing
 go test ./...
 go test -race ./...
 go test -cover ./...
+
+# Static analysis
 go vet ./...
+staticcheck ./...
 golangci-lint run
+
+# Module management
 go mod tidy
+go mod verify
+
+# Formatting
 gofmt -w .
 goimports -w .
 ```
 
+### Recommended Linter Configuration (.golangci.yml)
+
+```yaml
+linters:
+  enable:
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - gofmt
+    - goimports
+    - misspell
+    - unconvert
+    - unparam
+
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+  govet:
+    check-shadowing: true
+
+issues:
+  exclude-use-default: false
+```
+
 ## Quick Reference: Go Idioms
 
-| Idiom                                               | Description                                              |
-| --------------------------------------------------- | -------------------------------------------------------- |
-| Accept interfaces, return structs                   | Functions accept interface params, return concrete types |
-| Errors are values                                   | Treat errors as first-class values, not exceptions       |
-| Don't communicate by sharing memory                 | Use channels for coordination between goroutines         |
-| Make the zero value useful                          | Types should work without explicit initialization        |
-| A little copying is better than a little dependency | Avoid unnecessary external dependencies                  |
-| Clear is better than clever                         | Prioritize readability over cleverness                   |
-| Return early                                        | Handle errors first, keep happy path unindented          |
+| Idiom | Description |
+|-------|-------------|
+| Accept interfaces, return structs | Functions accept interface params, return concrete types |
+| Errors are values | Treat errors as first-class values, not exceptions |
+| Don't communicate by sharing memory | Use channels for coordination between goroutines |
+| Make the zero value useful | Types should work without explicit initialization |
+| A little copying is better than a little dependency | Avoid unnecessary external dependencies |
+| Clear is better than clever | Prioritize readability over cleverness |
+| gofmt is no one's favorite but everyone's friend | Always format with gofmt/goimports |
+| Return early | Handle errors first, keep happy path unindented |
 
 ## Anti-Patterns to Avoid
 
 ```go
+// Bad: Naked returns in long functions
+func process() (result int, err error) {
+    // ... 50 lines ...
+    return // What is being returned?
+}
+
 // Bad: Using panic for control flow
 func GetUser(id string) *User {
     user, err := db.Find(id)
@@ -493,6 +660,12 @@ type Request struct {
 func ProcessRequest(ctx context.Context, id string) error {
     // ...
 }
+
+// Bad: Mixing value and pointer receivers
+type Counter struct{ n int }
+func (c Counter) Value() int { return c.n }    // Value receiver
+func (c *Counter) Increment() { c.n++ }        // Pointer receiver
+// Pick one style and be consistent
 ```
 
 **Remember**: Go code should be boring in the best way - predictable, consistent, and easy to understand. When in doubt, keep it simple.
