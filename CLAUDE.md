@@ -1,6 +1,6 @@
 # agentic-skills
 
-A curated library of 76 drop-in skills for Claude Code. Each skill is a `SKILL.md` file that encodes expert knowledge, workflows, and guardrails for a specific domain.
+A curated library of 109 drop-in skills for Claude Code. Each skill is a `SKILL.md` file that encodes expert knowledge, workflows, and guardrails for a specific domain.
 
 ## Structure
 
@@ -23,6 +23,9 @@ Skills live inside category folders at the repo root. Each category is a lowerca
 | `engineering/` | Development methodology and practices |
 | `frontend/` | UI engineering, design systems, performance |
 | `golang/` | Go language skills |
+| `nestjs/` | NestJS framework skills |
+| `python/` | Python language skills |
+| `react/` | React and Next.js skills |
 | `mobile/` | Ionic, Capacitor, Expo |
 | `rust/` | Rust language skills |
 | `seo/` | SEO, content strategy, marketing |
