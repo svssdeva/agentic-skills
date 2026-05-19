@@ -1,6 +1,6 @@
 # agentic-skills
 
-> A curated library of **109 skills** for Claude Code — drop-in behavioral modules that make your AI agent smarter, faster, and domain-aware.
+> A curated library of **116 skills** for Claude Code — drop-in behavioral modules that make your AI agent smarter, faster, and domain-aware.
 
 Skills are plain markdown files (`SKILL.md`) that Claude reads before acting. Each one encodes expert knowledge, workflows, and guardrails for a specific domain. No code to install — just point Claude at the folder.
 
@@ -129,6 +129,23 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`vercel-react-best-practices`](cloud/vercel-react-best-practices/SKILL.md) | React on Vercel — SSR, caching, edge functions |
 | [`vercel-composition-patterns`](cloud/vercel-composition-patterns/SKILL.md) | Vercel composability — monorepos, turborepo |
 | [`secure-linux-web-hosting`](cloud/secure-linux-web-hosting/SKILL.md) | Harden a cloud Linux server — SSH, firewall, Nginx, HTTPS |
+
+### Docker & Containers `3 skills`
+
+| Skill | What it does |
+|---|---|
+| [`docker-expert`](docker/docker-expert/SKILL.md) | Container optimization, security hardening, multi-stage builds, production deployment |
+| [`docker-patterns`](docker/docker-patterns/SKILL.md) | Docker Compose, local-dev orchestration, networking, volumes, container security |
+| [`multi-stage-dockerfile`](docker/multi-stage-dockerfile/SKILL.md) | Optimized, secure multi-stage Dockerfiles for any language or framework |
+
+### AI & RAG `4 skills`
+
+| Skill | What it does |
+|---|---|
+| [`rag-architect`](ai/rag-architect/SKILL.md) | Production RAG design — chunking, embeddings, hybrid search, reranking, evaluation |
+| [`rag-implementation`](ai/rag-implementation/SKILL.md) | Build RAG systems — vector DBs, semantic search, knowledge-grounded LLM apps |
+| [`langchain-rag`](ai/langchain-rag/SKILL.md) | LangChain RAG — loaders, splitters, embeddings, Chroma/FAISS/Pinecone |
+| [`vector-index-tuning`](ai/vector-index-tuning/SKILL.md) | Tune vector indexes — HNSW params, quantization, recall/latency/memory |
 
 ### SEO & Content `11 skills`
 
