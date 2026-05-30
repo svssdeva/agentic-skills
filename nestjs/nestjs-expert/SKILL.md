@@ -30,6 +30,8 @@ Senior NestJS specialist with deep expertise in enterprise-grade, scalable TypeS
 
 ## Reference Guide
 
+Load detailed guidance based on context:
+
 | Topic | Reference | Load When |
 |-------|-----------|-----------|
 | Controllers | `references/controllers-routing.md` | Creating controllers, routing, Swagger docs |
@@ -82,6 +84,13 @@ export class UsersController {
 ### Service with Dependency Injection and Error Handling
 
 ```typescript
+// users.service.ts
+import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './entities/user.entity';
+import { CreateUserDto } from './dto/create-user.dto';
+
 @Injectable()
 export class UsersService {
   constructor(
@@ -91,14 +100,18 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const existing = await this.usersRepository.findOneBy({ email: createUserDto.email });
-    if (existing) throw new ConflictException('Email already registered');
+    if (existing) {
+      throw new ConflictException('Email already registered');
+    }
     const user = this.usersRepository.create(createUserDto);
     return this.usersRepository.save(user);
   }
 
   async findOne(id: number): Promise<User> {
     const user = await this.usersRepository.findOneBy({ id });
-    if (!user) throw new NotFoundException(`User #${id} not found`);
+    if (!user) {
+      throw new NotFoundException(`User #${id} not found`);
+    }
     return user;
   }
 }
@@ -107,6 +120,13 @@ export class UsersService {
 ### Module Definition
 
 ```typescript
+// users.module.ts
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersController } from './users.controller';
+import { UsersService } from './users.service';
+import { User } from './entities/user.entity';
+
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UsersController],
@@ -119,6 +139,19 @@ export class UsersModule {}
 ### Unit Test for Service
 
 ```typescript
+// users.service.spec.ts
+import { Test, TestingModule } from '@nestjs/testing';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { ConflictException } from '@nestjs/common';
+import { UsersService } from './users.service';
+import { User } from './entities/user.entity';
+
+const mockRepo = {
+  findOneBy: jest.fn(),
+  create: jest.fn(),
+  save: jest.fn(),
+};
+
 describe('UsersService', () => {
   let service: UsersService;
 
@@ -145,19 +178,19 @@ describe('UsersService', () => {
 ## Constraints
 
 ### MUST DO
-- Use `@Injectable()` and constructor injection — never instantiate services with `new`
-- Validate all inputs with `class-validator` on DTOs and enable `ValidationPipe` globally
+- Use `@Injectable()` and constructor injection for all services — never instantiate services with `new`
+- Validate all inputs with `class-validator` decorators on DTOs and enable `ValidationPipe` globally
 - Use DTOs for all request/response bodies; never pass raw `req.body` to services
 - Throw typed HTTP exceptions (`NotFoundException`, `ConflictException`, etc.) in services
 - Document all endpoints with `@ApiTags`, `@ApiOperation`, and response decorators
 - Write unit tests for every service method using `Test.createTestingModule`
-- Store all config values via `ConfigModule`; never hardcode them
+- Store all config values via `ConfigModule` and `process.env`; never hardcode them
 
 ### MUST NOT DO
 - Expose passwords, secrets, or internal stack traces in responses
 - Accept unvalidated user input — always apply `ValidationPipe`
 - Use `any` type unless absolutely necessary and documented
-- Create circular dependencies — use `forwardRef()` only as a last resort
+- Create circular dependencies between modules — use `forwardRef()` only as a last resort
 - Hardcode hostnames, ports, or credentials in source files
 - Skip error handling in service methods
 
@@ -169,3 +202,7 @@ When implementing a NestJS feature, provide in this order:
 3. Service with typed error handling (`.service.ts`)
 4. DTOs with `class-validator` decorators (`dto/*.dto.ts`)
 5. Unit tests for service methods (`*.service.spec.ts`)
+
+## Knowledge Reference
+
+NestJS, TypeScript, TypeORM, Prisma, Passport, JWT, class-validator, class-transformer, Swagger/OpenAPI, Jest, Supertest, Guards, Interceptors, Pipes, Filters

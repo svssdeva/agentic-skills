@@ -23,10 +23,17 @@ Use this skill when:
 
 ```bash
 # macOS / Linux
-curl -fsSL https://bun.sh/install | bash
+brew install oven-sh/bun/bun
+
+# Alternative: download the official installer, inspect it, then execute it
+tmpdir="$(mktemp -d)"
+trap 'rm -rf "$tmpdir"' EXIT
+curl -fsSLo "$tmpdir/bun-install.sh" https://bun.sh/install
+sed -n '1,160p' "$tmpdir/bun-install.sh"
+bash "$tmpdir/bun-install.sh"
 
 # Windows
-powershell -c "irm bun.sh/install.ps1 | iex"
+powershell -NoProfile -Command "Invoke-WebRequest https://bun.sh/install.ps1 -OutFile $env:TEMP\\bun-install.ps1; Get-Content $env:TEMP\\bun-install.ps1 -TotalCount 120; powershell -ExecutionPolicy Bypass -File $env:TEMP\\bun-install.ps1"
 
 # Homebrew
 brew tap oven-sh/bun
@@ -140,6 +147,9 @@ bun add express          # Regular dependency
 bun add -d typescript    # Dev dependency
 bun add -D @types/node   # Dev dependency (alias)
 bun add --optional pkg   # Optional dependency
+
+# From specific registry
+bun add lodash --registry https://registry.npmmirror.com
 
 # Install specific version
 bun add react@18.2.0
@@ -578,7 +588,7 @@ console.log(__filename);
 
 ```bash
 # 1. Install Bun
-curl -fsSL https://bun.sh/install | bash
+brew install oven-sh/bun/bun
 
 # 2. Replace package manager
 rm -rf node_modules package-lock.json
@@ -598,6 +608,7 @@ bun add -d @types/bun
 // ❌ Node.js specific (may not work)
 require("module")             // Use import instead
 require.resolve("pkg")        // Use import.meta.resolve
+__non_webpack_require__       // Not supported
 
 // ✅ Bun equivalents
 import pkg from "pkg";

@@ -693,6 +693,84 @@ go test -count=10 ./...
 - Mock everything (prefer integration tests when possible)
 - Skip error path testing
 
+## Integration Tests
+
+### Build Tags
+
+```go
+//go:build integration
+// +build integration
+
+package user_test
+
+func TestUserRepository_Integration(t *testing.T) {
+    // ... integration test
+}
+```
+
+**Run integration tests:**
+```bash
+go test -tags=integration ./...
+```
+
+### Test Containers
+
+```go
+func TestWithPostgres(t *testing.T) {
+    if testing.Short() {
+        t.Skip("skipping integration test")
+    }
+
+    // Setup test container
+    ctx := context.Background()
+    container, err := testcontainers.GenericContainer(ctx, ...)
+    assertNoError(t, err)
+
+    t.Cleanup(func() {
+        container.Terminate(ctx)
+    })
+
+    // ... test logic
+}
+```
+
+## Test Organization
+
+### File Structure
+
+```
+package/
+├── user.go
+├── user_test.go          # Unit tests
+├── user_integration_test.go  # Integration tests
+└── testdata/             # Test fixtures
+    └── users.json
+```
+
+### Package Naming
+
+```go
+// Black-box testing (external perspective)
+package user_test
+
+// White-box testing (internal access)
+package user
+```
+
+## Testing with Context
+
+```go
+func TestWithTimeout(t *testing.T) {
+    ctx, cancel := context.WithTimeout(context.Background(), 100*time.Millisecond)
+    defer cancel()
+
+    err := SlowOperation(ctx)
+    if !errors.Is(err, context.DeadlineExceeded) {
+        t.Errorf("expected timeout error, got %v", err)
+    }
+}
+```
+
 ## Integration with CI/CD
 
 ```yaml

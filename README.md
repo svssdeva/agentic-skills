@@ -1,6 +1,6 @@
 # agentic-skills
 
-> A curated library of **116 skills** for Claude Code — drop-in behavioral modules that make your AI agent smarter, faster, and domain-aware.
+> A curated library of **125 skills** for Claude Code — drop-in behavioral modules that make your AI agent smarter, faster, and domain-aware.
 
 Skills are plain markdown files (`SKILL.md`) that Claude reads before acting. Each one encodes expert knowledge, workflows, and guardrails for a specific domain. No code to install — just point Claude at the folder.
 
@@ -147,7 +147,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`langchain-rag`](ai/langchain-rag/SKILL.md) | LangChain RAG — loaders, splitters, embeddings, Chroma/FAISS/Pinecone |
 | [`vector-index-tuning`](ai/vector-index-tuning/SKILL.md) | Tune vector indexes — HNSW params, quantization, recall/latency/memory |
 
-### SEO & Content `11 skills`
+### SEO & Content `20 skills`
 
 | Skill | What it does |
 |---|---|
@@ -162,6 +162,15 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`seo-aeo-best-practices`](seo/seo-aeo-best-practices/SKILL.md) | SEO + AEO best practices — metadata, Open Graph, JSON-LD, EEAT, AI-overview readiness |
 | [`optimize-for-ai`](seo/optimize-for-ai/SKILL.md) | Optimize content to get cited by ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews |
 | [`web-quality-seo`](seo/web-quality-seo/SKILL.md) | Technical SEO and on-page optimization based on Lighthouse audits and Google Search guidelines |
+| [`copywriting`](seo/copywriting/SKILL.md) | Conversion copywriting — headlines, value props, CTAs, and messaging frameworks |
+| [`marketing-psychology`](seo/marketing-psychology/SKILL.md) | Behavioral science and mental models for persuasion and decision-making |
+| [`marketing-ideas`](seo/marketing-ideas/SKILL.md) | Generate marketing campaign and growth-channel ideas |
+| [`page-cro`](seo/page-cro/SKILL.md) | Conversion-rate optimization for landing, pricing, and signup pages |
+| [`analytics-tracking`](seo/analytics-tracking/SKILL.md) | Set up and audit analytics and measurement (GA4, GTM, events) |
+| [`cold-email`](seo/cold-email/SKILL.md) | Cold email outreach — sequences, deliverability, and follow-ups |
+| [`site-architecture`](seo/site-architecture/SKILL.md) | Plan SEO-friendly site structure, URLs, and internal linking |
+| [`competitor-alternatives`](seo/competitor-alternatives/SKILL.md) | Build competitor comparison and alternative pages for SEO and sales |
+| [`churn-prevention`](seo/churn-prevention/SKILL.md) | Reduce churn — cancel flows, dunning, and retention playbooks |
 
 ### NestJS `3 skills`
 
@@ -182,7 +191,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`dataverse-python-advanced-patterns`](python/dataverse-python-advanced-patterns/SKILL.md) | Dataverse production patterns — retry logic, batch ops, OData queries, chunked file upload |
 | [`dataverse-python-usecase-builder`](python/dataverse-python-usecase-builder/SKILL.md) | Architecture framework for Dataverse use cases — 6 categories from CRM to compliance |
 
-### Engineering Practices `26 skills`
+### Engineering Practices `25 skills`
 
 | Skill | What it does |
 |---|---|

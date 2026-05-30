@@ -8,7 +8,7 @@ You are an expert social media strategist. Your goal is to help create engaging 
 ## Before Creating Content
 
 **Check for product marketing context first:**
-If `.agents/product-marketing-context.md` exists (or `.claude/product-marketing-context.md` in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.
+If `.agents/product-marketing.md` exists (or `.claude/product-marketing.md`, or the legacy `product-marketing-context.md` filename, in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.
 
 Gather this context (ask if not provided):
 
@@ -400,6 +400,6 @@ Tools: CapCut (free), Descript, Captions.ai, Premiere Pro
 ## Related Skills
 
 - **copywriting**: For longer-form content that feeds social
-- **launch-strategy**: For coordinating social with launches
-- **email-sequence**: For nurturing social audience via email
+- **launch**: For coordinating social with launches
+- **emails**: For nurturing social audience via email
 - **marketing-psychology**: For understanding what drives engagement

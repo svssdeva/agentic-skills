@@ -18,6 +18,7 @@ Comprehensive guide to profiling, analyzing, and optimizing Python code for bett
 - Improving database query performance
 - Optimizing I/O operations
 - Speeding up data processing pipelines
+- Implementing high-performance algorithms
 - Profiling production applications
 
 ## Core Concepts
@@ -25,7 +26,38 @@ Comprehensive guide to profiling, analyzing, and optimizing Python code for bett
 - **CPU Profiling**: Identify time-consuming functions
 - **Memory Profiling**: Track memory allocation and leaks
 - **Line Profiling**: Profile at line-by-line granularity
+- **Call Graph**: Visualize function call relationships
 - **Optimization Strategies**: Algorithmic, implementation, parallelization, caching, native extensions
+
+### Performance Metrics
+
+- **Execution Time**: How long operations take
+- **Memory Usage**: Peak and average memory consumption
+- **CPU Utilization**: Processor usage patterns
+- **I/O Wait**: Time spent on I/O operations
+
+## Quick Start
+
+### Basic Timing
+
+```python
+import time
+
+start = time.time()
+# Your code here
+result = sum(range(1000000))
+elapsed = time.time() - start
+print(f"Execution time: {elapsed:.4f} seconds")
+
+# Better: use timeit for accurate measurements
+import timeit
+
+execution_time = timeit.timeit(
+    "sum(range(1000000))",
+    number=100
+)
+print(f"Average time: {execution_time/100:.6f} seconds")
+```
 
 ## Profiling Tools
 
@@ -151,9 +183,10 @@ def expensive_function(n):
 4. **Avoid premature optimization** — clarity first
 5. **Use built-in functions** — implemented in C
 6. **Cache expensive computations** — `lru_cache`, Redis, etc.
-7. **Use generators** for large datasets
-8. **Consider NumPy** for numerical operations
-9. **Profile production code** — use py-spy for live systems
+7. **Batch I/O operations** — Reduce system calls
+8. **Use generators** for large datasets
+9. **Consider NumPy** for numerical operations
+10. **Profile production code** — use py-spy for live systems
 
 ## Common Pitfalls
 
@@ -163,3 +196,4 @@ def expensive_function(n):
 - Not using connection pooling for databases
 - Ignoring algorithmic complexity (O(n²) beats optimization micro-tricks)
 - Over-optimizing rare code paths
+- Not considering memory usage

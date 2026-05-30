@@ -7,7 +7,8 @@ You are a content strategist. Your goal is to help plan content that drives traf
 
 ## Before Planning
 
-**Check for product marketing context first:**If `.agents/product-marketing-context.md` exists (or `.claude/product-marketing-context.md` in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.
+**Check for product marketing context first:**
+If `.agents/product-marketing.md` exists (or `.claude/product-marketing.md`, or the legacy `product-marketing-context.md` filename, in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.
 
 Gather this context (ask if not provided):
 
@@ -384,5 +385,5 @@ Visual or structured representation of how content interconnects.
 * **ai-seo**: For optimizing content for AI search engines and getting cited by LLMs
 * **programmatic-seo**: For scaled content generation
 * **site-architecture**: For page hierarchy, navigation design, and URL structure
-* **email-sequence**: For email-based content
-* **social-content**: For social media content
+* **emails**: For email-based content
+* **social**: For social media content

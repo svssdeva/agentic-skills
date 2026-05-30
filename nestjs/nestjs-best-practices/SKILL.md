@@ -118,6 +118,7 @@ Read individual rule files for detailed explanations and code examples:
 ```
 rules/arch-avoid-circular-deps.md
 rules/security-validate-all-input.md
+rules/_sections.md
 ```
 
 Each rule file contains:

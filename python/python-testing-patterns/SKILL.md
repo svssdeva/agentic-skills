@@ -18,6 +18,8 @@ Comprehensive guide to implementing robust testing strategies in Python using py
 - Mocking external dependencies and services
 - Testing async code and concurrent operations
 - Setting up continuous testing in CI/CD
+- Implementing property-based testing
+- Testing database operations
 - Debugging failing tests
 
 ## Core Concepts
@@ -118,6 +120,14 @@ def test_retries_on_transient_error():
     assert result == {"status": "ok"}
     assert client.request.call_count == 3
 
+def test_gives_up_after_max_retries():
+    client = Mock()
+    client.request.side_effect = ConnectionError("Failed")
+    service = ServiceWithRetry(client, max_retries=3)
+    with pytest.raises(ConnectionError):
+        service.fetch()
+    assert client.request.call_count == 3
+
 def test_does_not_retry_on_permanent_error():
     client = Mock()
     client.request.side_effect = ValueError("Invalid input")
@@ -136,6 +146,16 @@ from freezegun import freeze_time
 def test_token_expiry():
     token = create_token(expires_in_seconds=3600)
     assert token.expires_at == datetime(2026, 1, 15, 11, 0, 0)
+
+@freeze_time("2026-01-15 10:00:00")
+def test_is_expired_returns_false_before_expiry():
+    token = create_token(expires_in_seconds=3600)
+    assert not token.is_expired()
+
+@freeze_time("2026-01-15 12:00:00")
+def test_is_expired_returns_true_after_expiry():
+    token = Token(expires_at=datetime(2026, 1, 15, 11, 30, 0))
+    assert token.is_expired()
 
 def test_with_time_travel():
     with freeze_time("2026-01-01") as frozen_time:
@@ -156,6 +176,9 @@ def test_database_integration(): ...
 
 @pytest.mark.skip(reason="Feature not implemented yet")
 def test_future_feature(): ...
+
+@pytest.mark.skipif(os.name == "nt", reason="Unix only test")
+def test_unix_specific(): ...
 
 @pytest.mark.xfail(reason="Known bug #123")
 def test_known_bug(): ...
@@ -209,6 +232,22 @@ tests/
     test_database.py
   test_e2e/             # End-to-end tests
     test_workflows.py
+```
+
+## Test Naming Convention
+
+A common pattern: `test_<unit>_<scenario>_<expected_outcome>`. Adapt to your team's preferences.
+
+```python
+# Pattern: test_<unit>_<scenario>_<expected>
+def test_create_user_with_valid_data_returns_user():
+    ...
+
+def test_create_user_with_duplicate_email_raises_conflict():
+    ...
+
+def test_get_user_with_unknown_id_returns_none():
+    ...
 ```
 
 ## Coverage Reporting

@@ -50,7 +50,7 @@ Write code review comments terse and actionable. One line per finding. Location,
 
 ## Auto-Clarity
 
-Drop terse mode for: security findings (CVE-class bugs need full explanation + reference), architectural disagreements, and onboarding contexts where the author is new.
+Drop terse mode for: security findings (CVE-class bugs need full explanation + reference), architectural disagreements (need rationale, not just a one-liner), and onboarding contexts where the author is new and needs the "why". In those cases write a normal paragraph, then resume terse for the rest.
 
 ## Boundaries
 

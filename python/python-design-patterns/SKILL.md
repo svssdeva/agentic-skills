@@ -9,6 +9,15 @@ description: Python design patterns including KISS, Separation of Concerns, Sing
 
 Write maintainable Python code using fundamental design principles. These patterns help you build systems that are easy to understand, test, and modify.
 
+## When to Use This Skill
+
+- Designing new components or services
+- Refactoring complex or tangled code
+- Deciding whether to create an abstraction
+- Choosing between inheritance and composition
+- Evaluating code complexity and coupling
+- Planning modular architectures
+
 ## Core Concepts
 
 1. **KISS** — Choose the simplest solution that works. Complexity must be justified.
@@ -203,16 +212,28 @@ def calculate_discount(user: User, order_history: list[Order]) -> float:
 5. Rule of three — wait before abstracting
 6. Keep functions small — one purpose, ~20-50 lines
 7. Inject dependencies — constructor injection for testability
-8. Explicit over clever — readable beats elegant
+8. Delete before abstracting — remove dead code, then consider patterns
+9. Test each layer — isolated tests for each concern
+10. Explicit over clever — readable beats elegant
 
 ## Troubleshooting
 
-**Class has multiple responsibilities but splitting feels wrong** — Apply "reason to change" test: list every change that could require editing this class. Different domains → split.
+**A class is growing and seems to have multiple responsibilities, but splitting it feels wrong.**
+Apply the "reason to change" test: list every change that could require editing this class. If the list has items from different domains (e.g., HTTP parsing AND business rules AND formatting), split it. If all changes stem from the same domain concern, the class may be appropriately sized.
 
-**Constructor has 7+ parameters** — Too many responsibilities in one class; split first, then each constructor naturally shrinks.
+**Injecting all dependencies through the constructor is producing constructors with 7+ parameters.**
+This is a sign of too many responsibilities in one class, not a problem with dependency injection. Split the class into smaller units first, then each constructor naturally becomes smaller.
 
-**Composition produces deeply nested wrappers** — Keep composition shallow (2-3 levels). Consider Protocol-based approach or function composition instead.
+**Composition is producing deeply nested wrapper objects that are hard to trace.**
+Keep the composition shallow (2-3 levels). If wrapping is the only mechanism, consider whether a Protocol-based approach or simple function composition would be cleaner than a chain of decorator objects.
 
-**Rule of three says wait, but duplication is causing bugs** — Duplication that diverges dangerously should be abstracted sooner. The rule is a heuristic, not a law.
+**The rule of three says not to abstract yet, but the duplication is causing bugs when one copy is updated but not the other.**
+Duplication that diverges in dangerous ways should be abstracted sooner. The rule of three is a heuristic, not a law. If the copies are already diverging incorrectly, extract immediately and add a test that exercises the shared behavior.
 
-**Service layer is importing from API layer** — Layering violation. Introduce a shared types/models layer that both can import from.
+**A service layer is importing from the API layer, breaking the dependency direction.**
+This is a layering violation. The service layer must not import from handlers. Introduce a shared types/models layer that both can import from, keeping the dependency arrow pointing downward (API → Service → Repository).
+
+## Related Skills
+
+- python-testing-patterns — Test each layer in isolation using the dependency injection structure established here
+- python-project-setup — Set up project structure and tooling that enforces layer boundaries from the start

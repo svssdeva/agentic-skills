@@ -9,23 +9,25 @@ Compress natural language files (CLAUDE.md, todos, preferences) into caveman-spe
 
 ## Trigger
 
-`/caveman:compress <filepath>` or when user asks to compress a memory file.
+`/caveman-compress <filepath>` or when user asks to compress a memory file.
 
 ## Process
 
-1. This SKILL.md lives alongside `scripts/` in the same directory. Find that directory.
-2. Run:
+1. The compression scripts live in `scripts/` (adjacent to this SKILL.md). If the path is not immediately available, search for `scripts/__main__.py` next to this SKILL.md.
+
+2. From the directory containing this SKILL.md, run:
 
 cd <directory_containing_this_SKILL.md> && python3 -m scripts <absolute_filepath>
 
-1. The CLI will:
+3. The CLI will:
 * detect file type (no tokens)
 * call Claude to compress
 * validate output (no tokens)
 * if errors: cherry-pick fix with Claude (targeted fixes only, no recompression)
 * retry up to 2 times
 * if still failing after 2 retries: report error to user, leave original file untouched
-1. Return result to user
+
+4. Return result to user
 
 ## Compression Rules
 
@@ -66,7 +68,9 @@ cd <directory_containing_this_SKILL.md> && python3 -m scripts <absolute_filepath
 * Merge redundant bullets that say the same thing differently
 * Keep one example where multiple examples show the same pattern
 
-CRITICAL RULE: Anything inside `...` must be copied EXACTLY. Do not:
+CRITICAL RULE:
+Anything inside ``` ... ``` must be copied EXACTLY.
+Do not:
 
 * remove comments
 * remove spacing
@@ -74,7 +78,8 @@ CRITICAL RULE: Anything inside `...` must be copied EXACTLY. Do not:
 * shorten commands
 * simplify anything
 
-Inline code (`...`) must be preserved EXACTLY. Do not modify anything inside backticks.
+Inline code (`...`) must be preserved EXACTLY.
+Do not modify anything inside backticks.
 
 If file contains code blocks:
 

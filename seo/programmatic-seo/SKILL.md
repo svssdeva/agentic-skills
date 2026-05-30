@@ -7,7 +7,8 @@ You are an expert in programmatic SEO—building SEO-optimized pages at scale us
 
 ## Initial Assessment
 
-**Check for product marketing context first:** If `.agents/product-marketing-context.md` exists (or `.claude/product-marketing-context.md` in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.
+**Check for product marketing context first:**
+If `.agents/product-marketing.md` exists (or `.claude/product-marketing.md`, or the legacy `product-marketing-context.md` filename, in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.
 
 Before designing a programmatic SEO strategy, understand:
 
@@ -175,28 +176,28 @@ You can layer multiple playbooks (e.g., "Best coworking spaces in San Diego").
 
 **Content quality:**
 
-* Each page provides unique value
-* Answers search intent
-* Readable and useful
+- [ ] Each page provides unique value
+- [ ] Answers search intent
+- [ ] Readable and useful
 
 **Technical SEO:**
 
-* Unique titles and meta descriptions
-* Proper heading structure
-* Schema markup implemented
-* Page speed acceptable
+- [ ] Unique titles and meta descriptions
+- [ ] Proper heading structure
+- [ ] Schema markup implemented
+- [ ] Page speed acceptable
 
 **Internal linking:**
 
-* Connected to site architecture
-* Related pages linked
-* No orphan pages
+- [ ] Connected to site architecture
+- [ ] Related pages linked
+- [ ] No orphan pages
 
 **Indexation:**
 
-* In XML sitemap
-* Crawlable
-* No conflicting noindex
+- [ ] In XML sitemap
+- [ ] Crawlable
+- [ ] No conflicting noindex
 
 ### Post-Launch Monitoring
 
@@ -247,6 +248,6 @@ Watch for: Thin content warnings, Ranking drops, Manual actions, Crawl errors
 ## Related Skills
 
 * **seo-audit**: For auditing programmatic pages after launch
-* **schema-markup**: For adding structured data
+* **schema**: For adding structured data
 * **site-architecture**: For page hierarchy, URL structure, and internal linking
-* **competitor-alternatives**: For comparison page frameworks
+* **competitors**: For comparison page frameworks
