@@ -5,6 +5,7 @@ graphify-out/
 .DS_Store
 .AppleDouble
 .LSOverride
+._*
 
 # Python
 __pycache__/

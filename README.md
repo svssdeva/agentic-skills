@@ -1,6 +1,6 @@
 # agentic-skills
 
-> A curated library of **125 skills** for Claude Code — drop-in behavioral modules that make your AI agent smarter, faster, and domain-aware.
+> A curated library of **160 skills** for Claude Code — drop-in behavioral modules that make your AI agent smarter, faster, and domain-aware.
 
 Skills are plain markdown files (`SKILL.md`) that Claude reads before acting. Each one encodes expert knowledge, workflows, and guardrails for a specific domain. No code to install — just point Claude at the folder.
 
@@ -83,7 +83,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`bun-development`](bun/bun-development/SKILL.md) | Bun-first development workflows and patterns |
 | [`bun-runtime`](bun/bun-runtime/SKILL.md) | Runtime internals, FFI, native modules |
 
-### Rust `5 skills`
+### Rust `6 skills`
 
 | Skill | What it does |
 |---|---|
@@ -92,6 +92,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`rust-async-patterns`](rust/rust-async-patterns/SKILL.md) | Tokio, async/await, channels, cancellation |
 | [`rust-testing`](rust/rust-testing/SKILL.md) | Unit tests, integration tests, property testing |
 | [`m15-anti-pattern`](rust/m15-anti-pattern/SKILL.md) | Detect and fix the M15 anti-pattern |
+| [`tauri-v2`](rust/tauri-v2/SKILL.md) | Cross-platform desktop/mobile apps — tauri.conf.json, Rust commands, IPC, capabilities |
 
 ### TypeScript `2 skills`
 
@@ -138,7 +139,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`docker-patterns`](docker/docker-patterns/SKILL.md) | Docker Compose, local-dev orchestration, networking, volumes, container security |
 | [`multi-stage-dockerfile`](docker/multi-stage-dockerfile/SKILL.md) | Optimized, secure multi-stage Dockerfiles for any language or framework |
 
-### AI & RAG `4 skills`
+### AI & RAG `7 skills`
 
 | Skill | What it does |
 |---|---|
@@ -146,8 +147,18 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`rag-implementation`](ai/rag-implementation/SKILL.md) | Build RAG systems — vector DBs, semantic search, knowledge-grounded LLM apps |
 | [`langchain-rag`](ai/langchain-rag/SKILL.md) | LangChain RAG — loaders, splitters, embeddings, Chroma/FAISS/Pinecone |
 | [`vector-index-tuning`](ai/vector-index-tuning/SKILL.md) | Tune vector indexes — HNSW params, quantization, recall/latency/memory |
+| [`langchain-architecture`](ai/langchain-architecture/SKILL.md) | LLM apps with LangChain 1.x + LangGraph — agents, memory, tool integration |
+| [`langgraph-fundamentals`](ai/langgraph-fundamentals/SKILL.md) | LangGraph core — StateGraph, nodes, edges, Command, Send, streaming |
+| [`langgraph-persistence`](ai/langgraph-persistence/SKILL.md) | LangGraph state persistence — checkpointers, thread_id, time travel, Store |
 
-### SEO & Content `20 skills`
+### Database `2 skills`
+
+| Skill | What it does |
+|---|---|
+| [`neon-postgres`](database/neon-postgres/SKILL.md) | Neon Serverless Postgres — branching, autoscaling, pooling, SDKs, CLI/MCP |
+| [`postgresql-optimization`](database/postgresql-optimization/SKILL.md) | PostgreSQL-specific features — JSONB, arrays, custom types, full-text, tuning |
+
+### SEO & Content `23 skills`
 
 | Skill | What it does |
 |---|---|
@@ -171,6 +182,9 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`site-architecture`](seo/site-architecture/SKILL.md) | Plan SEO-friendly site structure, URLs, and internal linking |
 | [`competitor-alternatives`](seo/competitor-alternatives/SKILL.md) | Build competitor comparison and alternative pages for SEO and sales |
 | [`churn-prevention`](seo/churn-prevention/SKILL.md) | Reduce churn — cancel flows, dunning, and retention playbooks |
+| [`cro`](seo/cro/SKILL.md) | Conversion-rate optimization for marketing pages and lead-capture forms |
+| [`aso`](seo/aso/SKILL.md) | App Store / Google Play listing optimization (ASO) — keywords, conversion, ranking |
+| [`lead-magnets`](seo/lead-magnets/SKILL.md) | Plan and optimize lead magnets for email capture and lead generation |
 
 ### NestJS `3 skills`
 
@@ -180,7 +194,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`nestjs-expert`](nestjs/nestjs-expert/SKILL.md) | Full module/controller/service/DTO/test workflow with enforced MUST/MUST NOT constraints |
 | [`nestjs-patterns`](nestjs/nestjs-patterns/SKILL.md) | Feature module structure, thin controllers, global ValidationPipe, guard and interceptor patterns |
 
-### Python `6 skills`
+### Python `7 skills`
 
 | Skill | What it does |
 |---|---|
@@ -190,8 +204,9 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`dataverse-python-quickstart`](python/dataverse-python-quickstart/SKILL.md) | Microsoft Dataverse SDK setup — CRUD, bulk ops, paging, and file upload snippets |
 | [`dataverse-python-advanced-patterns`](python/dataverse-python-advanced-patterns/SKILL.md) | Dataverse production patterns — retry logic, batch ops, OData queries, chunked file upload |
 | [`dataverse-python-usecase-builder`](python/dataverse-python-usecase-builder/SKILL.md) | Architecture framework for Dataverse use cases — 6 categories from CRM to compliance |
+| [`async-python-patterns`](python/async-python-patterns/SKILL.md) | Python asyncio, concurrency, and async/await patterns for I/O-bound apps |
 
-### Engineering Practices `25 skills`
+### Engineering Practices `31 skills`
 
 | Skill | What it does |
 |---|---|
@@ -220,6 +235,12 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`shipping-and-launch`](engineering/shipping-and-launch/SKILL.md) | Launch checklist, rollout strategy, monitoring |
 | [`system-design`](engineering/system-design/SKILL.md) | Structured system design — requirements to trade-off analysis |
 | [`systematic-debugging`](engineering/systematic-debugging/SKILL.md) | Four-phase debugging with enforced root cause investigation |
+| [`architecture-patterns`](engineering/architecture-patterns/SKILL.md) | Clean, Hexagonal, and Domain-Driven Design backend architecture patterns |
+| [`karpathy-guidelines`](engineering/karpathy-guidelines/SKILL.md) | Behavioral guidelines to reduce common LLM coding mistakes — surgical changes |
+| [`documentation-writer`](engineering/documentation-writer/SKILL.md) | Diátaxis-framework technical documentation authoring |
+| [`create-readme`](engineering/create-readme/SKILL.md) | Generate a project README.md |
+| [`prd`](engineering/prd/SKILL.md) | Generate Product Requirements Documents — user stories, specs, risk analysis |
+| [`email-and-password-best-practices`](engineering/email-and-password-best-practices/SKILL.md) | Better Auth email/password — verification, reset flows, policies, hashing |
 
 ### Go `3 skills`
 
@@ -229,7 +250,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`golang-patterns`](golang/golang-patterns/SKILL.md) | Idiomatic Go patterns, error handling, concurrency, interfaces |
 | [`golang-testing`](golang/golang-testing/SKILL.md) | Table-driven tests, benchmarks, fuzzing, TDD workflows |
 
-### React `4 skills`
+### React `6 skills`
 
 | Skill | What it does |
 |---|---|
@@ -237,8 +258,10 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`vercel-react-view-transitions`](react/vercel-react-view-transitions/SKILL.md) | Native View Transition API animations — shared elements, route changes, Suspense reveals |
 | [`react-components`](react/react-components/SKILL.md) | Convert Stitch designs into modular, type-safe React components |
 | [`vercel-composition-patterns`](react/vercel-composition-patterns/SKILL.md) | React composition patterns that scale — compound components, context providers, React 19 APIs |
+| [`react-doctor`](react/react-doctor/SKILL.md) | Scan and triage React diagnostics — lint, a11y, bundle size, architecture |
+| [`react-modernization`](react/react-modernization/SKILL.md) | Upgrade React — class-to-hooks migration, concurrent features, latest versions |
 
-### Frontend & Design `6 skills`
+### Frontend & Design `16 skills`
 
 | Skill | What it does |
 |---|---|
@@ -248,6 +271,24 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`performance-optimization`](frontend/performance-optimization/SKILL.md) | Frontend and backend performance — measure first |
 | [`remotion-best-practices`](frontend/remotion-best-practices/SKILL.md) | Programmatic video with Remotion |
 | [`extract-design-system`](frontend/extract-design-system/SKILL.md) | Reverse-engineer a website's design tokens via Playwright |
+| [`interface-design`](frontend/interface-design/SKILL.md) | Interface design for dashboards, admin panels, apps, and tools |
+| [`high-end-visual-design`](frontend/high-end-visual-design/SKILL.md) | Design like a high-end agency — fonts, spacing, shadows, premium feel |
+| [`minimalist-ui`](frontend/minimalist-ui/SKILL.md) | Clean editorial UI — warm monochrome, typographic contrast, bento grids |
+| [`redesign-existing-projects`](frontend/redesign-existing-projects/SKILL.md) | Upgrade existing sites/apps to premium quality without breaking functionality |
+| [`impeccable`](frontend/impeccable/SKILL.md) | Design, critique, polish, and harden any frontend interface — live iteration |
+| [`design-system-patterns`](frontend/design-system-patterns/SKILL.md) | Scalable design systems — tokens, theming, component architecture |
+| [`responsive-design`](frontend/responsive-design/SKILL.md) | Responsive layouts — container queries, fluid type, CSS Grid, mobile-first |
+| [`frontend-patterns`](frontend/frontend-patterns/SKILL.md) | React/Next.js frontend patterns — state, performance, UI best practices |
+| [`web-quality-performance`](frontend/web-quality-performance/SKILL.md) | Web performance optimization — faster loading, reduced load time (Lighthouse) |
+| [`web-quality-best-practices`](frontend/web-quality-best-practices/SKILL.md) | Modern web best practices — security, compatibility, code-quality audits |
+
+### Video `3 skills`
+
+| Skill | What it does |
+|---|---|
+| [`hyperframes`](video/hyperframes/SKILL.md) | HTML video compositions — animations, captions, voiceovers, transitions |
+| [`hyperframes-cli`](video/hyperframes-cli/SKILL.md) | HyperFrames CLI dev loop — init, lint, inspect, preview, render |
+| [`website-to-hyperframes`](video/website-to-hyperframes/SKILL.md) | Capture a website and turn it into a HyperFrames video |
 
 ### Testing `2 skills`
 
@@ -256,7 +297,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`playwright-best-practices`](testing/playwright-best-practices/SKILL.md) | E2E testing — selectors, fixtures, parallelism |
 | [`browser-testing-with-devtools`](testing/browser-testing-with-devtools/SKILL.md) | DevTools-driven testing and debugging |
 
-### Utilities `10 skills`
+### Utilities `14 skills`
 
 | Skill | What it does |
 |---|---|
@@ -270,12 +311,16 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`caveman-commit`](utils/caveman-commit/SKILL.md) | Ultra-compressed Conventional Commits messages |
 | [`caveman-review`](utils/caveman-review/SKILL.md) | Ultra-compressed code review comments — one line per finding |
 | [`caveman`](utils/caveman/SKILL.md) | Ultra-compressed communication mode (~75% fewer tokens) |
+| [`cavecrew`](utils/cavecrew/SKILL.md) | Decide when to delegate to caveman-style subagents (investigator/builder/reviewer) |
+| [`caveman-stats`](utils/caveman-stats/SKILL.md) | Show real session token usage and estimated savings (/caveman-stats) |
+| [`webwright`](utils/webwright/SKILL.md) | Drive a local Playwright browser to solve web tasks code-as-action, with screenshots |
+| [`apify-ultimate-scraper`](utils/apify-ultimate-scraper/SKILL.md) | AI-powered web scraper for 25+ platforms via Apify actors |
 
 ---
 
 ## Knowledge Graph
 
-This repo includes a graphify knowledge graph (`graphify-out/`) that maps relationships between all 109 skills — which ones share concepts, which cluster together, and which bridge multiple domains.
+This repo includes a graphify knowledge graph (`graphify-out/`) that maps relationships between all 160 skills — which ones share concepts, which cluster together, and which bridge multiple domains.
 
 Open `graphify-out/graph.html` in any browser to explore the interactive graph.
 
@@ -348,5 +393,21 @@ Skills in this library are sourced from upstream authors (tracked in each `SKILL
 - [aaron-he-zhu/seo-geo-claude-skills](https://github.com/aaron-he-zhu/seo-geo-claude-skills) — SEO content writing
 - [sanity-io/agent-toolkit](https://github.com/sanity-io/agent-toolkit) — SEO & AEO best practices
 - [calm-north/seojuice-skills](https://github.com/calm-north/seojuice-skills) — AI search optimization
-- [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills) — Lighthouse-based SEO
+- [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills) — Lighthouse-based SEO, web performance, best practices
+- [wshobson/agents](https://github.com/wshobson/agents) — Backend architecture, async Python, design systems, responsive design, LangChain, React modernization
+- [langchain-ai/langchain-skills](https://github.com/langchain-ai/langchain-skills) — LangChain RAG, LangGraph fundamentals and persistence
+- [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) — HyperFrames HTML video compositions and CLI
+- [leonxlnx/taste-skill](https://github.com/leonxlnx/taste-skill) — High-end visual design, minimalist UI, redesign
+- [pbakaus/impeccable](https://github.com/pbakaus/impeccable) — Frontend interface design and critique
+- [dammyjay93/interface-design](https://github.com/dammyjay93/interface-design) — Interface/product design
+- [millionco/react-doctor](https://github.com/millionco/react-doctor) — React diagnostics scanner
+- [neondatabase/agent-skills](https://github.com/neondatabase/agent-skills) — Neon Serverless Postgres
+- [github/awesome-copilot](https://github.com/github/awesome-copilot) — Documentation, PRD, README, PostgreSQL optimization
+- [better-auth/skills](https://github.com/better-auth/skills) — Email/password authentication best practices
+- [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) — CRO, ASO, lead magnets
+- [apify/agent-skills](https://github.com/apify/agent-skills) — Universal web scraper
+- [microsoft/webwright](https://github.com/microsoft/webwright) — Playwright-driven web task automation
+- [forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills) — LLM coding behavioral guidelines
+- [juliusbrussee/caveman](https://github.com/juliusbrussee/caveman) — Cavecrew subagent delegation, caveman stats
+- [nodnarbnitram/claude-code-extensions](https://github.com/nodnarbnitram/claude-code-extensions) — Tauri v2 development
 - Custom skills authored for this library — all `engineering/`, `utils/`, and others without a Source comment
