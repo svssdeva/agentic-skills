@@ -1,6 +1,14 @@
 <!-- Source: https://skills.sh/josiahsiegel/claude-plugin-marketplace/tailwindcss-advanced-layouts -->
 <!-- Install: npx skills add https://github.com/josiahsiegel/claude-plugin-marketplace --skill tailwindcss-advanced-layouts -->
 
+---
+name: tailwindcss-advanced-layouts
+description: |
+  Tailwind CSS advanced layout techniques including CSS Grid and Flexbox patterns.
+  PROACTIVELY activate for: (1) building complex layouts with CSS Grid, (2) grid-template-areas via Tailwind v4 arbitrary values, (3) responsive grid (grid-cols-*, auto-fit, minmax), (4) Flexbox patterns (flex-1, flex-grow, gap), (5) sticky headers and footers, (6) holy grail layout, (7) masonry-style layouts, (8) container queries (@container) with Tailwind, (9) subgrid usage, (10) aspect-ratio utilities, (11) magazine-style multi-column layouts.
+  Provides: Grid template recipes, container-query patterns, holy-grail templates, masonry alternatives, and aspect-ratio examples.
+---
+
 # Tailwind CSS Advanced Layout Techniques
 
 ## CSS Grid Mastery

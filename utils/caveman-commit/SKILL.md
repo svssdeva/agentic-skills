@@ -1,5 +1,6 @@
 <!-- Source: https://www.skills.sh/juliusbrussee/caveman/caveman-commit -->
 <!-- Install: npx skills add https://github.com/juliusbrussee/caveman --skill caveman-commit -->
+
 ---
 name: caveman-commit
 description: >
@@ -31,7 +32,7 @@ Write commit messages terse and exact. Conventional Commits format. No fluff. Wh
 **What NEVER goes in:**
 - "This commit does X", "I", "we", "now", "currently" — the diff says what
 - "As requested by..." — use Co-authored-by trailer
-- "Generated with Claude Code" or any AI attribution
+- "Generated with Claude Code" or any AI attribution — unless the user's own rule requires an `Assisted-by`/AI-attribution trailer, then add it as a trailer
 - Emoji (unless project convention requires)
 - Restating the file name when scope already says it
 

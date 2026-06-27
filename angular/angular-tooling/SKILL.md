@@ -1,6 +1,11 @@
 <!-- Source: https://skills.sh/analogjs/angular-skills/angular-tooling -->
 <!-- Install: npx skills add https://github.com/analogjs/angular-skills --skill angular-tooling -->
 
+---
+name: angular-tooling
+description: Use Angular CLI and development tools effectively in Angular v20+ projects. Use for project setup, code generation, building, testing, and configuration. Triggers on creating new projects, generating components/services/modules, configuring builds, running tests, or optimizing production builds. Don't use for Nx workspace commands, custom Webpack configurations, or non-Angular CLI build systems like Vite standalone or esbuild direct usage.
+---
+
 # Angular Tooling
 
 Use Angular CLI and development tools for efficient Angular v20+ development.

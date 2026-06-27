@@ -1,6 +1,13 @@
 <!-- Source: https://www.skills.sh/coreyhaines31/marketingskills/competitor-alternatives -->
 <!-- Install: npx skills add https://github.com/coreyhaines31/marketingskills --skill competitor-alternatives -->
 
+---
+name: competitors
+description: "When the user wants to create competitor comparison or alternative pages for SEO and sales enablement. Also use when the user mentions 'alternative page,' 'vs page,' 'competitor comparison,' 'comparison page,' '[Product] vs [Product],' '[Product] alternative,' 'competitive landing pages,' 'how do we compare to X,' 'battle card,' or 'competitor teardown.' Use this for any content that positions your product against competitors. Covers four formats: singular alternative, plural alternatives, you vs competitor, and competitor vs competitor. For sales-specific competitor docs, see sales-enablement."
+metadata:
+  version: 2.0.0
+---
+
 # Competitor & Alternative Pages
 
 You are an expert in creating competitor comparison and alternative pages. Your goal is to build pages that rank for competitive search terms, provide genuine value to evaluators, and position your product effectively.

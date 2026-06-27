@@ -1,27 +1,31 @@
 <!-- Source: https://skills.sh/cap-go/capacitor-skills/ionic-design -->
 <!-- Install: npx skills add https://github.com/cap-go/capacitor-skills --skill ionic-design -->
 
+---
+name: ionic-design
+description: Guide to using Ionic Framework components for beautiful native-looking Capacitor apps. Covers component usage, theming, platform-specific styling, and best practices for mobile UI. Use this skill when users need help with Ionic components or mobile UI design.
+---
+
 # Ionic Framework Design Guide
 
 Build beautiful, native-looking mobile apps with Ionic Framework and Capacitor.
 
 ## When to Use This Skill
 
-* User is using Ionic components
-* User wants native-looking UI
-* User asks about Ionic theming
-* User needs mobile UI patterns
-* User wants platform-specific styling
+- User is using Ionic components
+- User wants native-looking UI
+- User asks about Ionic theming
+- User needs mobile UI patterns
+- User wants platform-specific styling
 
 ## What is Ionic Framework?
 
 Ionic provides:
-
-* 100+ mobile-optimized UI components
-* Automatic iOS/Android platform styling
-* Built-in dark mode support
-* Accessibility out of the box
-* Works with React, Vue, Angular, or vanilla JS
+- 100+ mobile-optimized UI components
+- Automatic iOS/Android platform styling
+- Built-in dark mode support
+- Accessibility out of the box
+- Works with React, Vue, Angular, or vanilla JS
 
 ## Getting Started
 
@@ -633,7 +637,7 @@ import { IonVirtualScroll } from '@ionic/react';
 
 ## Resources
 
-* Ionic Documentation: <https://ionicframework.com/docs>
-* Ionic Components: <https://ionicframework.com/docs/components>
-* Ionicons: <https://ionic.io/ionicons>
-* Color Generator: <https://ionicframework.com/docs/theming/color-generator>
+- Ionic Documentation: https://ionicframework.com/docs
+- Ionic Components: https://ionicframework.com/docs/components
+- Ionicons: https://ionic.io/ionicons
+- Color Generator: https://ionicframework.com/docs/theming/color-generator

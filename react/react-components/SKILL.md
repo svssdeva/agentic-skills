@@ -1,7 +1,8 @@
 <!-- Source: https://www.skills.sh/google-labs-code/stitch-skills/react:components -->
 <!-- Install: npx skills add https://github.com/google-labs-code/stitch-skills --skill react:components -->
+
 ---
-name: react:components
+name: stitch::react-components
 description: Converts Stitch designs into modular Vite and React components using system-level networking and AST-based validation.
 allowed-tools:
   - "stitch*:*"
@@ -23,7 +24,7 @@ You are a frontend engineer focused on transforming designs into clean React cod
    - **If files do not exist**: Proceed to step 4.
 4. **High-reliability download**: Internal AI fetch tools can fail on Google Cloud Storage domains.
    - **HTML**: `bash scripts/fetch-stitch.sh "[htmlCode.downloadUrl]" ".stitch/designs/{page}.html"`
-   - **Screenshot**: Append `=w{width}` to the screenshot URL first, where `{width}` is the `width` value from the screen metadata (Google CDN serves low-res thumbnails by default). Then run: `bash scripts/fetch-stitch.sh "[screenshot.downloadUrl]=w{width}" ".stitch/designs/{page}.png"`
+    - **Screenshot**: Append `=w{width}` to the screenshot URL first, where `{width}` is the `width` value from the screen metadata (Google CDN serves low-res thumbnails by default). Then run: `bash scripts/fetch-stitch.sh "[screenshot.downloadUrl]=w{width}" ".stitch/designs/{page}.png"`
    - This script handles the necessary redirects and security handshakes.
 5. **Visual audit**: Review the downloaded screenshot (`.stitch/designs/{page}.png`) to confirm design intent and layout details.
 
@@ -33,6 +34,10 @@ You are a frontend engineer focused on transforming designs into clean React cod
 * **Data decoupling**: Move all static text, image URLs, and lists into `src/data/mockData.ts`.
 * **Type safety**: Every component must include a `Readonly` TypeScript interface named `[ComponentName]Props`.
 * **Project specific**: Focus on the target project's needs and constraints. Leave Google license headers out of the generated React components.
+* **Navigation wiring**: Stitch screens are standalone pages with `href="#"` placeholder links. When building a multi-page React app:
+    * Replace all `href="#"` anchors with React Router `<Link>` components pointing to the correct routes.
+    * **Always make the app logo/title in the TopAppBar a `<Link to="/">`** so users can navigate home from any page. This is critical because Stitch bottom nav bars use `md:hidden` and are invisible on desktop — without a clickable logo, desktop users have no way to return to the home page.
+    * Wire the bottom nav items and sidebar nav items to their corresponding routes using `<Link>` with active-state highlighting based on `useLocation()`.
 * **Style mapping**:
     * Extract the `tailwind.config` from the HTML `<head>`.
     * Sync these values with `resources/style-guide.json`.
@@ -51,3 +56,4 @@ You are a frontend engineer focused on transforming designs into clean React cod
 ## Troubleshooting
 * **Fetch errors**: Ensure the URL is quoted in the bash command to prevent shell errors.
 * **Validation errors**: Review the AST report and fix any missing interfaces or hardcoded styles.
+* **Dead navigation links**: Stitch HTML uses `href="#"` placeholders everywhere. Every `<a href="#">` must be converted to a `<Link to="/route">` with a real route. Verify all nav items are clickable and lead to the correct page.

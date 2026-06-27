@@ -1,6 +1,11 @@
 <!-- Source: https://skills.sh/analogjs/angular-skills/angular-http -->
 <!-- Install: npx skills add https://github.com/analogjs/angular-skills --skill angular-http -->
 
+---
+name: angular-http
+description: Implement HTTP data fetching in Angular v20+ using resource(), httpResource(), and HttpClient. Use for API calls, data loading with signals, request/response handling, and interceptors. Triggers on data fetching, API integration, loading states, error handling, or converting Observable-based HTTP to signal-based patterns.
+---
+
 # Angular HTTP & Data Fetching
 
 Fetch data in Angular using signal-based `resource()`, `httpResource()`, and the traditional `HttpClient`.
@@ -35,7 +40,7 @@ interface User {
 })
 export class UserProfile {
   userId = signal('123');
-
+  
   // Reactive HTTP resource - refetches when userId changes
   userResource = httpResource<User>(() => `/api/users/${this.userId()}`);
 }
@@ -93,15 +98,15 @@ import { resource, signal } from '@angular/core';
 @Component({...})
 export class Search {
   query = signal('');
-
+  
   searchResource = resource({
     // Reactive params - triggers reload when changed
     params: () => ({ q: this.query() }),
-
+    
     // Async loader function
     loader: async ({ params, abortSignal }) => {
       if (!params.q) return [];
-
+      
       const response = await fetch(`/api/search?q=${params.q}`, {
         signal: abortSignal,
       });
@@ -156,13 +161,13 @@ import { toSignal } from '@angular/core/rxjs-interop';
 @Component({...})
 export class Users {
   private http = inject(HttpClient);
-
+  
   // Convert Observable to Signal
   users = toSignal(
     this.http.get<User[]>('/api/users'),
     { initialValue: [] }
   );
-
+  
   // Or use Observable directly
   users$ = this.http.get<User[]>('/api/users');
 }
@@ -229,13 +234,13 @@ import { inject } from '@angular/core';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(Auth);
   const token = authService.token();
-
+  
   if (token) {
     req = req.clone({
       setHeaders: { Authorization: `Bearer ${token}` },
     });
   }
-
+  
   return next(req);
 };
 
@@ -299,7 +304,7 @@ export const appConfig: ApplicationConfig = {
 })
 export class UserCmpt {
   userResource = httpResource<User>(() => `/api/users/${this.userId()}`);
-
+  
   getErrorMessage(error: unknown): string {
     if (error instanceof HttpErrorResponse) {
       return error.error?.message || `Error ${error.status}: ${error.statusText}`;
@@ -345,9 +350,9 @@ getUser(id: string) {
         <app-data [data]="dataResource.value()" />
       }
       @case ('error') {
-        <app-error
-          [error]="dataResource.error()"
-          (retry)="dataResource.reload()"
+        <app-error 
+          [error]="dataResource.error()" 
+          (retry)="dataResource.reload()" 
         />
       }
     }
@@ -355,10 +360,10 @@ getUser(id: string) {
 })
 export class Data {
   query = signal('');
-  dataResource = httpResource<Data[]>(() =>
+  dataResource = httpResource<Data[]>(() => 
     this.query() ? `/api/search?q=${this.query()}` : undefined
   );
 }
 ```
 
-For advanced patterns, see references/http-patterns.md.
+For advanced patterns, see [references/http-patterns.md](references/http-patterns.md).

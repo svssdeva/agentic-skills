@@ -2,20 +2,23 @@
 <!-- Install: npx skills add https://github.com/heygen-com/hyperframes --skill website-to-hyperframes -->
 
 ---
-name: website-to-hyperframes
-description: |
-  Capture a website and create a HyperFrames video from it. Use when: (1) a user provides a URL and wants a video, (2) someone says "capture this site", "turn this into a video", "make a promo from my site", (3) the user wants a social ad, product tour, or any video based on an existing website, (4) the user shares a link and asks for any kind of video content. Even if the user just pastes a URL — this is the skill to use.
+name: website-to-video
+description: "Capture a general website/URL and turn it into a HyperFrames video (site tour, showcase, or social clip from the site's own visuals). Uses headless Chrome screenshots + brand assets. Use when intent is general — portfolio/blog/landing-page showcase or social clip from the site. NOT for: product/SaaS launch or promo (→ /product-launch-video, even from a URL); topic explainer with no site (→ /faceless-explainer); GitHub PR (→ /pr-to-video); adding captions to existing video (→ /embedded-captions); short unnarrated page-highlight motion graphic (→ /motion-graphics). Unclear launch-vs-general-site? Ask one question or start at /hyperframes."
 ---
+
+> **media-use**: Before sourcing audio/images, call `/media-use` to resolve BGM/SFX/images from the HeyGen catalog. Run `--adopt` first to register existing assets. See `/media-use` skill.
 
 # Website to HyperFrames
 
 Capture a website, then produce a professional video from it.
 
+> **Confirm the route before Step 0.** This skill makes a video _of / from a general site_. If the user is really **marketing / launching / promoting a product** (even from this URL, even "promo for our site") → `/product-launch-video`. A **topic explainer with no site** → `/faceless-explainer`; a **GitHub PR** → `/pr-to-video`; **re-cutting / recoloring / reordering an existing video file** → out of scope. Routed here on a vague "make a video", or unsure launch-vs-general-site? **Read `/hyperframes` first** (full routing table + § What HyperFrames cannot do).
+
 Users say things like:
 
-- "Capture https://... and make me a 25-second product launch video"
-- "Turn this website into a 15-second social ad for Instagram"
-- "Create a 30-second product tour from https://..."
+- "Turn this website into a 15-second social clip for Instagram"
+- "Make a 30-second site tour / showcase from https://..."
+- "Capture our homepage and build a video from its own visuals"
 
 The workflow has 7 steps. Each produces an artifact that gates the next. By default it's collaborative — gates marked 💬 stop and ask the user. If the user signals autonomous mode ("decide for me", "surprise me"), 💬 user-preference gates are skipped; see step-2-brief.md for how that propagates.
 
@@ -36,7 +39,9 @@ If you find yourself reasoning "auto mode says bias toward action, so I'll skip 
 
 Capture the site, then read the extracted data to understand the **brand and product** — what it does, who it's for, what voice it speaks in, what mood it lives in. The captured assets are a brand toolkit for later, not the building blocks the video is made from.
 
-**Gate:** Site summary printed — strategy-first (what the product does, who it's for, brand voice) before the asset / color / font inventory.
+**Show sign-in status before the brief** — run `npx hyperframes auth status` and **relay its output verbatim (don't paraphrase or rewrite it).** It reports whether voice/BGM will use HeyGen or local engines and, when not signed in, how to sign in. **If not signed in, STOP and wait for the user to choose — sign in, or say "go"/"offline" to continue with local engines — before asking the brief or anything else.** Treat it as a real decision point, not a passing note; don't fold the choice into the brief question, and don't write keys into a per-repo `.env`. (In autonomous mode, note the status and continue offline.) See `../hyperframes-media` → Preflight for the canonical guidance.
+
+**Gate:** Site summary printed — strategy-first (what the product does, who it's for, brand voice) before the asset / color / font inventory; sign-in status was shown (signed in, or continuing offline).
 
 ---
 
@@ -97,7 +102,7 @@ Build index.html and compositions following the architecture and pacing chosen i
 
 **Read:** [references/step-6-validate.md](references/step-6-validate.md)
 
-Lint, validate, take snapshots scaled to video length (formula: `max(beats × 3, ceil(duration_seconds / 2))`), and review each one. Fix issues before delivering. Deliver the localhost Studio project URL — only render to MP4 on explicit user request.
+Lint, validate, take snapshots scaled to video length (formula: `max(beats × 3, ceil(duration_seconds / 2))`), and review each one. Fix issues before delivering. Deliver the localhost Studio project URL — only render to MP4 on explicit user request. Surface that Studio URL **only at handoff** — it is the final, stable preview; the build-phase snapshots are headless, so do not pop a preview mid-build.
 
 **Deliver something you're proud of.** Before handing off, ask yourself: would I post this on social media with my name on it? If not, fix what's wrong.
 

@@ -1,6 +1,11 @@
 <!-- Source: https://skills.sh/analogjs/angular-skills/angular-component -->
 <!-- Install: npx skills add https://github.com/analogjs/angular-skills --skill angular-component -->
 
+---
+name: angular-component
+description: Create modern Angular standalone components following v20+ best practices. Use for building UI components with signal-based inputs/outputs, OnPush change detection, host bindings, content projection, and lifecycle hooks. Triggers on component creation, refactoring class-based inputs to signals, adding host bindings, or implementing accessible interactive components.
+---
+
 # Angular Component
 
 Create standalone components for Angular v20+. Components are standalone by default—do NOT set `standalone: true`.
@@ -33,20 +38,20 @@ import { Component, ChangeDetectionStrategy, input, output, computed } from '@an
 export class UserCard {
   // Required input
   name = input.required<string>();
-
+  
   // Optional input with default
   email = input<string>('');
   showEmail = input(false);
-
+  
   // Input with transform
   isActive = input(false, { transform: booleanAttribute });
-
+  
   // Computed from inputs
   avatarUrl = computed(() => `https://api.example.com/avatar/${this.name()}`);
-
+  
   // Output
   selected = output<string>();
-
+  
   handleClick() {
     this.selected.emit(this.name());
   }
@@ -104,18 +109,18 @@ Use the `host` object in `@Component`—do NOT use `@HostBinding` or `@HostListe
   host: {
     // Static attributes
     'role': 'button',
-
+    
     // Dynamic class bindings
     '[class.primary]': 'variant() === "primary"',
     '[class.disabled]': 'disabled()',
-
+    
     // Dynamic style bindings
     '[style.--btn-color]': 'color()',
-
+    
     // Attribute bindings
     '[attr.aria-disabled]': 'disabled()',
     '[attr.tabindex]': 'disabled() ? -1 : 0',
-
+    
     // Event listeners
     '(click)': 'onClick($event)',
     '(keydown.enter)': 'onClick($event)',
@@ -127,9 +132,9 @@ export class Button {
   variant = input<'primary' | 'secondary'>('primary');
   disabled = input(false, { transform: booleanAttribute });
   color = input('#007bff');
-
+  
   clicked = output<void>();
-
+  
   onClick(event: Event) {
     if (!this.disabled()) {
       this.clicked.emit();
@@ -190,12 +195,11 @@ export class My implements OnInit, OnDestroy {
 ## Accessibility Requirements
 
 Components MUST:
-
-* Pass AXE accessibility checks
-* Meet WCAG AA standards
-* Include proper ARIA attributes for interactive elements
-* Support keyboard navigation
-* Maintain visible focus indicators
+- Pass AXE accessibility checks
+- Meet WCAG AA standards
+- Include proper ARIA attributes for interactive elements
+- Support keyboard navigation
+- Maintain visible focus indicators
 
 ```typescript
 @Component({
@@ -215,7 +219,7 @@ export class Toggle {
   label = input.required<string>();
   checked = input(false, { transform: booleanAttribute });
   checkedChange = output<boolean>();
-
+  
   toggle() {
     this.checkedChange.emit(!this.checked());
   }
@@ -284,4 +288,4 @@ export class Hero {
 }
 ```
 
-For detailed patterns, see references/component-patterns.md.
+For detailed patterns, see [references/component-patterns.md](references/component-patterns.md).

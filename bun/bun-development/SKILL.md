@@ -1,19 +1,27 @@
 <!-- Source: https://skills.sh/sickn33/antigravity-awesome-skills/bun-development -->
 <!-- Install: npx skills add https://github.com/sickn33/antigravity-awesome-skills --skill bun-development -->
 
+---
+name: bun-development
+description: "Fast, modern JavaScript/TypeScript development with the Bun runtime, inspired by [oven-sh/bun](https://github.com/oven-sh/bun)."
+risk: critical
+source: community
+date_added: "2026-02-27"
+---
+
 # ⚡ Bun Development
 
-> Fast, modern JavaScript/TypeScript development with the Bun runtime, inspired by oven-sh/bun.
+> Fast, modern JavaScript/TypeScript development with the Bun runtime, inspired by [oven-sh/bun](https://github.com/oven-sh/bun).
 
 ## When to Use This Skill
 
 Use this skill when:
 
-* Starting new JS/TS projects with Bun
-* Migrating from Node.js to Bun
-* Optimizing development speed
-* Using Bun's built-in tools (bundler, test runner)
-* Troubleshooting Bun-specific issues
+- Starting new JS/TS projects with Bun
+- Migrating from Node.js to Bun
+- Optimizing development speed
+- Using Bun's built-in tools (bundler, test runner)
+- Troubleshooting Bun-specific issues
 
 ---
 
@@ -29,7 +37,7 @@ brew install oven-sh/bun/bun
 tmpdir="$(mktemp -d)"
 trap 'rm -rf "$tmpdir"' EXIT
 curl -fsSLo "$tmpdir/bun-install.sh" https://bun.sh/install
-sed -n '1,160p' "$tmpdir/bun-install.sh"
+cat "$tmpdir/bun-install.sh"  # review the full installer before executing
 bash "$tmpdir/bun-install.sh"
 
 # Windows
@@ -49,7 +57,7 @@ bun upgrade
 ### 1.2 Why Bun?
 
 | Feature         | Bun            | Node.js                     |
-| --------------- | -------------- | --------------------------- |
+| :-------------- | :------------- | :-------------------------- |
 | Startup time    | ~25ms          | ~100ms+                     |
 | Package install | 10-100x faster | Baseline                    |
 | TypeScript      | Native         | Requires transpiler         |
@@ -620,8 +628,8 @@ process.hrtime()              // Use Bun.nanoseconds()
 setImmediate()                // Use queueMicrotask()
 
 // ✅ Bun-specific features
-const file = Bun.file("./data.txt");   // Fast file API
-Bun.serve({ port: 3000, fetch: () => {} }); // Fast HTTP server
+const file = Bun.file("./data.txt");  // Fast file API
+Bun.serve({ port: 3000, fetch: ... }); // Fast HTTP server
 Bun.password.hash(password);           // Built-in hashing
 ```
 
@@ -674,29 +682,28 @@ bun run ./dist/index.js
 
 ## Quick Reference
 
-| Task         | Command                                  |
-| ------------ | ---------------------------------------- |
-| Init project | bun init                                 |
-| Install deps | bun install                              |
-| Add package  | bun add \<pkg\>                          |
-| Run script   | bun run \<script\>                       |
-| Run file     | bun run file.ts                          |
-| Watch mode   | bun --watch run file.ts                  |
-| Run tests    | bun test                                 |
-| Build        | bun build ./src/index.ts --outdir ./dist |
-| Execute pkg  | bunx \<pkg\>                             |
+| Task         | Command                                    |
+| :----------- | :----------------------------------------- |
+| Init project | `bun init`                                 |
+| Install deps | `bun install`                              |
+| Add package  | `bun add <pkg>`                            |
+| Run script   | `bun run <script>`                         |
+| Run file     | `bun run file.ts`                          |
+| Watch mode   | `bun --watch run file.ts`                  |
+| Run tests    | `bun test`                                 |
+| Build        | `bun build ./src/index.ts --outdir ./dist` |
+| Execute pkg  | `bunx <pkg>`                               |
 
 ---
 
 ## Resources
 
-* [Bun Documentation](https://bun.sh/docs)
-* [Bun GitHub](https://github.com/oven-sh/bun)
-* [Elysia Framework](https://elysiajs.com)
-* [Bun Discord](https://bun.sh/discord)
+- [Bun Documentation](https://bun.sh/docs)
+- [Bun GitHub](https://github.com/oven-sh/bun)
+- [Elysia Framework](https://elysiajs.com/)
+- [Bun Discord](https://bun.sh/discord)
 
 ## Limitations
-
-* Use this skill only when the task clearly matches the scope described above.
-* Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-* Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+- Use this skill only when the task clearly matches the scope described above.
+- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
+- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.

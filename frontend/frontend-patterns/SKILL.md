@@ -3,30 +3,30 @@
 
 ---
 name: frontend-patterns
-description: Frontend development patterns for React, Next.js, state management, performance optimization, and UI best practices.
+description: React, Next.js, state yönetimi, performans optimizasyonu ve UI en iyi uygulamaları için frontend geliştirme kalıpları.
 origin: ECC
 ---
 
-# Frontend Development Patterns
+# Frontend Geliştirme Kalıpları
 
-Modern frontend patterns for React, Next.js, and performant user interfaces.
+React, Next.js ve performanslı kullanıcı arayüzleri için modern frontend kalıpları.
 
-## When to Activate
+## Ne Zaman Aktifleştirmelisiniz
 
-- Building React components (composition, props, rendering)
-- Managing state (useState, useReducer, Zustand, Context)
-- Implementing data fetching (SWR, React Query, server components)
-- Optimizing performance (memoization, virtualization, code splitting)
-- Working with forms (validation, controlled inputs, Zod schemas)
-- Handling client-side routing and navigation
-- Building accessible, responsive UI patterns
+- React bileşenleri oluştururken (composition, props, rendering)
+- State yönetirken (useState, useReducer, Zustand, Context)
+- Veri çekme implementasyonu (SWR, React Query, server components)
+- Performans optimize ederken (memoization, virtualization, code splitting)
+- Formlarla çalışırken (validation, controlled inputs, Zod schemas)
+- Client-side routing ve navigasyon işlerken
+- Erişilebilir, responsive UI kalıpları oluştururken
 
-## Component Patterns
+## Bileşen Kalıpları
 
-### Composition Over Inheritance
+### Kalıtım Yerine Composition
 
 ```typescript
-// PASS: GOOD: Component composition
+// PASS: İYİ: Bileşen composition
 interface CardProps {
   children: React.ReactNode
   variant?: 'default' | 'outlined'
@@ -44,10 +44,10 @@ export function CardBody({ children }: { children: React.ReactNode }) {
   return <div className="card-body">{children}</div>
 }
 
-// Usage
+// Kullanım
 <Card>
-  <CardHeader>Title</CardHeader>
-  <CardBody>Content</CardBody>
+  <CardHeader>Başlık</CardHeader>
+  <CardBody>İçerik</CardBody>
 </Card>
 ```
 
@@ -92,16 +92,16 @@ export function Tab({ id, children }: { id: string, children: React.ReactNode })
   )
 }
 
-// Usage
+// Kullanım
 <Tabs defaultTab="overview">
   <TabList>
-    <Tab id="overview">Overview</Tab>
-    <Tab id="details">Details</Tab>
+    <Tab id="overview">Genel Bakış</Tab>
+    <Tab id="details">Detaylar</Tab>
   </TabList>
 </Tabs>
 ```
 
-### Render Props Pattern
+### Render Props Kalıbı
 
 ```typescript
 interface DataLoaderProps<T> {
@@ -125,7 +125,7 @@ export function DataLoader<T>({ url, children }: DataLoaderProps<T>) {
   return <>{children(data, loading, error)}</>
 }
 
-// Usage
+// Kullanım
 <DataLoader<Market[]> url="/api/markets">
   {(markets, loading, error) => {
     if (loading) return <Spinner />
@@ -135,9 +135,9 @@ export function DataLoader<T>({ url, children }: DataLoaderProps<T>) {
 </DataLoader>
 ```
 
-## Custom Hooks Patterns
+## Özel Hook Kalıpları
 
-### State Management Hook
+### State Yönetimi Hook'u
 
 ```typescript
 export function useToggle(initialValue = false): [boolean, () => void] {
@@ -150,11 +150,11 @@ export function useToggle(initialValue = false): [boolean, () => void] {
   return [value, toggle]
 }
 
-// Usage
+// Kullanım
 const [isOpen, toggleOpen] = useToggle()
 ```
 
-### Async Data Fetching Hook
+### Async Veri Çekme Hook'u
 
 ```typescript
 interface UseQueryOptions<T> {
@@ -172,10 +172,11 @@ export function useQuery<T>(
   const [error, setError] = useState<Error | null>(null)
   const [loading, setLoading] = useState(false)
 
-  // Keep the latest fetcher/options in refs so refetch stays referentially
-  // stable even when callers pass inline functions and object literals.
-  // Without this, every render creates a new refetch, and the effect below
-  // re-runs after each state update - an infinite fetch loop.
+  // Çağıranlar satır içi fonksiyonlar ve nesne literalleri geçirse bile
+  // refetch'in referans olarak kararlı kalması için en güncel fetcher/options
+  // değerlerini ref'lerde tutun. Bu olmadan her render yeni bir refetch
+  // oluşturur ve aşağıdaki effect her state güncellemesinden sonra yeniden
+  // çalışır - sonsuz bir fetch döngüsü.
   const fetcherRef = useRef(fetcher)
   const optionsRef = useRef(options)
   useEffect(() => {
@@ -211,18 +212,18 @@ export function useQuery<T>(
   return { data, error, loading, refetch }
 }
 
-// Usage
+// Kullanım
 const { data: markets, loading, error, refetch } = useQuery(
   'markets',
   () => fetch('/api/markets').then(r => r.json()),
   {
-    onSuccess: data => console.log('Fetched', data.length, 'markets'),
-    onError: err => console.error('Failed:', err)
+    onSuccess: data => console.log('Getirilen', data.length, 'market'),
+    onError: err => console.error('Başarısız:', err)
   }
 )
 ```
 
-### Debounce Hook
+### Debounce Hook'u
 
 ```typescript
 export function useDebounce<T>(value: T, delay: number): T {
@@ -239,7 +240,7 @@ export function useDebounce<T>(value: T, delay: number): T {
   return debouncedValue
 }
 
-// Usage
+// Kullanım
 const [searchQuery, setSearchQuery] = useState('')
 const debouncedQuery = useDebounce(searchQuery, 500)
 
@@ -250,9 +251,9 @@ useEffect(() => {
 }, [debouncedQuery])
 ```
 
-## State Management Patterns
+## State Yönetimi Kalıpları
 
-### Context + Reducer Pattern
+### Context + Reducer Kalıbı
 
 ```typescript
 interface State {
@@ -305,23 +306,23 @@ export function useMarkets() {
 }
 ```
 
-## Performance Optimization
+## Performans Optimizasyonu
 
 ### Memoization
 
 ```typescript
-// PASS: useMemo for expensive computations
-// Copy before sorting - Array.prototype.sort mutates in place
+// PASS: Pahalı hesaplamalar için useMemo
+// Sıralamadan önce kopyalayın - Array.prototype.sort yerinde değiştirir
 const sortedMarkets = useMemo(() => {
   return [...markets].sort((a, b) => b.volume - a.volume)
 }, [markets])
 
-// PASS: useCallback for functions passed to children
+// PASS: Alt bileşenlere geçirilen fonksiyonlar için useCallback
 const handleSearch = useCallback((query: string) => {
   setSearchQuery(query)
 }, [])
 
-// PASS: React.memo for pure components
+// PASS: Pure bileşenler için React.memo
 export const MarketCard = React.memo<MarketCardProps>(({ market }) => {
   return (
     <div className="market-card">
@@ -332,12 +333,12 @@ export const MarketCard = React.memo<MarketCardProps>(({ market }) => {
 })
 ```
 
-### Code Splitting & Lazy Loading
+### Code Splitting ve Lazy Loading
 
 ```typescript
 import { lazy, Suspense } from 'react'
 
-// PASS: Lazy load heavy components
+// PASS: Ağır bileşenleri lazy yükle
 const HeavyChart = lazy(() => import('./HeavyChart'))
 const ThreeJsBackground = lazy(() => import('./ThreeJsBackground'))
 
@@ -356,7 +357,7 @@ export function Dashboard() {
 }
 ```
 
-### Virtualization for Long Lists
+### Uzun Listeler için Virtualization
 
 ```typescript
 import { useVirtualizer } from '@tanstack/react-virtual'
@@ -367,8 +368,8 @@ export function VirtualMarketList({ markets }: { markets: Market[] }) {
   const virtualizer = useVirtualizer({
     count: markets.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 100,  // Estimated row height
-    overscan: 5  // Extra items to render
+    estimateSize: () => 100,  // Tahmini satır yüksekliği
+    overscan: 5  // Ekstra render edilecek öğeler
   })
 
   return (
@@ -400,9 +401,9 @@ export function VirtualMarketList({ markets }: { markets: Market[] }) {
 }
 ```
 
-## Form Handling Patterns
+## Form İşleme Kalıpları
 
-### Controlled Form with Validation
+### Doğrulamalı Controlled Form
 
 ```typescript
 interface FormData {
@@ -430,17 +431,17 @@ export function CreateMarketForm() {
     const newErrors: FormErrors = {}
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required'
+      newErrors.name = 'İsim gereklidir'
     } else if (formData.name.length > 200) {
-      newErrors.name = 'Name must be under 200 characters'
+      newErrors.name = 'İsim 200 karakterden az olmalıdır'
     }
 
     if (!formData.description.trim()) {
-      newErrors.description = 'Description is required'
+      newErrors.description = 'Açıklama gereklidir'
     }
 
     if (!formData.endDate) {
-      newErrors.endDate = 'End date is required'
+      newErrors.endDate = 'Bitiş tarihi gereklidir'
     }
 
     setErrors(newErrors)
@@ -454,9 +455,9 @@ export function CreateMarketForm() {
 
     try {
       await createMarket(formData)
-      // Success handling
+      // Başarı işleme
     } catch (error) {
-      // Error handling
+      // Hata işleme
     }
   }
 
@@ -465,19 +466,19 @@ export function CreateMarketForm() {
       <input
         value={formData.name}
         onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
-        placeholder="Market name"
+        placeholder="Market ismi"
       />
       {errors.name && <span className="error">{errors.name}</span>}
 
-      {/* Other fields */}
+      {/* Diğer alanlar */}
 
-      <button type="submit">Create Market</button>
+      <button type="submit">Market Oluştur</button>
     </form>
   )
 }
 ```
 
-## Error Boundary Pattern
+## Error Boundary Kalıbı
 
 ```typescript
 interface ErrorBoundaryState {
@@ -506,10 +507,10 @@ export class ErrorBoundary extends React.Component<
     if (this.state.hasError) {
       return (
         <div className="error-fallback">
-          <h2>Something went wrong</h2>
+          <h2>Bir şeyler yanlış gitti</h2>
           <p>{this.state.error?.message}</p>
           <button onClick={() => this.setState({ hasError: false })}>
-            Try again
+            Tekrar dene
           </button>
         </div>
       )
@@ -519,20 +520,20 @@ export class ErrorBoundary extends React.Component<
   }
 }
 
-// Usage
+// Kullanım
 <ErrorBoundary>
   <App />
 </ErrorBoundary>
 ```
 
-## Animation Patterns
+## Animasyon Kalıpları
 
-### Framer Motion Animations
+### Framer Motion Animasyonları
 
 ```typescript
 import { motion, AnimatePresence } from 'framer-motion'
 
-// PASS: List animations
+// PASS: Liste animasyonları
 export function AnimatedMarketList({ markets }: { markets: Market[] }) {
   return (
     <AnimatePresence>
@@ -551,7 +552,7 @@ export function AnimatedMarketList({ markets }: { markets: Market[] }) {
   )
 }
 
-// PASS: Modal animations
+// PASS: Modal animasyonları
 export function Modal({ isOpen, onClose, children }: ModalProps) {
   return (
     <AnimatePresence>
@@ -579,9 +580,9 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
 }
 ```
 
-## Accessibility Patterns
+## Erişilebilirlik Kalıpları
 
-### Keyboard Navigation
+### Klavye Navigasyonu
 
 ```typescript
 export function Dropdown({ options, onSelect }: DropdownProps) {
@@ -616,13 +617,13 @@ export function Dropdown({ options, onSelect }: DropdownProps) {
       aria-haspopup="listbox"
       onKeyDown={handleKeyDown}
     >
-      {/* Dropdown implementation */}
+      {/* Dropdown implementasyonu */}
     </div>
   )
 }
 ```
 
-### Focus Management
+### Focus Yönetimi
 
 ```typescript
 export function Modal({ isOpen, onClose, children }: ModalProps) {
@@ -631,13 +632,13 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
 
   useEffect(() => {
     if (isOpen) {
-      // Save currently focused element
+      // Şu anki focus'lanmış elementi kaydet
       previousFocusRef.current = document.activeElement as HTMLElement
 
-      // Focus modal
+      // Modal'a focus yap
       modalRef.current?.focus()
     } else {
-      // Restore focus when closing
+      // Kapatırken focus'u geri yükle
       previousFocusRef.current?.focus()
     }
   }, [isOpen])
@@ -656,4 +657,4 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
 }
 ```
 
-**Remember**: Modern frontend patterns enable maintainable, performant user interfaces. Choose patterns that fit your project complexity.
+**Unutmayın**: Modern frontend kalıpları sürdürülebilir, performanslı kullanıcı arayüzleri sağlar. Proje karmaşıklığınıza uyan kalıpları seçin.

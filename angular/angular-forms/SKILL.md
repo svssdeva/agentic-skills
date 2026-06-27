@@ -1,11 +1,16 @@
 <!-- Source: https://skills.sh/analogjs/angular-skills/angular-forms -->
 <!-- Install: npx skills add https://github.com/analogjs/angular-skills --skill angular-forms -->
 
+---
+name: angular-forms
+description: Build signal-based forms in Angular v21+ using the new Signal Forms API. Use for form creation with automatic two-way binding, schema-based validation, field state management, and dynamic forms. Triggers on form implementation, adding validation, creating multi-step forms, or building forms with conditional fields. Signal Forms are experimental but recommended for new Angular projects. Don't use for template-driven forms without signals or third-party form libraries like Formly or ngx-formly.
+---
+
 # Angular Signal Forms
 
 Build type-safe, reactive forms using Angular's Signal Forms API. Signal Forms provide automatic two-way binding, schema-based validation, and reactive field state.
 
-**Note:** Signal Forms are experimental in Angular v21. For production apps requiring stability, see references/form-patterns.md for Reactive Forms patterns.
+**Note:** Signal Forms are experimental in Angular v21. For production apps requiring stability, see [references/form-patterns.md](references/form-patterns.md) for Reactive Forms patterns.
 
 ## Basic Setup
 
@@ -30,7 +35,7 @@ interface LoginData {
       @if (loginForm.email().touched() && loginForm.email().invalid()) {
         <p class="error">{{ loginForm.email().errors()[0].message }}</p>
       }
-
+      
       <label>
         Password
         <input type="password" [formField]="loginForm.password" />
@@ -38,7 +43,7 @@ interface LoginData {
       @if (loginForm.password().touched() && loginForm.password().invalid()) {
         <p class="error">{{ loginForm.password().errors()[0].message }}</p>
       }
-
+      
       <button type="submit" [disabled]="loginForm().invalid()">Login</button>
     </form>
   `,
@@ -49,14 +54,14 @@ export class Login {
     email: '',
     password: '',
   });
-
+  
   // Create form with validation schema
   loginForm = form(this.loginModel, (schemaPath) => {
     required(schemaPath.email, { message: 'Email is required' });
     email(schemaPath.email, { message: 'Enter a valid email address' });
     required(schemaPath.password, { message: 'Password is required' });
   });
-
+  
   onSubmit(event: Event) {
     event.preventDefault();
     if (this.loginForm().valid()) {
@@ -175,26 +180,26 @@ this.form().dirty()
 ### Built-in Validators
 
 ```typescript
-import {
-  form, required, email, min, max,
-  minLength, maxLength, pattern
+import { 
+  form, required, email, min, max, 
+  minLength, maxLength, pattern 
 } from '@angular/forms/signals';
 
 const userForm = form(this.userModel, (schemaPath) => {
   // Required field
   required(schemaPath.name, { message: 'Name is required' });
-
+  
   // Email format
   email(schemaPath.email, { message: 'Invalid email' });
-
+  
   // Numeric range
   min(schemaPath.age, 18, { message: 'Must be 18+' });
   max(schemaPath.age, 120, { message: 'Invalid age' });
-
+  
   // String/array length
   minLength(schemaPath.password, 8, { message: 'Min 8 characters' });
   maxLength(schemaPath.bio, 500, { message: 'Max 500 characters' });
-
+  
   // Regex pattern
   pattern(schemaPath.phone, /^\d{3}-\d{3}-\d{4}$/, {
     message: 'Format: 555-123-4567',
@@ -235,7 +240,7 @@ const signupForm = form(this.signupModel, (schemaPath) => {
 const passwordForm = form(this.passwordModel, (schemaPath) => {
   required(schemaPath.password);
   required(schemaPath.confirmPassword);
-
+  
   // Compare fields
   validate(schemaPath.confirmPassword, ({ value, valueOf }) => {
     if (value() !== valueOf(schemaPath.password)) {
@@ -326,10 +331,10 @@ export class Login {
     required(schemaPath.email);
     required(schemaPath.password);
   });
-
+  
   onSubmit(event: Event) {
     event.preventDefault();
-
+    
     // submit() marks all fields touched and runs callback if valid
     submit(this.form, async () => {
       await this.authService.login(this.model());
@@ -361,21 +366,21 @@ export class Order {
   orderModel = signal<Order>({
     items: [{ product: '', quantity: 1 }],
   });
-
+  
   orderForm = form(this.orderModel, (schemaPath) => {
     applyEach(schemaPath.items, (item) => {
       required(item.product, { message: 'Product required' });
       min(item.quantity, 1, { message: 'Min quantity is 1' });
     });
   });
-
+  
   addItem() {
     this.orderModel.update(m => ({
       ...m,
       items: [...m.items, { product: '', quantity: 1 }],
     }));
   }
-
+  
   removeItem(index: number) {
     this.orderModel.update(m => ({
       ...m,
@@ -418,15 +423,15 @@ export class Order {
 ```typescript
 async onSubmit() {
   if (!this.form().valid()) return;
-
+  
   await this.api.submit(this.model());
-
+  
   // Clear interaction state
   this.form().reset();
-
+  
   // Clear values
   this.model.set({ email: '', password: '' });
 }
 ```
 
-For Reactive Forms patterns (production-stable), see references/form-patterns.md.
+For Reactive Forms patterns (production-stable), see [references/form-patterns.md](references/form-patterns.md).

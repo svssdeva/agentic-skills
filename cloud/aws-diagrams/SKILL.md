@@ -1,6 +1,18 @@
 <!-- Source: https://skills.sh/eraserlabs/eraser-io/aws-diagrams -->
 <!-- Install: npx skills add https://github.com/eraserlabs/eraser-io --skill aws-diagrams -->
 
+---
+name: aws-diagrams
+description: 'Visualizes AWS infrastructure from CLI output, CloudFormation, or descriptions. Use when user has AWS resources to diagram.'
+license: MIT
+compatibility: Requires network access to call Eraser API
+allowed-tools: Read Write Bash(curl:*)
+metadata:
+  version: "1.0.0"
+  author: Eraser Labs
+  tags: aws, diagram, cloudformation, ec2, vpc, s3, rds, lambda, infrastructure
+---
+
 # AWS Diagram Generator
 
 Generates architecture diagrams for AWS infrastructure from CloudFormation templates, AWS CLI output, or natural language descriptions.

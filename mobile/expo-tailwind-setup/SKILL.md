@@ -1,6 +1,13 @@
 <!-- Source: https://skills.sh/expo/skills/expo-tailwind-setup -->
 <!-- Install: npx skills add https://github.com/expo/skills --skill expo-tailwind-setup -->
 
+---
+name: expo-tailwind-setup
+description: Set up Tailwind CSS v4 in Expo with react-native-css and NativeWind v5 for universal styling
+version: 1.0.0
+license: MIT
+---
+
 # Tailwind CSS Setup for Expo with react-native-css
 
 This guide covers setting up Tailwind CSS v4 in Expo using react-native-css and NativeWind v5 for universal styling across iOS, Android, and Web.
@@ -9,10 +16,10 @@ This guide covers setting up Tailwind CSS v4 in Expo using react-native-css and 
 
 This setup uses:
 
-* **Tailwind CSS v4** - Modern CSS-first configuration
-* **react-native-css** - CSS runtime for React Native
-* **NativeWind v5** - Metro transformer for Tailwind in React Native
-* **@tailwindcss/postcss** - PostCSS plugin for Tailwind v4
+- **Tailwind CSS v4** - Modern CSS-first configuration
+- **react-native-css** - CSS runtime for React Native
+- **NativeWind v5** - Metro transformer for Tailwind in React Native
+- **@tailwindcss/postcss** - PostCSS plugin for Tailwind v4
 
 ## Installation
 
@@ -32,8 +39,8 @@ Add resolutions for lightningcss compatibility:
 }
 ```
 
-* autoprefixer is not needed in Expo because of lightningcss
-* postcss is included in expo by default
+- autoprefixer is not needed in Expo because of lightningcss
+- postcss is included in expo by default
 
 ## Configuration Files
 

@@ -39,6 +39,7 @@ Retrieval Augmented Generation (RAG) enhances LLM responses by fetching relevant
 <ex-basic-rag-setup>
 <python>
 End-to-end RAG pipeline: load documents, split into chunks, embed, store, retrieve, and generate a response.
+
 ```python
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_community.vectorstores import InMemoryVectorStore
@@ -76,6 +77,7 @@ response = model.invoke([
 </python>
 <typescript>
 End-to-end RAG pipeline: load documents, split into chunks, embed, store, retrieve, and generate a response.
+
 ```typescript
 import { ChatOpenAI, OpenAIEmbeddings } from "@langchain/openai";
 import { MemoryVectorStore } from "@langchain/classic/vectorstores/memory";
@@ -120,6 +122,7 @@ const response = await model.invoke([
 <ex-loading-pdf>
 <python>
 Load a PDF file and extract each page as a separate document.
+
 ```python
 from langchain_community.document_loaders import PyPDFLoader
 
@@ -130,6 +133,7 @@ print(f"Loaded {len(docs)} pages")
 </python>
 <typescript>
 Load a PDF file and extract each page as a separate document.
+
 ```typescript
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 
@@ -143,6 +147,7 @@ console.log(`Loaded ${docs.length} pages`);
 <ex-loading-web-pages>
 <python>
 Fetch and parse content from a web URL into a document.
+
 ```python
 from langchain_community.document_loaders import WebBaseLoader
 
@@ -152,6 +157,7 @@ docs = loader.load()
 </python>
 <typescript>
 Fetch and parse content from a web URL into a document using Cheerio.
+
 ```typescript
 import { CheerioWebBaseLoader } from "@langchain/community/document_loaders/web/cheerio";
 
@@ -164,6 +170,7 @@ const docs = await loader.load();
 <ex-loading-directory>
 <python>
 Load all text files from a directory using a glob pattern.
+
 ```python
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
 
@@ -185,6 +192,7 @@ docs = loader.load()
 <ex-text-splitting>
 <python>
 Split documents into chunks using RecursiveCharacterTextSplitter with configurable size and overlap.
+
 ```python
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -206,6 +214,7 @@ splits = splitter.split_documents(docs)
 <ex-chroma-vectorstore>
 <python>
 Create a persistent Chroma vector store and reload it from disk.
+
 ```python
 from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
@@ -227,6 +236,7 @@ vectorstore = Chroma(
 </python>
 <typescript>
 Create a Chroma vector store connected to a running Chroma server.
+
 ```typescript
 import { Chroma } from "@langchain/community/vectorstores/chroma";
 import { OpenAIEmbeddings } from "@langchain/openai";
@@ -243,6 +253,7 @@ const vectorstore = await Chroma.fromDocuments(
 <ex-faiss-vectorstore>
 <python>
 Create a FAISS vector store, save it to disk, and reload it.
+
 ```python
 from langchain_community.vectorstores import FAISS
 
@@ -259,6 +270,7 @@ loaded = FAISS.load_local(
 </python>
 <typescript>
 Create a FAISS vector store, save it to disk, and reload it.
+
 ```typescript
 import { FaissStore } from "@langchain/community/vectorstores/faiss";
 
@@ -277,6 +289,7 @@ const loaded = await FaissStore.load("./faiss_index", embeddings);
 <ex-similarity-search>
 <python>
 Perform similarity search and retrieve results with relevance scores.
+
 ```python
 # Basic search
 results = vectorstore.similarity_search(query, k=5)
@@ -289,6 +302,7 @@ for doc, score in results_with_score:
 </python>
 <typescript>
 Perform similarity search and retrieve results with relevance scores.
+
 ```typescript
 // Basic search
 const results = await vectorstore.similaritySearch(query, 5);
@@ -305,6 +319,7 @@ for (const [doc, score] of resultsWithScore) {
 <ex-mmr-search>
 <python>
 Use MMR (Maximal Marginal Relevance) to balance relevance and diversity in search results.
+
 ```python
 # MMR balances relevance and diversity
 retriever = vectorstore.as_retriever(
@@ -318,6 +333,7 @@ retriever = vectorstore.as_retriever(
 <ex-metadata-filtering>
 <python>
 Add metadata to documents and filter search results by metadata properties.
+
 ```python
 # Add metadata when creating documents
 docs = [
@@ -340,6 +356,7 @@ results = vectorstore.similarity_search(
 <ex-rag-with-agent>
 <python>
 Create an agent that uses RAG as a tool for answering questions.
+
 ```python
 from langchain.agents import create_agent
 from langchain.tools import tool
@@ -362,6 +379,7 @@ result = agent.invoke({
 </python>
 <typescript>
 Create an agent that uses RAG as a tool for answering questions.
+
 ```typescript
 import { createAgent } from "langchain";
 import { tool } from "@langchain/core/tools";
@@ -409,6 +427,7 @@ const result = await agent.invoke({
 <fix-chunk-size>
 <python>
 Chunk size 500-1500 is typically good.
+
 ```python
 # WRONG: Too small (loses context) or too large (hits limits)
 splitter = RecursiveCharacterTextSplitter(chunk_size=50)
@@ -420,6 +439,7 @@ splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 </python>
 <typescript>
 Chunk size 500-1500 is typically good.
+
 ```typescript
 // WRONG: Too small or too large
 const splitter = new RecursiveCharacterTextSplitter({ chunkSize: 50 });
@@ -433,6 +453,7 @@ const splitter = new RecursiveCharacterTextSplitter({ chunkSize: 1000, chunkOver
 <fix-chunk-overlap>
 <python>
 Use overlap (10-20% of chunk size) to maintain context at boundaries.
+
 ```python
 # WRONG: No overlap - context breaks at boundaries
 splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
@@ -446,6 +467,7 @@ splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 <fix-persist-vectorstore>
 <python>
 Use persistent vector store instead of in-memory to avoid data loss.
+
 ```python
 # WRONG: InMemory - lost on restart
 vectorstore = InMemoryVectorStore.from_documents(docs, embeddings)
@@ -456,6 +478,7 @@ vectorstore = Chroma.from_documents(docs, embeddings, persist_directory="./chrom
 </python>
 <typescript>
 Use persistent vector store instead of in-memory to avoid data loss.
+
 ```typescript
 // WRONG: Memory - lost on restart
 const vectorstore = await MemoryVectorStore.fromDocuments(docs, embeddings);
@@ -469,6 +492,7 @@ const vectorstore = await Chroma.fromDocuments(docs, embeddings, { collectionNam
 <fix-consistent-embeddings>
 <python>
 Use the same embedding model for indexing and querying.
+
 ```python
 # WRONG: Different embeddings for index and query - incompatible!
 vectorstore = Chroma.from_documents(docs, OpenAIEmbeddings(model="text-embedding-3-small"))
@@ -482,6 +506,7 @@ retriever = vectorstore.as_retriever()  # Uses same embeddings
 </python>
 <typescript>
 Use the same embedding model for indexing and querying.
+
 ```typescript
 const embeddings = new OpenAIEmbeddings({ model: "text-embedding-3-small" });
 const vectorstore = await Chroma.fromDocuments(docs, embeddings);
@@ -493,6 +518,7 @@ const retriever = vectorstore.asRetriever();  // Uses same embeddings
 <fix-faiss-deserialization>
 <python>
 Explicitly allow deserialization when loading FAISS indexes.
+
 ```python
 # WRONG: Will raise error
 loaded_store = FAISS.load_local("./faiss_index", embeddings)
@@ -506,6 +532,7 @@ loaded_store = FAISS.load_local("./faiss_index", embeddings, allow_dangerous_des
 <fix-dimension-mismatch>
 <python>
 Ensure embedding dimensions match the vector store index dimensions.
+
 ```python
 # WRONG: Index has 1536 dimensions but using 512-dim embeddings
 pc.create_index(name="idx", dimension=1536, metric="cosine")

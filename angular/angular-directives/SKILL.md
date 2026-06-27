@@ -1,6 +1,11 @@
 <!-- Source: https://skills.sh/analogjs/angular-skills/angular-directives -->
 <!-- Install: npx skills add https://github.com/analogjs/angular-skills --skill angular-directives -->
 
+---
+name: angular-directives
+description: Create custom directives in Angular v20+ for DOM manipulation and behavior extension. Use for attribute directives that modify element behavior/appearance, structural directives for portals/overlays, and host directives for composition. Triggers on creating reusable DOM behaviors, extending element functionality, or composing behaviors across components. Note - use native @if/@for/@switch for control flow, not custom structural directives.
+---
+
 # Angular Directives
 
 Create custom directives for reusable DOM manipulation and behavior in Angular v20+.

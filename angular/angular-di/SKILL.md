@@ -1,6 +1,11 @@
 <!-- Source: https://skills.sh/analogjs/angular-skills/angular-di -->
 <!-- Install: npx skills add https://github.com/analogjs/angular-skills --skill angular-di -->
 
+---
+name: angular-di
+description: Implement dependency injection in Angular v20+ using inject(), injection tokens, and provider configuration. Use for service architecture, providing dependencies at different levels, creating injectable tokens, and managing singleton vs scoped services. Triggers on service creation, configuring providers, using injection tokens, or understanding DI hierarchy.
+---
+
 # Angular Dependency Injection
 
 Configure and use dependency injection in Angular v20+ with `inject()` and providers.
@@ -24,7 +29,7 @@ export class UserList {
   // Inject dependencies
   private http = inject(HttpClient);
   private userService = inject(User);
-
+  
   // Can use immediately
   users = this.userService.getUsers();
 }
@@ -41,10 +46,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class User {
   private http = inject(HttpClient);
-
+  
   private users = signal<User[]>([]);
   readonly users$ = this.users.asReadonly();
-
+  
   async loadUsers() {
     const users = await firstValueFrom(
       this.http.get<User[]>('/api/users')
@@ -160,7 +165,7 @@ export class Api {
   private apiUrl = inject(API_URL);
   private config = inject(APP_CONFIG);
   private window = inject(WINDOW);
-
+  
   getBaseUrl(): string {
     return this.apiUrl;
   }
@@ -236,7 +241,7 @@ providers: [
 export class My {
   // Returns null if not provided
   private analytics = inject(Analytics, { optional: true });
-
+  
   trackEvent(name: string) {
     this.analytics?.track(name);
   }
@@ -283,7 +288,7 @@ providers: [
 @Injectable()
 export class Validation {
   private validators = inject(VALIDATORS); // Validator[]
-
+  
   validate(value: string): ValidationError[] {
     return this.validators
       .map(v => v.validate(value))
@@ -352,7 +357,7 @@ import { createEnvironmentInjector, EnvironmentInjector, inject } from '@angular
 @Injectable({ providedIn: 'root' })
 export class Plugin {
   private parentInjector = inject(EnvironmentInjector);
-
+  
   loadPlugin(providers: Provider[]): EnvironmentInjector {
     return createEnvironmentInjector(providers, this.parentInjector);
   }
@@ -369,7 +374,7 @@ import { runInInjectionContext, EnvironmentInjector, inject } from '@angular/cor
 @Injectable({ providedIn: 'root' })
 export class Utility {
   private injector = inject(EnvironmentInjector);
-
+  
   executeWithDI<T>(fn: () => T): T {
     return runInInjectionContext(this.injector, fn);
   }
@@ -382,4 +387,4 @@ utilityService.executeWithDI(() => {
 });
 ```
 
-For advanced patterns, see references/di-patterns.md.
+For advanced patterns, see [references/di-patterns.md](references/di-patterns.md).

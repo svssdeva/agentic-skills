@@ -1,5 +1,6 @@
 <!-- Source: https://www.skills.sh/github/awesome-copilot/dataverse-python-usecase-builder -->
 <!-- Install: npx skills add https://github.com/github/awesome-copilot --skill dataverse-python-usecase-builder -->
+
 ---
 name: dataverse-python-usecase-builder
 description: 'Generate complete solutions for specific Dataverse SDK use cases with architecture recommendations'
@@ -116,18 +117,18 @@ class Status(IntEnum):
 # 3. SERVICE CLASS (SINGLETON PATTERN)
 class DataverseService:
     _instance = None
-
+    
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super().__new__(cls)
             cls._instance._initialize()
         return cls._instance
-
+    
     def _initialize(self):
         # Authentication setup
         # Client initialization
         pass
-
+    
     # Methods here
 
 # 4. SPECIFIC OPERATIONS

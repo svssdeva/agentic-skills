@@ -40,7 +40,7 @@ For implementation patterns (working code), see `techniques.md`. This file is th
 | 19  | **Variables / parameterization**                     | Typed runtime variables (string, color, number, boolean, enum), CLI override, strict validation                                                                                                                                 |
 | 20  | **Sub-compositions**                                 | External file or inline template, auto-nested timelines, scoped CSS, scoped scripts, variable inheritance                                                                                                                       |
 | 21  | **Global runtime APIs**                              | 25+ window globals for timelines, player, variables, adapters, hooks                                                                                                                                                            |
-| 22  | **Skills (16)**                                      | hyperframes, cli, media, registry, contrast, animation-map, website-to-hyperframes, remotion, gsap, animejs, css-animations, waapi, lottie, three, tailwind, contribute-catalog                                                 |
+| 22  | **Skills (16)**                                      | hyperframes, cli, media, registry, contrast, animation-map, website-to-video, remotion, gsap, animejs, css-animations, waapi, lottie, three, tailwind, contribute-catalog                                                       |
 | 23  | **References (15 docs)**                             | transitions, css-patterns, dynamic-techniques, motion-principles, typography, narration, captions, audio-reactive, transcript-guide, techniques, beat-direction, visual-styles, and more                                        |
 | 24  | **Documentation (27 pages)**                         | Guides + package docs covering rendering, HDR, html-in-canvas, performance, prompting, troubleshooting, etc.                                                                                                                    |
 
@@ -458,7 +458,7 @@ Install: `npx hyperframes add <name>` for blocks/components, `hyperframes init <
 
 ### Website capture (`hyperframes capture <url>`)
 
-Detects these libraries on captured sites (for context labeling): GSAP / ScrollTrigger, Three.js, Lottie, Anime.js, PixiJS, Babylon.js, Rive, Matter.js, Lenis, Framer Motion, Tailwind CSS, WebGL (shader fingerprinting). Captured outputs feed the website-to-hyperframes skill workflow.
+Detects these libraries on captured sites (for context labeling): GSAP / ScrollTrigger, Three.js, Lottie, Anime.js, PixiJS, Babylon.js, Rive, Matter.js, Lenis, Framer Motion, Tailwind CSS, WebGL (shader fingerprinting). Captured outputs feed the website-to-video skill workflow.
 
 ---
 
@@ -671,7 +671,7 @@ Control bridge actions: play, pause, seek, set-muted, set-playback-rate, enable-
 | hyperframes-registry      | Installing blocks/components                                            |
 | hyperframes-contrast      | WCAG audit (scripts/contrast-report.mjs)                                |
 | hyperframes-animation-map | Per-tween bbox + flags report                                           |
-| website-to-hyperframes    | Capture → DESIGN.md → brief → storyboard+script → VO → build → validate |
+| website-to-video          | Capture → DESIGN.md → brief → storyboard+script → VO → build → validate |
 | remotion-to-hyperframes   | Migration patterns + API map + CustomEase                               |
 | gsap                      | GSAP API + plugins reference                                            |
 | animejs                   | Anime.js v4 patterns                                                    |

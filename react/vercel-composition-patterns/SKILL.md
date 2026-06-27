@@ -1,8 +1,14 @@
 <!-- Source: https://www.skills.sh/vercel-labs/agent-skills/vercel-composition-patterns -->
 <!-- Install: npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-composition-patterns -->
+
 ---
 name: vercel-composition-patterns
-description: React composition patterns that scale. Use when refactoring components with boolean prop proliferation, building flexible component libraries, or designing reusable APIs. Triggers on tasks involving compound components, render props, context providers, or component architecture. Includes React 19 API changes.
+description:
+  React composition patterns that scale. Use when refactoring components with
+  boolean prop proliferation, building flexible component libraries, or
+  designing reusable APIs. Triggers on tasks involving compound components,
+  render props, context providers, or component architecture. Includes React 19
+  API changes.
 license: MIT
 metadata:
   author: vercel
@@ -39,19 +45,25 @@ Reference these guidelines when:
 
 ### 1. Component Architecture (HIGH)
 
-- `architecture-avoid-boolean-props` - Don't add boolean props to customize behavior; use composition
-- `architecture-compound-components` - Structure complex components with shared context
+- `architecture-avoid-boolean-props` - Don't add boolean props to customize
+  behavior; use composition
+- `architecture-compound-components` - Structure complex components with shared
+  context
 
 ### 2. State Management (MEDIUM)
 
-- `state-decouple-implementation` - Provider is the only place that knows how state is managed
-- `state-context-interface` - Define generic interface with state, actions, meta for dependency injection
+- `state-decouple-implementation` - Provider is the only place that knows how
+  state is managed
+- `state-context-interface` - Define generic interface with state, actions, meta
+  for dependency injection
 - `state-lift-state` - Move state into provider components for sibling access
 
 ### 3. Implementation Patterns (MEDIUM)
 
-- `patterns-explicit-variants` - Create explicit variant components instead of boolean modes
-- `patterns-children-over-render-props` - Use children for composition instead of renderX props
+- `patterns-explicit-variants` - Create explicit variant components instead of
+  boolean modes
+- `patterns-children-over-render-props` - Use children for composition instead
+  of renderX props
 
 ### 4. React 19 APIs (MEDIUM)
 

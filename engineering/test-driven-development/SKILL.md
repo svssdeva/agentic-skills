@@ -1,5 +1,6 @@
 <!-- Source: https://www.skills.sh/obra/superpowers/test-driven-development -->
 <!-- Install: npx skills add https://github.com/obra/superpowers --skill test-driven-development -->
+
 ---
 name: test-driven-development
 description: Use when implementing any feature or bugfix, before writing implementation code
@@ -358,7 +359,7 @@ Never fix bugs without a test.
 
 ## Testing Anti-Patterns
 
-When adding mocks or test utilities, read @testing-anti-patterns.md to avoid common pitfalls:
+When adding mocks or test utilities, read [testing-anti-patterns.md](testing-anti-patterns.md) to avoid common pitfalls:
 - Testing mock behavior instead of real behavior
 - Adding test-only methods to production classes
 - Mocking without understanding dependencies

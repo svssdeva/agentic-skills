@@ -1,6 +1,11 @@
 <!-- Source: https://skills.sh/analogjs/angular-skills/angular-signals -->
 <!-- Install: npx skills add https://github.com/analogjs/angular-skills --skill angular-signals -->
 
+---
+name: angular-signals
+description: Implement signal-based reactive state management in Angular v20+. Use for creating reactive state with signal(), derived state with computed(), dependent state with linkedSignal(), and side effects with effect(). Triggers on state management questions, converting from BehaviorSubject/Observable patterns to signals, or implementing reactive data flows.
+---
+
 # Angular Signals
 
 Signals are Angular's reactive primitive for state management. They provide synchronous, fine-grained reactivity.
@@ -50,12 +55,12 @@ const filter = signal('');
 
 const filteredItems = computed(() => {
   const query = filter().toLowerCase();
-  return items().filter(item =>
+  return items().filter(item => 
     item.name.toLowerCase().includes(query)
   );
 });
 
-const totalPrice = computed(() =>
+const totalPrice = computed(() => 
   filteredItems().reduce((sum, item) => sum + item.price, 0)
 );
 ```
@@ -100,19 +105,19 @@ import { signal, effect, inject, DestroyRef } from '@angular/core';
 @Component({...})
 export class Search {
   query = signal('');
-
+  
   constructor() {
     // Effect runs when query changes
     effect(() => {
       console.log('Search query:', this.query());
     });
-
+    
     // Effect with cleanup
     effect((onCleanup) => {
       const timer = setInterval(() => {
         console.log('Current query:', this.query());
       }, 1000);
-
+      
       onCleanup(() => clearInterval(timer));
     });
   }
@@ -120,9 +125,8 @@ export class Search {
 ```
 
 **Effect rules:**
-
-* Run in injection context (constructor or with `runInInjectionContext`)
-* Automatically cleaned up when component destroys
+- Run in injection context (constructor or with `runInInjectionContext`)
+- Automatically cleaned up when component destroys
 
 ## Component State Pattern
 
@@ -132,7 +136,7 @@ export class Search {
   template: `
     <input [value]="newTodo()" (input)="newTodo.set($any($event.target).value)" />
     <button (click)="addTodo()" [disabled]="!canAdd()">Add</button>
-
+    
     <ul>
       @for (todo of filteredTodos(); track todo.id) {
         <li [class.done]="todo.done">
@@ -141,7 +145,7 @@ export class Search {
         </li>
       }
     </ul>
-
+    
     <p>{{ remaining() }} remaining</p>
   `,
 })
@@ -150,10 +154,10 @@ export class TodoList {
   todos = signal<Todo[]>([]);
   newTodo = signal('');
   filter = signal<'all' | 'active' | 'done'>('all');
-
+  
   // Derived state
   canAdd = computed(() => this.newTodo().trim().length > 0);
-
+  
   filteredTodos = computed(() => {
     const todos = this.todos();
     switch (this.filter()) {
@@ -162,11 +166,11 @@ export class TodoList {
       default: return todos;
     }
   });
-
-  remaining = computed(() =>
+  
+  remaining = computed(() => 
     this.todos().filter(t => !t.done).length
   );
-
+  
   // Actions
   addTodo() {
     const text = this.newTodo().trim();
@@ -178,7 +182,7 @@ export class TodoList {
       this.newTodo.set('');
     }
   }
-
+  
   toggleTodo(id: string) {
     this.todos.update(todos =>
       todos.map(t => t.id === id ? { ...t, done: !t.done } : t)
@@ -198,13 +202,13 @@ import { interval } from 'rxjs';
 @Component({...})
 export class Timer {
   private http = inject(HttpClient);
-
+  
   // From observable - requires initial value or allowUndefined
   counter = toSignal(interval(1000), { initialValue: 0 });
-
+  
   // From HTTP - undefined until loaded
   users = toSignal(this.http.get<User[]>('/api/users'));
-
+  
   // With requireSync for synchronous observables (BehaviorSubject)
   private user$ = new BehaviorSubject<User | null>(null);
   currentUser = toSignal(this.user$, { requireSync: true });
@@ -220,9 +224,9 @@ import { switchMap, debounceTime } from 'rxjs';
 @Component({...})
 export class Search {
   query = signal('');
-
+  
   private http = inject(HttpClient);
-
+  
   // Convert signal to observable for RxJS operators
   results = toSignal(
     toObservable(this.query).pipe(
@@ -272,14 +276,14 @@ export class Auth {
   // Private writable state
   private _user = signal<User | null>(null);
   private _loading = signal(false);
-
+  
   // Public read-only signals
   readonly user = this._user.asReadonly();
   readonly loading = this._loading.asReadonly();
   readonly isAuthenticated = computed(() => this._user() !== null);
-
+  
   private http = inject(HttpClient);
-
+  
   async login(credentials: Credentials): Promise<void> {
     this._loading.set(true);
     try {
@@ -291,11 +295,11 @@ export class Auth {
       this._loading.set(false);
     }
   }
-
+  
   logout(): void {
     this._user.set(null);
   }
 }
 ```
 
-For advanced patterns including resource(), see references/signal-patterns.md.
+For advanced patterns including resource(), see [references/signal-patterns.md](references/signal-patterns.md).

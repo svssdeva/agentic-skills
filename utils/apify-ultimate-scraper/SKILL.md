@@ -79,7 +79,9 @@ For larger tasks, confirm output format (quick answer / CSV / JSON) and result c
 
 **Standard run (blocking):**
 
-    apify actors call "ACTOR_ID" -i 'JSON_INPUT' --user-agent apify-agent-skills/apify-ultimate-scraper --json 2>/dev/null
+    apify actors call "ACTOR_ID" --input-file input.json --user-agent apify-agent-skills/apify-ultimate-scraper --json 2>/dev/null
+
+Prefer `--input-file input.json` for large or complex inputs. For tiny inputs, inline JSON is acceptable with shell quoting: `--input '{"maxItems":10}'`.
 
 From output: `.id` (run ID), `.status`, `.defaultDatasetId`, `.stats.durationMillis`
 
@@ -95,7 +97,7 @@ For CSV: `apify datasets get-items DATASET_ID --user-agent apify-agent-skills/ap
 
 **Large/long-running scrapes:**
 
-    apify actors start "ACTOR_ID" -i 'JSON_INPUT' --user-agent apify-agent-skills/apify-ultimate-scraper --json 2>/dev/null
+    apify actors start "ACTOR_ID" --input-file input.json --user-agent apify-agent-skills/apify-ultimate-scraper --json 2>/dev/null
 
 Poll: `apify runs info RUN_ID --user-agent apify-agent-skills/apify-ultimate-scraper --json 2>/dev/null` (check `.status` for `SUCCEEDED`).
 

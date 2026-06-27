@@ -1,9 +1,18 @@
 <!-- Source: https://skills.sh/astrolicious/agent-skills/astro -->
 <!-- Install: npx skills add https://github.com/astrolicious/agent-skills --skill astro -->
 
+---
+name: astro
+description: Skill for building with the Astro web framework. Helps create Astro components and pages, configure SSR adapters, set up content collections, deploy static sites, and manage project structure and CLI commands. Use when the user needs to work with Astro, mentions .astro files, asks about static site generation (SSG), islands architecture, content collections, or deploying an Astro project.
+license: MIT
+metadata: 
+  authors: "Astro Team"
+  version: "0.0.1"
+---
+
 # Astro Usage Guide
 
-**Always consult docs.astro.build for code examples and latest API.**
+**Always consult [docs.astro.build](https://docs.astro.build) for code examples and latest API.**
 
 Astro is the web framework for content-driven websites.
 
@@ -12,40 +21,39 @@ Astro is the web framework for content-driven websites.
 ## Quick Reference
 
 ### File Location
-
 CLI looks for `astro.config.js`, `astro.config.mjs`, `astro.config.cjs`, and `astro.config.ts` in: `./`. Use `--config` for custom path.
 
 ### CLI Commands
 
-* `npx astro dev` - Start the development server.
-* `npx astro build` - Build your project and write it to disk.
-* `npx astro check` - Check your project for errors.
-* `npx astro add` - Add an integration.
-* `npx astro sync` - Generate TypeScript types for all Astro modules.
+- `npx astro dev` - Start the development server.
+- `npx astro build` - Build your project and write it to disk.
+- `npx astro check` - Check your project for errors.
+- `npx astro add` - Add an integration.
+- `npx astro sync` - Generate TypeScript types for all Astro modules.
 
 **Re-run after adding/changing plugins.**
 
 ### Project Structure
 
-Reference project structure docs.
+Reference [project structure docs](https://docs.astro.build/en/basics/project-structure).
 
-* `src/*` - Project source code (components, pages, styles, images, etc.)
-* `src/pages` - **Required.** Defines all pages and routes.
-* `src/components` - Components (convention, not required).
-* `src/layouts` - Layout components (convention, not required).
-* `src/styles` - CSS/Sass files (convention, not required).
-* `public/*` - Non-code, unprocessed assets (fonts, icons, etc.); copied as-is to build output.
-* `package.json` - Project manifest.
-* `astro.config.{js,mjs,cjs,ts}` - Astro configuration file. (recommended)
-* `tsconfig.json` - TypeScript configuration file. (recommended)
+- `src/*` - Project source code (components, pages, styles, images, etc.)
+- `src/pages` - **Required.** Defines all pages and routes.
+- `src/components` - Components (convention, not required).
+- `src/layouts` - Layout components (convention, not required).
+- `src/styles` - CSS/Sass files (convention, not required).
+- `public/*` - Non-code, unprocessed assets (fonts, icons, etc.); copied as-is to build output.
+- `package.json` - Project manifest.
+- `astro.config.{js,mjs,cjs,ts}` - Astro configuration file. (recommended)
+- `tsconfig.json` - TypeScript configuration file. (recommended)
 
 ---
 
 ## Core Config Options
 
-| Option | Notes                                                                   |
-| ------ | ----------------------------------------------------------------------- |
-| site   | Your final, deployed URL. Used to generate sitemaps and canonical URLs. |
+| Option | Notes |
+|--------|-------|
+| `site` | Your final, deployed URL. Used to generate sitemaps and canonical URLs. |
 
 ### Example `astro.config.ts`
 
@@ -105,35 +113,31 @@ const { title, body } = Astro.props;
 
 Deploy to your favorite server, serverless, or edge host with build adapters. Use an adapter to enable on-demand rendering in your Astro project.
 
-**Add Node.js adapter using astro add:**
-
-```text
+**Add [Node.js](https://docs.astro.build/en/guides/integrations-guide/node) adapter using astro add:**
+```
 npx astro add node --yes
 ```
 
-**Add Cloudflare adapter using astro add:**
-
-```text
+**Add [Cloudflare](https://docs.astro.build/en/guides/integrations-guide/cloudflare) adapter using astro add:**
+```
 npx astro add cloudflare --yes
 ```
 
-**Add Netlify adapter using astro add:**
-
-```text
+**Add [Netlify](https://docs.astro.build/en/guides/integrations-guide/netlify) adapter using astro add:**
+```
 npx astro add netlify --yes
 ```
 
-**Add Vercel adapter using astro add:**
-
-```text
+**Add [Vercel](https://docs.astro.build/en/guides/integrations-guide/vercel) adapter using astro add:**
+```
 npx astro add vercel --yes
 ```
 
-Other Community adapters
+[Other Community adapters](https://astro.build/integrations/2/?search=&categories%5B%5D=adapters)
 
 ## Resources
 
-* Docs
-* Config Reference
-* llms.txt
-* GitHub
+- [Docs](https://docs.astro.build)
+- [Config Reference](https://docs.astro.build/en/reference/configuration-reference/)
+- [llms.txt](https://docs.astro.build/llms.txt)
+- [GitHub](https://github.com/withastro/astro)

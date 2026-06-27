@@ -1,5 +1,6 @@
 <!-- Source: https://www.skills.sh/juliusbrussee/caveman/caveman-compress -->
 <!-- Install: npx skills add https://github.com/juliusbrussee/caveman --skill caveman-compress -->
+
 ---
 name: caveman-compress
 description: >
@@ -25,9 +26,7 @@ Compress natural language files (CLAUDE.md, todos, preferences) into caveman-spe
 
 2. From the directory containing this SKILL.md, run:
 
-```bash
 python3 -m scripts <absolute_filepath>
-```
 
 3. The CLI will:
 - detect file type (no tokens)

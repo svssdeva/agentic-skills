@@ -1,9 +1,11 @@
 <!-- Source: https://www.skills.sh/affaan-m/everything-claude-code/nestjs-patterns -->
 <!-- Install: npx skills add https://github.com/affaan-m/everything-claude-code --skill nestjs-patterns -->
+
 ---
 name: nestjs-patterns
 description: NestJS architecture patterns for modules, controllers, providers, DTO validation, guards, interceptors, config, and production-grade TypeScript backends.
-origin: ECC
+metadata:
+  origin: ECC
 ---
 
 # NestJS Development Patterns
@@ -103,6 +105,15 @@ export class UsersController {
     return this.usersService.create(dto);
   }
 }
+
+@Injectable()
+export class UsersService {
+  constructor(private readonly usersRepo: UsersRepository) {}
+
+  async create(dto: CreateUserDto) {
+    return this.usersRepo.create(dto);
+  }
+}
 ```
 
 - Controllers should stay thin: parse HTTP input, call a provider, return response DTOs.
@@ -127,7 +138,7 @@ export class CreateUserDto {
 ```
 
 - Validate every request DTO with `class-validator`.
-- Use dedicated response DTOs instead of returning ORM entities directly.
+- Use dedicated response DTOs or serializers instead of returning ORM entities directly.
 - Avoid leaking internal fields such as password hashes, tokens, or audit columns.
 
 ## Auth, Guards, and Request Context
@@ -141,8 +152,9 @@ getAdminReport(@Req() req: AuthenticatedRequest) {
 }
 ```
 
-- Keep auth strategies module-local unless truly shared.
-- Encode coarse access rules in guards; do resource-specific authorization in services.
+- Keep auth strategies and guards module-local unless they are truly shared.
+- Encode coarse access rules in guards, then do resource-specific authorization in services.
+- Prefer explicit request types for authenticated request objects.
 
 ## Exception Filters and Error Shape
 
@@ -183,6 +195,13 @@ ConfigModule.forRoot({
 
 - Validate env at boot, not lazily at first request.
 - Keep config access behind typed helpers or config services.
+- Split dev/staging/prod concerns in config factories instead of branching throughout feature code.
+
+## Persistence and Transactions
+
+- Keep repository / ORM code behind providers that speak domain language.
+- For Prisma or TypeORM, isolate transactional workflows in services that own the unit of work.
+- Do not let controllers coordinate multi-step writes directly.
 
 ## Testing
 
@@ -210,5 +229,6 @@ describe('UsersController', () => {
 
 - Enable structured logging and request correlation ids.
 - Terminate on invalid env/config instead of booting partially.
+- Prefer async provider initialization for DB/cache clients with explicit health checks.
 - Keep background jobs and event consumers in their own modules, not inside HTTP controllers.
 - Make rate limiting, auth, and audit logging explicit for public endpoints.

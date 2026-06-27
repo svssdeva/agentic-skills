@@ -1,5 +1,6 @@
 <!-- Source: https://www.skills.sh/sleekdotdesign/agent-skills/sleek-design-mobile-apps -->
 <!-- Install: npx skills add https://github.com/sleekdotdesign/agent-skills --skill sleek-design-mobile-apps -->
+
 ---
 name: sleek-design-mobile-apps
 description: Use when the user wants to design a mobile app, create screens, build UI, or interact with their Sleek projects. Covers high-level requests ("design an app that does X") and specific ones ("list my projects", "create a new project", "screenshot that screen").
@@ -328,8 +329,8 @@ Content-Type: application/json
 | `background`    | `transparent` | Any CSS color (hex, named, `transparent`)                            |
 | `showDots`      | `false`       | Overlay a subtle dot grid on the background                          |
 | `radius`        | `48`          | Squircle corner radius per component in pixels (integer ≥ 0); pass `0` for sharp corners |
-| `componentVersionOverrides` | _(optional)_  | Map of `componentId` → `versions[i].id` to render at a pinned version instead of `activeVersion` (see Pinned versions) |
-| `themeVersionOverrides`     | _(optional)_  | Map of `themeId` → `versions[i].id` to render with a pinned theme version (see Pinned versions) |
+| `componentVersionOverrides` | _(optional)_  | Map of `componentId` → `versions[i].id` to render at a pinned version instead of `activeVersion` (see [Pinned versions](#pinned-versions)) |
+| `themeVersionOverrides`     | _(optional)_  | Map of `themeId` → `versions[i].id` to render with a pinned theme version (see [Pinned versions](#pinned-versions))                       |
 
 Padding resolves with a cascade: per-side → axis → uniform. For example, `paddingTop` falls back to `paddingY`, which falls back to `padding`. So `{ "padding": 20, "paddingX": 10, "paddingLeft": 5 }` gives top/bottom 20px, right 10px, left 5px.
 
@@ -416,7 +417,7 @@ Use `GET /api/v1/projects/:id/components/:componentId` to fetch each screen's co
 
 Each component carries a `versions[]` array and an `activeVersion: number`. **By default, use the entry where `versions[i].version === activeVersion`** — that's the code currently shown in Sleek.
 
-If the user's prompt pins specific versions, follow those instead (see Pinned versions below).
+If the user's prompt pins specific versions, follow those instead (see [Pinned versions](#pinned-versions) below).
 
 ### Pinned versions
 

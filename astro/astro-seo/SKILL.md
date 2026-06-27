@@ -1,6 +1,11 @@
 <!-- Source: https://skills.sh/soborbo/claudeskills/astro-seo -->
 <!-- Install: npx skills add https://github.com/soborbo/claudeskills --skill astro-seo -->
 
+---
+name: astro-seo
+description: SEO markup patterns for Astro lead generation sites. Meta tags, Open Graph, Schema.org, sitemap, robots. Use for all SEO implementation.
+---
+
 # Astro SEO Skill
 
 ## Purpose
@@ -50,7 +55,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Business Name",
-  "address": { "@type": "PostalAddress", "..." : "..." },
+  "address": { "@type": "PostalAddress", ... },
   "telephone": "+44...",
   "openingHours": "Mo-Fr 08:00-18:00"
 }
@@ -63,7 +68,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "Service Name",
-  "provider": { "@type": "LocalBusiness", "..." : "..." }
+  "provider": { "@type": "LocalBusiness", ... }
 }
 ```
 
@@ -73,7 +78,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": ["..."]
+  "mainEntity": [...]
 }
 ```
 
@@ -91,24 +96,24 @@ export default {
 
 ## Noindex Pages
 
-* Thank you pages
-* 404/410 pages
-* Admin/preview pages
-* Duplicate content
+- Thank you pages
+- 404/410 pages
+- Admin/preview pages
+- Duplicate content
 
 ## Related Skills
 
-* `local-seo` — GBP, citations, area pages
-* `heading-tree` — H1-H4 structure
-* `keyword-research` — Keyword targeting
+- `local-seo` — GBP, citations, area pages
+- `heading-tree` — H1-H4 structure
+- `keyword-research` — Keyword targeting
 
 ## Definition of Done
 
-* Unique title + description per page
-* Open Graph tags set
-* LocalBusiness schema on homepage
-* Service schema on service pages
-* FAQ schema where applicable
-* Sitemap configured
-* Canonical URLs set
-* Thank you pages noindexed
+- [ ] Unique title + description per page
+- [ ] Open Graph tags set
+- [ ] LocalBusiness schema on homepage
+- [ ] Service schema on service pages
+- [ ] FAQ schema where applicable
+- [ ] Sitemap configured
+- [ ] Canonical URLs set
+- [ ] Thank you pages noindexed

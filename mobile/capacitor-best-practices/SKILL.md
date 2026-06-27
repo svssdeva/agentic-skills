@@ -1,17 +1,22 @@
 <!-- Source: https://skills.sh/cap-go/capacitor-skills/capacitor-best-practices -->
 <!-- Install: npx skills add https://github.com/cap-go/capacitor-skills --skill capacitor-best-practices -->
 
+---
+name: capacitor-best-practices
+description: Best practices for Capacitor app development including project structure, plugin usage, performance optimization, security, and deployment. Use this skill when reviewing Capacitor code, setting up new projects, or optimizing existing apps.
+---
+
 # Capacitor Best Practices
 
 Comprehensive guidelines for building production-ready Capacitor applications.
 
 ## When to Use This Skill
 
-* Setting up a new Capacitor project
-* Reviewing Capacitor app architecture
-* Optimizing app performance
-* Implementing security measures
-* Preparing for app store submission
+- Setting up a new Capacitor project
+- Reviewing Capacitor app architecture
+- Optimizing app performance
+- Implementing security measures
+- Preparing for app store submission
 
 ## Project Structure
 
@@ -30,7 +35,6 @@ my-app/
 ### Configuration Best Practices
 
 **capacitor.config.ts** (CORRECT):
-
 ```typescript
 import type { CapacitorConfig } from '@capacitor/cli';
 
@@ -56,7 +60,6 @@ export default config;
 ```
 
 **capacitor.config.json** (AVOID):
-
 ```json
 {
   "server": {
@@ -65,8 +68,7 @@ export default config;
   }
 }
 ```
-
-_Never commit development server URLs to production_
+*Never commit development server URLs to production*
 
 ## Plugin Usage
 
@@ -83,7 +85,6 @@ npx cap sync
 ### Plugin Installation Pattern
 
 **CORRECT**:
-
 ```bash
 # 1. Install the package
 npm install @capgo/capacitor-native-biometric
@@ -96,7 +97,6 @@ cd ios/App && pod install && cd ../..
 ```
 
 **INCORRECT**:
-
 ```bash
 # Missing sync step
 npm install @capgo/capacitor-native-biometric
@@ -106,7 +106,6 @@ npm install @capgo/capacitor-native-biometric
 ### Plugin Initialization
 
 **CORRECT** - Check availability before use:
-
 ```typescript
 import { NativeBiometric, BiometryType } from '@capgo/capacitor-native-biometric';
 
@@ -132,7 +131,6 @@ async function authenticate() {
 ```
 
 **INCORRECT** - No availability check:
-
 ```typescript
 // Will crash if biometrics not available
 await NativeBiometric.verifyIdentity({ reason: 'Login' });
@@ -143,7 +141,6 @@ await NativeBiometric.verifyIdentity({ reason: 'Login' });
 ### CRITICAL: Lazy Load Plugins
 
 **CORRECT** - Dynamic imports:
-
 ```typescript
 // Only load when needed
 async function scanDocument() {
@@ -153,7 +150,6 @@ async function scanDocument() {
 ```
 
 **INCORRECT** - Import everything at startup:
-
 ```typescript
 // Increases initial bundle size
 import { DocumentScanner } from '@capgo/capacitor-document-scanner';
@@ -165,7 +161,6 @@ import { Camera } from '@capacitor/camera';
 ### HIGH: Optimize WebView Performance
 
 **CORRECT** - Use hardware acceleration:
-
 ```xml
 <!-- android/app/src/main/AndroidManifest.xml -->
 <application
@@ -182,7 +177,6 @@ import { Camera } from '@capacitor/camera';
 ### HIGH: Minimize Bridge Calls
 
 **CORRECT** - Batch operations:
-
 ```typescript
 // Single call with batch data
 await Storage.set({
@@ -192,7 +186,6 @@ await Storage.set({
 ```
 
 **INCORRECT** - Multiple bridge calls:
-
 ```typescript
 // Each call crosses the JS-native bridge
 await Storage.set({ key: 'name', value: name });
@@ -203,7 +196,6 @@ await Storage.set({ key: 'preferences', value: JSON.stringify(preferences) });
 ### MEDIUM: Image Optimization
 
 **CORRECT**:
-
 ```typescript
 import { Camera, CameraResultType } from '@capacitor/camera';
 
@@ -216,7 +208,6 @@ const photo = await Camera.getPhoto({
 ```
 
 **INCORRECT**:
-
 ```typescript
 const photo = await Camera.getPhoto({
   quality: 100,
@@ -230,7 +221,6 @@ const photo = await Camera.getPhoto({
 ### CRITICAL: Secure Storage
 
 **CORRECT** - Use secure storage for sensitive data:
-
 ```typescript
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
@@ -248,7 +238,6 @@ const credentials = await NativeBiometric.getCredentials({
 ```
 
 **INCORRECT** - Plain storage:
-
 ```typescript
 import { Preferences } from '@capacitor/preferences';
 
@@ -312,7 +301,6 @@ async function requestTracking() {
 ### CRITICAL: Always Handle Plugin Errors
 
 **CORRECT**:
-
 ```typescript
 import { Camera, CameraResultType } from '@capacitor/camera';
 
@@ -341,7 +329,6 @@ async function takePhoto() {
 ```
 
 **INCORRECT**:
-
 ```typescript
 // No error handling
 const image = await Camera.getPhoto({ quality: 90 });
@@ -373,7 +360,6 @@ CapacitorUpdater.addListener('updateAvailable', async (update) => {
 ### Update Strategy
 
 **CORRECT** - Background download, apply on restart:
-
 ```typescript
 // Download silently
 const bundle = await CapacitorUpdater.download({ url, version });
@@ -385,7 +371,6 @@ await CapacitorUpdater.set(bundle);
 ```
 
 **INCORRECT** - Interrupt user:
-
 ```typescript
 // Don't force reload while user is active
 const bundle = await CapacitorUpdater.download({ url, version });
@@ -461,19 +446,19 @@ if (Capacitor.getPlatform() === 'ios') {
 
 ## Deployment Checklist
 
-* Remove development server URLs from config
-* Enable ProGuard for Android release builds
-* Set appropriate iOS deployment target
-* Test on real devices, not just simulators
-* Verify all permissions are declared
-* Test with poor network conditions
-* Verify deep links work correctly
-* Test app backgrounding/foregrounding
-* Verify push notifications work
-* Test biometric authentication edge cases
+- [ ] Remove development server URLs from config
+- [ ] Enable ProGuard for Android release builds
+- [ ] Set appropriate iOS deployment target
+- [ ] Test on real devices, not just simulators
+- [ ] Verify all permissions are declared
+- [ ] Test with poor network conditions
+- [ ] Verify deep links work correctly
+- [ ] Test app backgrounding/foregrounding
+- [ ] Verify push notifications work
+- [ ] Test biometric authentication edge cases
 
 ## Resources
 
-* Capacitor Documentation: <https://capacitorjs.com/docs>
-* Capgo Documentation: <https://capgo.app/docs>
-* Ionic Framework: <https://ionicframework.com/docs>
+- Capacitor Documentation: https://capacitorjs.com/docs
+- Capgo Documentation: https://capgo.app/docs
+- Ionic Framework: https://ionicframework.com/docs

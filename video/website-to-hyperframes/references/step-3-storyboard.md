@@ -192,7 +192,7 @@ When planning beats, decide which ones deserve an HTML-in-Canvas treatment vs. a
 **Before writing beats,** read the SFX manifest. Locate it from your current directory:
 
 ```bash
-find "$HOME" -path '*/website-to-hyperframes/assets/sfx/manifest.json' -maxdepth 10 2>/dev/null | head -1
+find "$HOME" -path '*/website-to-video/assets/sfx/manifest.json' -maxdepth 10 2>/dev/null | head -1
 ```
 
 Or if you already copied SFX into the project (Step 5 does this), read your local `sfx/manifest.json`. Each entry has a filename, duration in seconds, and description. Assign **specific SFX files** to exact moments in the storyboard. Step 5 implements what you specify here — it makes no SFX decisions.
