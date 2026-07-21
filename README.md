@@ -1,29 +1,40 @@
 # agentic-skills
 
-> A curated library of **160 skills** for Claude Code — drop-in behavioral modules that make your AI agent smarter, faster, and domain-aware.
+> A curated library of **160 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 21 domains.
 
-Skills are plain markdown files (`SKILL.md`) that Claude reads before acting. Each one encodes expert knowledge, workflows, and guardrails for a specific domain. No code to install — just point Claude at the folder.
+Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts. Each one encodes the expert knowledge, workflow, and guardrails for a single domain — like hiring a specialist for the task at hand. There is nothing to compile and no runtime: point Claude at the folder and invoke a skill by name.
+
+> [!TIP]
+> New here? Browse every skill by category in the [Skill Library](#skill-library), or skip to [Getting Started](#getting-started) to wire them into your own project.
+
+---
+
+## Highlights
+
+- **160 skills across 21 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
+- **Zero install** — each skill is a single markdown file. No dependencies, no build step, no lock-in.
+- **Stackable** — combine skills (for example, spec-driven + test-driven development) for compound expertise.
+- **Provenance-tracked** — every imported skill records its upstream source and stays syncable. See [Sources](#sources).
+- **Mapped as a knowledge graph** — explore how skills relate, cluster, and bridge domains in `graphify-out/`. See [Knowledge Graph](#knowledge-graph).
 
 ---
 
 ## What's a Skill?
 
-A skill is a `SKILL.md` file that tells Claude *how* to behave in a given context. When you invoke a skill, Claude loads it and follows its instructions exactly — like hiring a specialist for the task at hand.
+A skill is a `SKILL.md` file that tells Claude *how* to behave in a given context. When you invoke one, Claude loads it and follows its instructions exactly — covering everything from language idioms to development methodologies to content strategy.
 
 ```
-/skill angular/angular-component    → expert Angular component authoring
-/skill rust/rust-engineer           → idiomatic Rust with ownership & error handling
-/skill seo/seo-audit                → structured technical SEO review
-/skill engineering/test-driven-development → red-green-refactor discipline
+/skill angular/angular-component            → expert Angular component authoring
+/skill rust/rust-engineer                   → idiomatic Rust with ownership & error handling
+/skill seo/seo-audit                        → structured technical SEO review
+/skill engineering/test-driven-development  → red-green-refactor discipline
 ```
-
-Skills cover everything from language idioms to development methodologies to content strategy.
 
 ---
 
-## Using Skills in Claude Code
+## Getting Started
 
-**Install** — clone this repo anywhere and point Claude at it in your project's `CLAUDE.md`:
+**Install** — clone this repo anywhere and point Claude at it from your project's `CLAUDE.md`:
 
 ```bash
 git clone https://github.com/svssdeva/agentic-skills ~/.claude/skills
@@ -32,10 +43,10 @@ git clone https://github.com/svssdeva/agentic-skills ~/.claude/skills
 **Invoke** — type a slash command in Claude Code:
 
 ```
-/skill <skill-name>
+/skill <category>/<skill-name>
 ```
 
-Or reference skills directly in your prompt:
+Or reference a skill directly in your prompt:
 
 ```
 Using the rust-engineer skill, refactor this module to use proper error propagation.
@@ -324,10 +335,10 @@ This repo includes a graphify knowledge graph (`graphify-out/`) that maps relati
 
 Open `graphify-out/graph.html` in any browser to explore the interactive graph.
 
-To rebuild the graph after adding new skills:
+To rebuild the graph after adding or updating skills:
 
 ```
-/graphify .
+/graphify . --update
 ```
 
 ---
@@ -360,6 +371,9 @@ description: One-line description of what this skill does and when to use it.
 ## Core Principles
 ...
 ```
+
+> [!NOTE]
+> When adding a skill, keep the counts in sync — bump the headline total and the per-category count, add a row to the matching table, then run `/graphify . --update` to refresh the knowledge graph.
 
 Pull requests welcome.
 

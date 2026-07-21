@@ -31,12 +31,20 @@ async function validateComponent(filePath) {
     console.log("🔍 Scanning AST...");
 
     const walk = (node) => {
-      if (!node) return;
+      if (!node || typeof node !== 'object') return;
+      if (Array.isArray(node)) {
+        for (const item of node) walk(item);
+        return;
+      }
+      if (typeof node.type !== 'string') return;
       if (node.type === 'TsInterfaceDeclaration' && node.id.value.endsWith('Props')) hasInterface = true;
       if (node.type === 'JSXAttribute' && (node.name?.value === 'className' || node.name?.name === 'className')) {
         if (node.value?.value && HEX_COLOR_REGEX.test(node.value.value)) tailwindIssues.push(node.value.value);
       }
-      for (const key in node) { if (node[key] && typeof node[key] === 'object') walk(node[key]); }
+      for (const key in node) {
+        if (key === 'span') continue;
+        if (node[key] && typeof node[key] === 'object') walk(node[key]);
+      }
     };
     walk(ast);
 

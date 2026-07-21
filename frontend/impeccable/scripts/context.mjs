@@ -1,13 +1,21 @@
 /**
  * Context loader: prints PRODUCT.md (and DESIGN.md if present) as one
- * markdown block on stdout, or exits with empty stdout when no PRODUCT.md
- * is found anywhere. The skill keys off "empty stdout" to branch into the
- * init flow.
+ * markdown block on stdout, or prints a `NO_PRODUCT_MD:` message when no
+ * PRODUCT.md is found anywhere. The skill keys off that message to branch:
+ * from-scratch build commands (init / teach / craft / shape) and clear
+ * build/shape intent divert into the init flow, while scoped commands proceed
+ * using the existing code as context.
  *
  * Path resolution (first match wins):
- *   1. Active project root, if PRODUCT.md or DESIGN.md is there
+ *   1. Active project root, if PRODUCT.md or DESIGN.md is there. An explicit
+ *      --target selects the active project: the workspace child in a
+ *      monorepo, or the nearest directory around the target carrying
+ *      canonical context files in an ordinary repo (issue #376).
  *   2. Active project .agents/context/ then docs/
- *   3. Monorepo root context, using the same order, as a per-file fallback
+ *   3. Repo root context, using the same order, as a per-file fallback
+ *      whenever the active project is nested below it (a repo counts as a
+ *      monorepo when a package manager declares workspaces, or
+ *      `.impeccable/config.json` declares `projectRoots`)
  *   4. $IMPECCABLE_CONTEXT_DIR (absolute or cwd-relative) — power-user
  *      escape hatch, only consulted when defaults are empty
  *   5. Active project root as a "nothing found" default
@@ -21,6 +29,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseTargetOptions } from './lib/target-args.mjs';
+import { IMPECCABLE_COMMAND } from './lib/provider.mjs';
 
 const PRODUCT_NAMES = ['PRODUCT.md', 'Product.md', 'product.md'];
 const DESIGN_NAMES = ['DESIGN.md', 'Design.md', 'design.md'];
@@ -85,7 +94,10 @@ function resolveContext(cwd = process.cwd(), options = {}) {
   const absCwd = path.resolve(cwd);
   const project = resolveProject(absCwd, options);
   const projectContextDir = resolveLocalContextDir(project.projectRoot);
-  const rootContextDir = project.isMonorepo && project.repoRoot !== project.projectRoot
+  // Per-file inheritance from the repo root whenever the active project is
+  // nested below it: monorepo workspace children and explicit-target nested
+  // products in ordinary repos behave the same way.
+  const rootContextDir = project.repoRoot !== project.projectRoot
     ? resolveLocalContextDir(project.repoRoot)
     : null;
 
@@ -162,7 +174,7 @@ function resolveProject(cwd = process.cwd(), options = {}) {
   if (!repoRoot) {
     return {
       targetDir,
-      projectRoot: absCwd,
+      projectRoot: nearestTargetContextRoot(absCwd, targetDir) || absCwd,
       repoRoot: absCwd,
       isMonorepo: false,
     };
@@ -232,7 +244,7 @@ function findMonorepoRoot(startDir) {
 }
 
 function isMonorepoRoot(dir) {
-  if (readWorkspacePatterns(dir).some((pattern) => !normalizeWorkspacePattern(pattern).startsWith('!'))) return true;
+  if (readProjectPatterns(dir).some((pattern) => !normalizeWorkspacePattern(pattern).startsWith('!'))) return true;
   if (!MONOREPO_MARKER_FILES.some((file) => fs.existsSync(path.join(dir, file)))) return false;
   return hasFallbackWorkspaceChildren(dir);
 }
@@ -257,10 +269,12 @@ function hasFallbackWorkspaceChildren(dir) {
 
 function discoverTargetCandidates(repoRoot) {
   const roots = new Map();
-  const patterns = readWorkspacePatterns(repoRoot);
-  for (const pattern of patterns) {
-    for (const root of discoverRootsForPattern(repoRoot, pattern)) {
-      roots.set(path.relative(repoRoot, root).split(path.sep).join('/'), root);
+  const patternGroups = readProjectPatternGroups(repoRoot);
+  for (const patterns of patternGroups) {
+    for (const pattern of patterns) {
+      for (const root of discoverRootsForPattern(repoRoot, pattern)) {
+        roots.set(path.relative(repoRoot, root).split(path.sep).join('/'), root);
+      }
     }
   }
   if (MONOREPO_MARKER_FILES.some((file) => fs.existsSync(path.join(repoRoot, file)))) {
@@ -281,10 +295,7 @@ function discoverTargetCandidates(repoRoot) {
   }
   return [...roots.entries()]
     .filter(([rel]) => rel && !rel.startsWith('..'))
-    // Honor negated workspace patterns (e.g. "!packages/internal"). resolveWorkspaceProjectRoot
-    // sends an excluded package back to the repo root, so an excluded folder must not appear as a
-    // selectable target — choosing it would silently resolve to the root instead.
-    .filter(([rel]) => !isExcludedByWorkspacePattern(rel.split('/').filter(Boolean), patterns))
+    .filter(([rel]) => isSelectableCandidate(repoRoot, rel, patternGroups))
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([rel, root]) => {
       const targetExample = findTargetExample(repoRoot, root);
@@ -440,15 +451,13 @@ function resolveWorkspaceProjectRoot(repoRoot, targetDir) {
   const rel = path.relative(repoRoot, targetDir);
   if (!rel || rel.startsWith('..') || path.isAbsolute(rel)) return repoRoot;
   const relSegments = rel.split(path.sep).filter(Boolean);
-  const patterns = readWorkspacePatterns(repoRoot);
-  const excluded = isExcludedByWorkspacePattern(relSegments, patterns);
-  if (!excluded) {
+  for (const patterns of readProjectPatternGroups(repoRoot)) {
+    if (isExcludedByWorkspacePattern(relSegments, patterns)) return repoRoot;
     for (const pattern of patterns) {
       const projectRoot = projectRootFromWorkspacePattern(repoRoot, relSegments, pattern);
       if (projectRoot) return projectRoot;
     }
   }
-  if (excluded) return repoRoot;
   if (
     relSegments.length >= 2
     && MONOREPO_FALLBACK_PROJECT_DIRS.includes(relSegments[0])
@@ -460,12 +469,56 @@ function resolveWorkspaceProjectRoot(repoRoot, targetDir) {
   return repoRoot;
 }
 
+// A discovered folder is only selectable when picking it would resolve back to
+// itself. Impeccable `projectRoots` patterns govern every path they match:
+// a negation drops the candidate (resolveWorkspaceProjectRoot would send it to
+// the repo root), and a positive match with a different boundary drops it too,
+// because the boundary root is already its own candidate and choosing the
+// deeper folder would silently resolve there. Paths the Impeccable group does
+// not match fall through to the package-manager negations, which is the
+// pre-existing behavior for package workspaces and marker-dir fallbacks.
+function isSelectableCandidate(repoRoot, rel, patternGroups) {
+  const relSegments = rel.split('/').filter(Boolean);
+  const [impeccablePatterns, packagePatterns] = patternGroups;
+  if (isExcludedByWorkspacePattern(relSegments, impeccablePatterns)) return false;
+  for (const pattern of impeccablePatterns) {
+    const boundary = projectRootFromWorkspacePattern(repoRoot, relSegments, pattern);
+    if (boundary) return path.resolve(boundary) === path.resolve(path.join(repoRoot, ...relSegments));
+  }
+  return !isExcludedByWorkspacePattern(relSegments, packagePatterns);
+}
+
 function isExcludedByWorkspacePattern(relSegments, patterns) {
   return patterns.some((rawPattern) => {
     const pattern = normalizeWorkspacePattern(rawPattern);
     if (!pattern.startsWith('!')) return false;
     return workspacePatternMatchesRel(pattern.slice(1), relSegments);
   });
+}
+
+// An explicit --target in an ordinary (non-monorepo) repository must still
+// select a nested product's own context (issue #376). Walk from the target up
+// to — but not including — the invocation root and return the nearest
+// directory carrying context files, in the canonical spot or a fallback dir
+// (resolveLocalContextDir covers both). Context files only, not package.json:
+// without the monorepo root-context fallback, a package.json marker would
+// strand targets inside plain subpackages away from the root PRODUCT.md. The
+// cwd's own fallback context dirs (.agents/context, docs) hold the root
+// project's context, not a nested product, so they never count.
+// Returns null when nothing nested is found, keeping the cwd default.
+function nearestTargetContextRoot(absCwd, targetDir) {
+  if (!isPathInside(targetDir, absCwd)) return null;
+  const rootFallbackDirs = FALLBACK_DIRS.map((rel) => path.resolve(absCwd, rel));
+  let dir = path.resolve(targetDir);
+  while (dir && dir !== absCwd) {
+    if (!rootFallbackDirs.includes(dir) && resolveLocalContextDir(dir)) {
+      return dir;
+    }
+    const parent = path.dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return null;
 }
 
 function nearestProjectLikeRoot(repoRoot, targetDir) {
@@ -523,12 +576,37 @@ function workspacePatternMatchesRel(pattern, relSegments) {
   return true;
 }
 
-function readWorkspacePatterns(repoRoot) {
+// Project boundaries come from two sources, in precedence order: explicit
+// `projectRoots` globs in .impeccable config, then package-manager workspace
+// declarations. A path matched by any Impeccable pattern — positive or
+// negated — is governed by the Impeccable group alone; package-manager
+// patterns only apply to paths the Impeccable group does not match. Within a
+// group, negations win over positives.
+function readProjectPatternGroups(repoRoot) {
   return [
-    ...readPackageWorkspaces(repoRoot),
-    ...readPnpmWorkspaces(repoRoot),
-    ...readLernaWorkspaces(repoRoot),
-  ].filter(Boolean);
+    readImpeccableProjectRoots(repoRoot),
+    [
+      ...readPackageWorkspaces(repoRoot),
+      ...readPnpmWorkspaces(repoRoot),
+      ...readLernaWorkspaces(repoRoot),
+    ].filter(Boolean),
+  ];
+}
+
+function readProjectPatterns(repoRoot) {
+  return readProjectPatternGroups(repoRoot).flat();
+}
+
+function readImpeccableProjectRoots(repoRoot) {
+  const patterns = [];
+  for (const name of ['config.json', 'config.local.json']) {
+    const cfg = readJson(path.join(repoRoot, '.impeccable', name));
+    if (!Array.isArray(cfg?.projectRoots)) continue;
+    for (const entry of cfg.projectRoots) {
+      if (typeof entry === 'string' && entry.trim()) patterns.push(entry.trim());
+    }
+  }
+  return patterns;
 }
 
 function readPackageWorkspaces(repoRoot) {
@@ -692,23 +770,59 @@ function escapeRegExp(value) {
 }
 
 /**
+ * Read the first non-empty line under a bare `## <heading>` section of
+ * PRODUCT.md (e.g. `## Register`, `## Platform`). Returns null when the
+ * section is absent. The heading match is exact (`\s*$`) so near-miss
+ * headings like `## Register guidelines` don't shadow the real field.
+ */
+export function extractSectionValue(product, heading) {
+  if (!product) return null;
+  const headingRe = new RegExp(`^##\\s+${escapeRegExp(heading)}\\s*$`, 'i');
+  const lines = product.split('\n');
+  for (let i = 0; i < lines.length; i++) {
+    if (headingRe.test(lines[i].trim())) {
+      for (let j = i + 1; j < lines.length; j++) {
+        const next = lines[j].trim();
+        // A new heading before any value means the section is empty.
+        if (/^#{1,6}\s/.test(next)) return null;
+        if (next) return next;
+      }
+    }
+  }
+  return null;
+}
+
+/**
  * Pull the register (`brand` or `product`) out of PRODUCT.md by looking
  * for a `## Register` section and reading the first non-empty line that
  * follows it. Returns null when the file is legacy / register-less.
  */
 export function extractRegister(product) {
-  if (!product) return null;
-  const lines = product.split('\n');
-  for (let i = 0; i < lines.length; i++) {
-    if (/^##\s+Register\b/i.test(lines[i].trim())) {
-      for (let j = i + 1; j < lines.length; j++) {
-        const next = lines[j].trim();
-        if (!next) continue;
-        const word = next.toLowerCase();
-        if (word === 'brand' || word === 'product') return word;
-        return null;
-      }
-    }
+  const word = (extractSectionValue(product, 'Register') || '').toLowerCase();
+  return word === 'brand' || word === 'product' ? word : null;
+}
+
+/**
+ * Pull the platform (`web`, `ios`, `android`, or `adaptive`) out of PRODUCT.md
+ * by looking for a `## Platform` section and reading the first non-empty line
+ * that follows it. `adaptive` is for cross-platform apps (Flutter, React
+ * Native) that ship both iOS and Android from one codebase; a line that names
+ * both targets (e.g. `ios, android`) is also read as `adaptive`. Returns null
+ * when the file is legacy / platform-less, which the skill treats as `web`
+ * (the default the general rules already assume).
+ */
+export function extractPlatform(product) {
+  const value = (extractSectionValue(product, 'Platform') || '').toLowerCase();
+  if (!value) return null;
+  if (value === 'web' || value === 'ios' || value === 'android' || value === 'adaptive') return value;
+  // A short list naming both native targets (`ios, android`, `ios and
+  // android`) = adaptive. Only list separators and the two platform words may
+  // appear; anything else (prose, negations) is unrecognized and falls
+  // through to the CLI's WARNING path.
+  const tokens = value.split(/[\s,+&/]+/).filter(t => t && t !== 'and');
+  if (tokens.length >= 2 && tokens.every(t => t === 'ios' || t === 'android')
+    && tokens.includes('ios') && tokens.includes('android')) {
+    return 'adaptive';
   }
   return null;
 }
@@ -860,8 +974,11 @@ async function cli() {
     // — cheap models miss the empty case more often than the explicit one.
     const parts = [
       'NO_PRODUCT_MD: This project has no PRODUCT.md yet. ' +
-      'Stop the current task, load reference/init.md, and follow its ' +
-      'instructions to write PRODUCT.md before resuming.',
+      'Follow SKILL.md Setup step 1: for `init`, `teach`, `craft`, `shape`, ' +
+      'or wording that clearly maps to a from-scratch build/shape flow, load ' +
+      'reference/init.md and write PRODUCT.md first; for any other (scoped) ' +
+      'command against existing code, proceed using the code as context and ' +
+      `offer \`${IMPECCABLE_COMMAND} init\` as a suggestion (do not block).`,
     ];
     parts.push(buildResolvedContextDirective(ctx, cliOptions, { targetExists }));
     if (shouldWarnMissingTarget(ctx, targetProvided, targetExists)) {
@@ -884,6 +1001,26 @@ async function cli() {
     ? `NEXT STEP: This project's register is \`${register}\`. You MUST now read \`reference/${register}.md\` before producing any design output.`
     : `NEXT STEP: You MUST now read the matching register reference (\`reference/brand.md\` or \`reference/product.md\`) before producing any design output. Pick based on PRODUCT.md above.`;
   parts.push(next);
+  const platform = extractPlatform(ctx.product);
+  const nativeRefs =
+    platform === 'adaptive' ? ['ios', 'android'] : platform === 'ios' || platform === 'android' ? [platform] : [];
+  if (nativeRefs.length) {
+    const refList = nativeRefs.map(p => `\`reference/${p}.md\``).join(' and ');
+    const label = platform === 'adaptive' ? '`adaptive` (both iOS and Android)' : `\`${platform}\``;
+    parts.push(
+      `NEXT STEP: This project targets ${label}. Also read ${refList} for native conventions, in addition to the register reference.`,
+    );
+  } else if (!platform) {
+    // A `## Platform` section that names something we don't recognize (a
+    // toolchain like `flutter`, a typo) would otherwise silently fall back to
+    // web — the wrong default exactly when the user tried to say "native".
+    const rawPlatform = extractSectionValue(ctx.product, 'Platform');
+    if (rawPlatform) {
+      parts.push(
+        `WARNING: PRODUCT.md's \`## Platform\` value \`${rawPlatform}\` is not recognized; treating the project as \`web\`. Valid values are \`web\`, \`ios\`, \`android\`, or \`adaptive\` (cross-platform, ships both). If this project is native, fix the field (name the design language the app renders, not the toolchain) and surface it to the user.`,
+      );
+    }
+  }
   if (updateDirective) parts.push(updateDirective);
   process.stdout.write(parts.join('\n\n---\n\n') + '\n');
 }

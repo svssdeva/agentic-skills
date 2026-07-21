@@ -3,26 +3,27 @@
 
 ---
 name: golang-patterns
-description: 견고하고 효율적이며 유지보수 가능한 Go 애플리케이션 구축을 위한 관용적 Go 패턴, 모범 사례 및 규칙.
-origin: ECC
+description: Idiomatic Go patterns, best practices, and conventions for building robust, efficient, and maintainable Go applications.
+metadata:
+  origin: ECC
 ---
 
-# Go 개발 패턴
+# Go Development Patterns
 
-견고하고 효율적이며 유지보수 가능한 애플리케이션 구축을 위한 관용적 Go 패턴과 모범 사례.
+Idiomatic Go patterns and best practices for building robust, efficient, and maintainable applications.
 
-## 활성화 시점
+## When to Activate
 
-- 새로운 Go 코드 작성 시
-- Go 코드 리뷰 시
-- 기존 Go 코드 리팩토링 시
-- Go 패키지/모듈 설계 시
+- Writing new Go code
+- Reviewing Go code
+- Refactoring existing Go code
+- Designing Go packages/modules
 
-## 핵심 원칙
+## Core Principles
 
-### 1. 단순성과 명확성
+### 1. Simplicity and Clarity
 
-Go는 영리함보다 단순성을 선호합니다. 코드는 명확하고 읽기 쉬워야 합니다.
+Go favors simplicity over cleverness. Code should be obvious and easy to read.
 
 ```go
 // Good: Clear and direct
@@ -46,9 +47,9 @@ func GetUser(id string) (*User, error) {
 }
 ```
 
-### 2. 제로 값을 유용하게 만들기
+### 2. Make the Zero Value Useful
 
-제로 값이 초기화 없이 즉시 사용 가능하도록 타입을 설계하세요.
+Design types so their zero value is immediately usable without initialization.
 
 ```go
 // Good: Zero value is useful
@@ -73,9 +74,9 @@ type BadCounter struct {
 }
 ```
 
-### 3. 인터페이스를 받고 구조체를 반환하기
+### 3. Accept Interfaces, Return Structs
 
-함수는 인터페이스 매개변수를 받고 구체적 타입을 반환해야 합니다.
+Functions should accept interface parameters and return concrete types.
 
 ```go
 // Good: Accepts interface, returns concrete type
@@ -93,9 +94,9 @@ func ProcessData(r io.Reader) (io.Reader, error) {
 }
 ```
 
-## 에러 처리 패턴
+## Error Handling Patterns
 
-### 컨텍스트가 있는 에러 래핑
+### Error Wrapping with Context
 
 ```go
 // Good: Wrap errors with context
@@ -114,7 +115,7 @@ func LoadConfig(path string) (*Config, error) {
 }
 ```
 
-### 커스텀 에러 타입
+### Custom Error Types
 
 ```go
 // Define domain-specific errors
@@ -135,7 +136,7 @@ var (
 )
 ```
 
-### errors.Is와 errors.As를 사용한 에러 확인
+### Error Checking with errors.Is and errors.As
 
 ```go
 func HandleError(err error) {
@@ -158,7 +159,7 @@ func HandleError(err error) {
 }
 ```
 
-### 에러를 절대 무시하지 말 것
+### Never Ignore Errors
 
 ```go
 // Bad: Ignoring error with blank identifier
@@ -174,9 +175,9 @@ if err != nil {
 _ = writer.Close() // Best-effort cleanup, error logged elsewhere
 ```
 
-## 동시성 패턴
+## Concurrency Patterns
 
-### 워커 풀
+### Worker Pool
 
 ```go
 func WorkerPool(jobs <-chan Job, results chan<- Result, numWorkers int) {
@@ -197,7 +198,7 @@ func WorkerPool(jobs <-chan Job, results chan<- Result, numWorkers int) {
 }
 ```
 
-### 취소 및 타임아웃을 위한 Context
+### Context for Cancellation and Timeouts
 
 ```go
 func FetchWithTimeout(ctx context.Context, url string) ([]byte, error) {
@@ -219,7 +220,7 @@ func FetchWithTimeout(ctx context.Context, url string) ([]byte, error) {
 }
 ```
 
-### 우아한 종료
+### Graceful Shutdown
 
 ```go
 func GracefulShutdown(server *http.Server) {
@@ -240,7 +241,7 @@ func GracefulShutdown(server *http.Server) {
 }
 ```
 
-### 조율된 고루틴을 위한 errgroup
+### errgroup for Coordinated Goroutines
 
 ```go
 import "golang.org/x/sync/errgroup"
@@ -268,7 +269,7 @@ func FetchAll(ctx context.Context, urls []string) ([][]byte, error) {
 }
 ```
 
-### 고루틴 누수 방지
+### Avoiding Goroutine Leaks
 
 ```go
 // Bad: Goroutine leak if context is cancelled
@@ -298,9 +299,9 @@ func safeFetch(ctx context.Context, url string) <-chan []byte {
 }
 ```
 
-## 인터페이스 설계
+## Interface Design
 
-### 작고 집중된 인터페이스
+### Small, Focused Interfaces
 
 ```go
 // Good: Single-method interfaces
@@ -324,7 +325,7 @@ type ReadWriteCloser interface {
 }
 ```
 
-### 사용되는 곳에서 인터페이스 정의
+### Define Interfaces Where They're Used
 
 ```go
 // In the consumer package, not the provider
@@ -344,7 +345,7 @@ type Service struct {
 // It doesn't need to know about this interface
 ```
 
-### 타입 어서션을 통한 선택적 동작
+### Optional Behavior with Type Assertions
 
 ```go
 type Flusher interface {
@@ -364,9 +365,9 @@ func WriteAndFlush(w io.Writer, data []byte) error {
 }
 ```
 
-## 패키지 구성
+## Package Organization
 
-### 표준 프로젝트 레이아웃
+### Standard Project Layout
 
 ```text
 myproject/
@@ -388,7 +389,7 @@ myproject/
 └── Makefile
 ```
 
-### 패키지 명명
+### Package Naming
 
 ```go
 // Good: Short, lowercase, no underscores
@@ -402,7 +403,7 @@ package json_parser
 package userService // Redundant 'Service' suffix
 ```
 
-### 패키지 수준 상태 피하기
+### Avoid Package-Level State
 
 ```go
 // Bad: Global mutable state
@@ -422,9 +423,9 @@ func NewServer(db *sql.DB) *Server {
 }
 ```
 
-## 구조체 설계
+## Struct Design
 
-### 함수형 옵션 패턴
+### Functional Options Pattern
 
 ```go
 type Server struct {
@@ -466,7 +467,7 @@ server := NewServer(":8080",
 )
 ```
 
-### 합성을 위한 임베딩
+### Embedding for Composition
 
 ```go
 type Logger struct {
@@ -494,9 +495,9 @@ s := NewServer(":8080")
 s.Log("Starting...") // Calls embedded Logger.Log
 ```
 
-## 메모리 및 성능
+## Memory and Performance
 
-### 크기를 알 때 슬라이스 미리 할당
+### Preallocate Slices When Size is Known
 
 ```go
 // Bad: Grows slice multiple times
@@ -518,7 +519,7 @@ func processItems(items []Item) []Result {
 }
 ```
 
-### 빈번한 할당에 sync.Pool 사용
+### Use sync.Pool for Frequent Allocations
 
 ```go
 var bufferPool = sync.Pool{
@@ -536,12 +537,11 @@ func ProcessRequest(data []byte) []byte {
 
     buf.Write(data)
     // Process...
-    out := append([]byte(nil), buf.Bytes()...)
-    return out
+    return buf.Bytes()
 }
 ```
 
-### 루프에서 문자열 연결 피하기
+### Avoid String Concatenation in Loops
 
 ```go
 // Bad: Creates many string allocations
@@ -571,9 +571,9 @@ func join(parts []string) string {
 }
 ```
 
-## Go 도구 통합
+## Go Tooling Integration
 
-### 필수 명령어
+### Essential Commands
 
 ```bash
 # Build and run
@@ -599,7 +599,7 @@ gofmt -w .
 goimports -w .
 ```
 
-### 권장 린터 구성 (.golangci.yml)
+### Recommended Linter Configuration (.golangci.yml)
 
 ```yaml
 linters:
@@ -620,26 +620,27 @@ linters-settings:
   errcheck:
     check-type-assertions: true
   govet:
-    check-shadowing: true
+    enable:
+      - shadow
 
 issues:
   exclude-use-default: false
 ```
 
-## 빠른 참조: Go 관용구
+## Quick Reference: Go Idioms
 
-| 관용구 | 설명 |
+| Idiom | Description |
 |-------|-------------|
-| Accept interfaces, return structs | 함수는 인터페이스 매개변수를 받고 구체적 타입을 반환 |
-| Errors are values | 에러를 예외가 아닌 일급 값으로 취급 |
-| Don't communicate by sharing memory | 고루틴 간 조율에 채널 사용 |
-| Make the zero value useful | 타입이 명시적 초기화 없이 작동해야 함 |
-| A little copying is better than a little dependency | 불필요한 외부 의존성 피하기 |
-| Clear is better than clever | 영리함보다 가독성 우선 |
-| gofmt is no one's favorite but everyone's friend | 항상 gofmt/goimports로 포맷팅 |
-| Return early | 에러를 먼저 처리하고 정상 경로는 들여쓰기 없이 유지 |
+| Accept interfaces, return structs | Functions accept interface params, return concrete types |
+| Errors are values | Treat errors as first-class values, not exceptions |
+| Don't communicate by sharing memory | Use channels for coordination between goroutines |
+| Make the zero value useful | Types should work without explicit initialization |
+| A little copying is better than a little dependency | Avoid unnecessary external dependencies |
+| Clear is better than clever | Prioritize readability over cleverness |
+| gofmt is no one's favorite but everyone's friend | Always format with gofmt/goimports |
+| Return early | Handle errors first, keep happy path unindented |
 
-## 피해야 할 안티패턴
+## Anti-Patterns to Avoid
 
 ```go
 // Bad: Naked returns in long functions
@@ -675,4 +676,4 @@ func (c *Counter) Increment() { c.n++ }        // Pointer receiver
 // Pick one style and be consistent
 ```
 
-**기억하세요**: Go 코드는 최고의 의미에서 지루해야 합니다 - 예측 가능하고, 일관적이며, 이해하기 쉽게. 의심스러울 때는 단순하게 유지하세요.
+**Remember**: Go code should be boring in the best way - predictable, consistent, and easy to understand. When in doubt, keep it simple.
