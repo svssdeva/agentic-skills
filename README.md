@@ -1,6 +1,6 @@
 # agentic-skills
 
-> A curated library of **160 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 21 domains.
+> A curated library of **202 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 23 domains.
 
 Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts. Each one encodes the expert knowledge, workflow, and guardrails for a single domain — like hiring a specialist for the task at hand. There is nothing to compile and no runtime: point Claude at the folder and invoke a skill by name.
 
@@ -11,7 +11,7 @@ Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts.
 
 ## Highlights
 
-- **160 skills across 21 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
+- **202 skills across 23 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
 - **Zero install** — each skill is a single markdown file. No dependencies, no build step, no lock-in.
 - **Stackable** — combine skills (for example, spec-driven + test-driven development) for compound expertise.
 - **Provenance-tracked** — every imported skill records its upstream source and stays syncable. See [Sources](#sources).
@@ -62,7 +62,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 
 ## Skill Library
 
-### Angular `9 skills`
+### Angular `10 skills`
 
 | Skill | What it does |
 |---|---|
@@ -75,6 +75,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`angular-signals`](angular/angular-signals/SKILL.md) | Signals, computed, effects — Angular reactivity model |
 | [`angular-testing`](angular/angular-testing/SKILL.md) | Unit and integration testing with TestBed |
 | [`angular-tooling`](angular/angular-tooling/SKILL.md) | CLI, build config, workspace setup |
+| [`angular-new-app`](angular/angular-new-app/SKILL.md) | Scaffold a new Angular app with the Angular CLI (official angular/skills) |
 
 ### Astro `5 skills`
 
@@ -94,7 +95,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`bun-development`](bun/bun-development/SKILL.md) | Bun-first development workflows and patterns |
 | [`bun-runtime`](bun/bun-runtime/SKILL.md) | Runtime internals, FFI, native modules |
 
-### Rust `6 skills`
+### Rust `9 skills`
 
 | Skill | What it does |
 |---|---|
@@ -104,13 +105,18 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`rust-testing`](rust/rust-testing/SKILL.md) | Unit tests, integration tests, property testing |
 | [`m15-anti-pattern`](rust/m15-anti-pattern/SKILL.md) | Detect and fix the M15 anti-pattern |
 | [`tauri-v2`](rust/tauri-v2/SKILL.md) | Cross-platform desktop/mobile apps — tauri.conf.json, Rust commands, IPC, capabilities |
+| [`tree-sitter-parsing`](rust/tree-sitter-parsing/SKILL.md) | Parse source to ASTs, grammar/ABI management, queries, generic walker |
+| [`rusqlite-graph-store`](rust/rusqlite-graph-store/SKILL.md) | Embedded SQLite store, WAL, bounded graph BFS via recursive CTE |
+| [`cargo-workspace-scaffold`](rust/cargo-workspace-scaffold/SKILL.md) | Library-first multi-crate workspace + cross-platform determinism CI |
 
-### TypeScript `2 skills`
+### TypeScript `4 skills`
 
 | Skill | What it does |
 |---|---|
 | [`typescript-expert`](typescript/typescript-expert/SKILL.md) | Full TypeScript expertise — types, config, tooling |
 | [`typescript-advanced-types`](typescript/typescript-advanced-types/SKILL.md) | Conditional types, mapped types, template literals |
+| [`typescript-pro`](typescript/typescript-pro/SKILL.md) | Advanced type systems — type guards, utility types, branded types, build optimization |
+| [`modern-javascript-patterns`](typescript/modern-javascript-patterns/SKILL.md) | ES6+ and functional patterns — async/await, destructuring, memoization, throttling |
 
 ### Tailwind CSS `3 skills`
 
@@ -150,7 +156,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`docker-patterns`](docker/docker-patterns/SKILL.md) | Docker Compose, local-dev orchestration, networking, volumes, container security |
 | [`multi-stage-dockerfile`](docker/multi-stage-dockerfile/SKILL.md) | Optimized, secure multi-stage Dockerfiles for any language or framework |
 
-### AI & RAG `7 skills`
+### AI & RAG `8 skills`
 
 | Skill | What it does |
 |---|---|
@@ -161,13 +167,19 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`langchain-architecture`](ai/langchain-architecture/SKILL.md) | LLM apps with LangChain 1.x + LangGraph — agents, memory, tool integration |
 | [`langgraph-fundamentals`](ai/langgraph-fundamentals/SKILL.md) | LangGraph core — StateGraph, nodes, edges, Command, Send, streaming |
 | [`langgraph-persistence`](ai/langgraph-persistence/SKILL.md) | LangGraph state persistence — checkpointers, thread_id, time travel, Store |
+| [`ai-research-explore`](ai/ai-research-explore/SKILL.md) | Structured deep-learning research exploration — candidate generation and novelty checks |
 
-### Database `2 skills`
+### Database `7 skills`
 
 | Skill | What it does |
 |---|---|
 | [`neon-postgres`](database/neon-postgres/SKILL.md) | Neon Serverless Postgres — branching, autoscaling, pooling, SDKs, CLI/MCP |
 | [`postgresql-optimization`](database/postgresql-optimization/SKILL.md) | PostgreSQL-specific features — JSONB, arrays, custom types, full-text, tuning |
+| [`prisma-database-setup`](database/prisma-database-setup/SKILL.md) | Configure Prisma against Postgres, MySQL, SQLite, or MongoDB |
+| [`prisma-postgres`](database/prisma-postgres/SKILL.md) | Prisma Postgres — Console, create-db CLI, Management API and SDK |
+| [`prisma-upgrade-v7`](database/prisma-upgrade-v7/SKILL.md) | Migrate Prisma ORM v6 → v7, covering every breaking change |
+| [`prisma-driver-adapter-implementation`](database/prisma-driver-adapter-implementation/SKILL.md) | Implement and modify Prisma 7 SQL driver adapters |
+| [`supabase`](database/supabase/SKILL.md) | Supabase end to end — Database, Auth, Edge Functions, Realtime, Storage, RLS |
 
 ### SEO & Content `23 skills`
 
@@ -187,7 +199,6 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`copywriting`](seo/copywriting/SKILL.md) | Conversion copywriting — headlines, value props, CTAs, and messaging frameworks |
 | [`marketing-psychology`](seo/marketing-psychology/SKILL.md) | Behavioral science and mental models for persuasion and decision-making |
 | [`marketing-ideas`](seo/marketing-ideas/SKILL.md) | Generate marketing campaign and growth-channel ideas |
-| [`page-cro`](seo/page-cro/SKILL.md) | Conversion-rate optimization for landing, pricing, and signup pages |
 | [`analytics-tracking`](seo/analytics-tracking/SKILL.md) | Set up and audit analytics and measurement (GA4, GTM, events) |
 | [`cold-email`](seo/cold-email/SKILL.md) | Cold email outreach — sequences, deliverability, and follow-ups |
 | [`site-architecture`](seo/site-architecture/SKILL.md) | Plan SEO-friendly site structure, URLs, and internal linking |
@@ -196,6 +207,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`cro`](seo/cro/SKILL.md) | Conversion-rate optimization for marketing pages and lead-capture forms |
 | [`aso`](seo/aso/SKILL.md) | App Store / Google Play listing optimization (ASO) — keywords, conversion, ranking |
 | [`lead-magnets`](seo/lead-magnets/SKILL.md) | Plan and optimize lead magnets for email capture and lead generation |
+| [`reddit-automation`](seo/reddit-automation/SKILL.md) | Find Reddit threads worth answering and draft disclosed, useful replies |
 
 ### NestJS `3 skills`
 
@@ -217,7 +229,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`dataverse-python-usecase-builder`](python/dataverse-python-usecase-builder/SKILL.md) | Architecture framework for Dataverse use cases — 6 categories from CRM to compliance |
 | [`async-python-patterns`](python/async-python-patterns/SKILL.md) | Python asyncio, concurrency, and async/await patterns for I/O-bound apps |
 
-### Engineering Practices `31 skills`
+### Engineering Practices `42 skills`
 
 | Skill | What it does |
 |---|---|
@@ -252,6 +264,17 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`create-readme`](engineering/create-readme/SKILL.md) | Generate a project README.md |
 | [`prd`](engineering/prd/SKILL.md) | Generate Product Requirements Documents — user stories, specs, risk analysis |
 | [`email-and-password-best-practices`](engineering/email-and-password-best-practices/SKILL.md) | Better Auth email/password — verification, reset flows, policies, hashing |
+| [`codebase-design`](engineering/codebase-design/SKILL.md) | Design deep modules — interface depth, boundaries, and shared vocabulary |
+| [`diagnosing-bugs`](engineering/diagnosing-bugs/SKILL.md) | Diagnosis loop for hard bugs and performance regressions |
+| [`to-spec`](engineering/to-spec/SKILL.md) | Turn the current conversation into a spec and publish it to the issue tracker |
+| [`teach`](engineering/teach/SKILL.md) | Teach a new skill or concept in the context of this workspace |
+| [`ask-matt`](engineering/ask-matt/SKILL.md) | Router that picks which skill or flow fits the situation |
+| [`claude-handoff`](engineering/claude-handoff/SKILL.md) | Hand the current conversation to a fresh background agent |
+| [`loop-me`](engineering/loop-me/SKILL.md) | Get grilled about the specs for workflows you want to build |
+| [`wait-what`](engineering/wait-what/SKILL.md) | Stop and re-pitch a message that did not land |
+| [`writing-fragments`](engineering/writing-fragments/SKILL.md) | Writing, explore — mine raw fragments before any structure |
+| [`writing-shape`](engineering/writing-shape/SKILL.md) | Writing, exploit — shape raw material into an article, paragraph by paragraph |
+| [`writing-beats`](engineering/writing-beats/SKILL.md) | Writing, exploit — assemble material into a journey of grounded beats |
 
 ### Go `3 skills`
 
@@ -272,7 +295,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`react-doctor`](react/react-doctor/SKILL.md) | Scan and triage React diagnostics — lint, a11y, bundle size, architecture |
 | [`react-modernization`](react/react-modernization/SKILL.md) | Upgrade React — class-to-hooks migration, concurrent features, latest versions |
 
-### Frontend & Design `16 skills`
+### Frontend & Design `20 skills`
 
 | Skill | What it does |
 |---|---|
@@ -292,14 +315,35 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`frontend-patterns`](frontend/frontend-patterns/SKILL.md) | React/Next.js frontend patterns — state, performance, UI best practices |
 | [`web-quality-performance`](frontend/web-quality-performance/SKILL.md) | Web performance optimization — faster loading, reduced load time (Lighthouse) |
 | [`web-quality-best-practices`](frontend/web-quality-best-practices/SKILL.md) | Modern web best practices — security, compatibility, code-quality audits |
+| [`anti-ui-slop`](frontend/anti-ui-slop/SKILL.md) | Stop generic agent UI — build product-specific interfaces from real screen references |
+| [`design-taste-frontend`](frontend/design-taste-frontend/SKILL.md) | Anti-slop landing pages, portfolios, and redesigns with inferred design direction |
+| [`apple-design`](frontend/apple-design/SKILL.md) | Apple's interface and fluid-motion principles translated for the web |
+| [`imagegen-frontend-mobile`](frontend/imagegen-frontend-mobile/SKILL.md) | Premium app-native mobile screen concepts and flows via image generation |
 
-### Video `3 skills`
+### 3D & WebGL `4 skills`
+
+| Skill | What it does |
+|---|---|
+| [`3d-web-experience`](3d/3d-web-experience/SKILL.md) | Three.js, React Three Fiber, Spline, and WebGL for product configurators and immersive sites |
+| [`web3d-integration-patterns`](3d/web3d-integration-patterns/SKILL.md) | Combine Three.js, GSAP ScrollTrigger, R3F, Motion, and React Spring in one app |
+| [`lightweight-3d-effects`](3d/lightweight-3d-effects/SKILL.md) | Decorative pseudo-3D with Zdog, Vanta.js, and Vanilla-Tilt.js |
+| [`threejs-3d-generator`](3d/threejs-3d-generator/SKILL.md) | Generate, texture, rig, and export 3D game assets via the Tripo API |
+
+### Video `11 skills`
 
 | Skill | What it does |
 |---|---|
 | [`hyperframes`](video/hyperframes/SKILL.md) | HTML video compositions — animations, captions, voiceovers, transitions |
 | [`hyperframes-cli`](video/hyperframes-cli/SKILL.md) | HyperFrames CLI dev loop — init, lint, inspect, preview, render |
 | [`website-to-hyperframes`](video/website-to-hyperframes/SKILL.md) | Capture a website and turn it into a HyperFrames video |
+| [`media-use`](video/media-use/SKILL.md) | Agent Media OS — resolve BGM, SFX, images, icons, voice, LUTs into local assets |
+| [`hyperframes-registry`](video/hyperframes-registry/SKILL.md) | Install, discover, and wire registry blocks and components into compositions |
+| [`faceless-explainer`](video/faceless-explainer/SKILL.md) | Turn text, notes, or a brief into a faceless explainer video |
+| [`embedded-captions`](video/embedded-captions/SKILL.md) | Add plain, cinematic, or VFX captions to talking-head footage |
+| [`music-to-video`](video/music-to-video/SKILL.md) | Turn a music track into a beat-synced lyric video, slideshow, or promo |
+| [`talking-head-recut`](video/talking-head-recut/SKILL.md) | Package interview or podcast footage with timed graphic overlay cards |
+| [`video-edit`](video/video-edit/SKILL.md) | Agent-driven video editing pipeline |
+| [`3d-animation-short-generator`](video/3d-animation-short-generator/SKILL.md) | Story-driven 3D animated shorts — concept, shot table, storyboard, render |
 
 ### Testing `2 skills`
 
@@ -307,6 +351,14 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 |---|---|
 | [`playwright-best-practices`](testing/playwright-best-practices/SKILL.md) | E2E testing — selectors, fixtures, parallelism |
 | [`browser-testing-with-devtools`](testing/browser-testing-with-devtools/SKILL.md) | DevTools-driven testing and debugging |
+
+### Productivity `3 skills`
+
+| Skill | What it does |
+|---|---|
+| [`pptx`](productivity/pptx/SKILL.md) | Create, edit, and read .pptx decks — slides, layouts, and content extraction |
+| [`jira-integration`](productivity/jira-integration/SKILL.md) | Retrieve, analyze, update, and transition Jira tickets from your workflow |
+| [`confluence`](productivity/confluence/SKILL.md) | Confluence pages and spaces — documentation and knowledge management |
 
 ### Utilities `14 skills`
 
@@ -331,7 +383,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 
 ## Knowledge Graph
 
-This repo includes a graphify knowledge graph (`graphify-out/`) that maps relationships between all 160 skills — which ones share concepts, which cluster together, and which bridge multiple domains.
+This repo includes a graphify knowledge graph (`graphify-out/`) that maps relationships between all 202 skills — which ones share concepts, which cluster together, and which bridge multiple domains.
 
 Open `graphify-out/graph.html` in any browser to explore the interactive graph.
 

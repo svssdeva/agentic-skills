@@ -1,6 +1,6 @@
 # agentic-skills
 
-A curated library of 160 drop-in skills for Claude Code. Each skill is a `SKILL.md` file that encodes expert knowledge, workflows, and guardrails for a specific domain.
+A curated library of 199 drop-in skills for Claude Code. Each skill is a `SKILL.md` file that encodes expert knowledge, workflows, and guardrails for a specific domain.
 
 ## Structure
 
@@ -16,17 +16,19 @@ Skills live inside category folders at the repo root. Each category is a lowerca
 
 | Folder | Domain |
 |---|---|
+| `3d/` | Three.js, WebGL, R3F, 3D asset generation |
 | `ai/` | RAG, LLM applications, vector search and indexing |
 | `angular/` | Angular framework skills |
 | `astro/` | Astro framework skills |
 | `bun/` | Bun runtime and tooling |
 | `cloud/` | AWS, Vercel, CI/CD, Linux hosting |
-| `database/` | Postgres, Neon, query optimization |
+| `database/` | Postgres, Neon, Prisma, Supabase, query optimization |
 | `docker/` | Docker, containerization, Compose, multi-stage builds |
 | `engineering/` | Development methodology and practices |
 | `frontend/` | UI engineering, design systems, performance |
 | `golang/` | Go language skills |
 | `nestjs/` | NestJS framework skills |
+| `productivity/` | Office documents, Jira, Confluence |
 | `python/` | Python language skills |
 | `react/` | React and Next.js skills |
 | `mobile/` | Ionic, Capacitor, Expo |
@@ -36,7 +38,7 @@ Skills live inside category folders at the repo root. Each category is a lowerca
 | `testing/` | Testing tools and practices |
 | `typescript/` | TypeScript skills |
 | `utils/` | Utilities and meta-skills (compression, skill discovery, site audit) |
-| `video/` | HTML video composition (HyperFrames) |
+| `video/` | HTML video composition (HyperFrames), video editing and generation |
 
 ## Conventions
 

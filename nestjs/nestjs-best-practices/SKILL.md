@@ -1,12 +1,13 @@
 <!-- Source: https://www.skills.sh/kadajett/agent-nestjs-skills/nestjs-best-practices -->
 <!-- Install: npx skills add https://github.com/kadajett/agent-nestjs-skills --skill nestjs-best-practices -->
+
 ---
 name: nestjs-best-practices
 description: NestJS best practices and architecture patterns for building production-ready applications. This skill should be used when writing, reviewing, or refactoring NestJS code to ensure proper patterns for modules, dependency injection, security, and performance.
 license: MIT
 metadata:
   author: Kadajett
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # NestJS Best Practices
@@ -129,4 +130,5 @@ Each rule file contains:
 
 ## Full Compiled Document
 
-For the complete guide with all rules expanded: `AGENTS.md`
+For the complete guide with all rules expanded in a single document, see
+[AGENTS.md in the repository](https://github.com/Kadajett/agent-nestjs-skills/blob/main/AGENTS.md).
