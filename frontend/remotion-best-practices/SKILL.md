@@ -1,10 +1,9 @@
 <!-- Source: https://skills.sh/remotion-dev/skills/remotion-best-practices -->
 <!-- Install: npx skills add https://github.com/remotion-dev/skills --skill remotion-best-practices -->
-
 ---
 name: remotion-best-practices
 description: Router for all Remotion skills
-version: 4.0.518
+version: 4.0.529
 ---
 
 ## Preserve user changes
