@@ -1,6 +1,6 @@
 # agentic-skills
 
-> A curated library of **202 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 23 domains.
+> A curated library of **207 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 23 domains.
 
 Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts. Each one encodes the expert knowledge, workflow, and guardrails for a single domain — like hiring a specialist for the task at hand. There is nothing to compile and no runtime: point Claude at the folder and invoke a skill by name.
 
@@ -11,7 +11,7 @@ Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts.
 
 ## Highlights
 
-- **202 skills across 23 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
+- **207 skills across 23 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
 - **Zero install** — each skill is a single markdown file. No dependencies, no build step, no lock-in.
 - **Stackable** — combine skills (for example, spec-driven + test-driven development) for compound expertise.
 - **Provenance-tracked** — every imported skill records its upstream source and stays syncable. See [Sources](#sources).
@@ -156,7 +156,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`docker-patterns`](docker/docker-patterns/SKILL.md) | Docker Compose, local-dev orchestration, networking, volumes, container security |
 | [`multi-stage-dockerfile`](docker/multi-stage-dockerfile/SKILL.md) | Optimized, secure multi-stage Dockerfiles for any language or framework |
 
-### AI & RAG `8 skills`
+### AI & RAG `9 skills`
 
 | Skill | What it does |
 |---|---|
@@ -168,6 +168,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`langgraph-fundamentals`](ai/langgraph-fundamentals/SKILL.md) | LangGraph core — StateGraph, nodes, edges, Command, Send, streaming |
 | [`langgraph-persistence`](ai/langgraph-persistence/SKILL.md) | LangGraph state persistence — checkpointers, thread_id, time travel, Store |
 | [`ai-research-explore`](ai/ai-research-explore/SKILL.md) | Structured deep-learning research exploration — candidate generation and novelty checks |
+| [`ai-image-generation`](ai/ai-image-generation/SKILL.md) | Generate images with 50+ models (FLUX, GPT-Image, Gemini, Seedream) via the belt / inference.sh CLI |
 
 ### Database `7 skills`
 
@@ -229,7 +230,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`dataverse-python-usecase-builder`](python/dataverse-python-usecase-builder/SKILL.md) | Architecture framework for Dataverse use cases — 6 categories from CRM to compliance |
 | [`async-python-patterns`](python/async-python-patterns/SKILL.md) | Python asyncio, concurrency, and async/await patterns for I/O-bound apps |
 
-### Engineering Practices `42 skills`
+### Engineering Practices `43 skills`
 
 | Skill | What it does |
 |---|---|
@@ -275,6 +276,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`writing-fragments`](engineering/writing-fragments/SKILL.md) | Writing, explore — mine raw fragments before any structure |
 | [`writing-shape`](engineering/writing-shape/SKILL.md) | Writing, exploit — shape raw material into an article, paragraph by paragraph |
 | [`writing-beats`](engineering/writing-beats/SKILL.md) | Writing, exploit — assemble material into a journey of grounded beats |
+| [`setup-matt-pocock-skills`](engineering/setup-matt-pocock-skills/SKILL.md) | One-time repo setup for the engineering skills — issue tracker, triage labels, domain docs |
 
 ### Go `3 skills`
 
@@ -295,7 +297,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`react-doctor`](react/react-doctor/SKILL.md) | Scan and triage React diagnostics — lint, a11y, bundle size, architecture |
 | [`react-modernization`](react/react-modernization/SKILL.md) | Upgrade React — class-to-hooks migration, concurrent features, latest versions |
 
-### Frontend & Design `20 skills`
+### Frontend & Design `21 skills`
 
 | Skill | What it does |
 |---|---|
@@ -319,6 +321,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`design-taste-frontend`](frontend/design-taste-frontend/SKILL.md) | Anti-slop landing pages, portfolios, and redesigns with inferred design direction |
 | [`apple-design`](frontend/apple-design/SKILL.md) | Apple's interface and fluid-motion principles translated for the web |
 | [`imagegen-frontend-mobile`](frontend/imagegen-frontend-mobile/SKILL.md) | Premium app-native mobile screen concepts and flows via image generation |
+| [`image-to-code`](frontend/image-to-code/SKILL.md) | Image-first web design — generate section design images, then implement to match |
 
 ### 3D & WebGL `4 skills`
 
@@ -329,7 +332,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`lightweight-3d-effects`](3d/lightweight-3d-effects/SKILL.md) | Decorative pseudo-3D with Zdog, Vanta.js, and Vanilla-Tilt.js |
 | [`threejs-3d-generator`](3d/threejs-3d-generator/SKILL.md) | Generate, texture, rig, and export 3D game assets via the Tripo API |
 
-### Video `11 skills`
+### Video `12 skills`
 
 | Skill | What it does |
 |---|---|
@@ -344,6 +347,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`talking-head-recut`](video/talking-head-recut/SKILL.md) | Package interview or podcast footage with timed graphic overlay cards |
 | [`video-edit`](video/video-edit/SKILL.md) | Agent-driven video editing pipeline |
 | [`3d-animation-short-generator`](video/3d-animation-short-generator/SKILL.md) | Story-driven 3D animated shorts — concept, shot table, storyboard, render |
+| [`ai-video-generation`](video/ai-video-generation/SKILL.md) | Generate videos with 40+ models (Veo, Seedance, Wan, Grok) via the belt / inference.sh CLI |
 
 ### Testing `2 skills`
 
@@ -352,13 +356,14 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`playwright-best-practices`](testing/playwright-best-practices/SKILL.md) | E2E testing — selectors, fixtures, parallelism |
 | [`browser-testing-with-devtools`](testing/browser-testing-with-devtools/SKILL.md) | DevTools-driven testing and debugging |
 
-### Productivity `3 skills`
+### Productivity `4 skills`
 
 | Skill | What it does |
 |---|---|
 | [`pptx`](productivity/pptx/SKILL.md) | Create, edit, and read .pptx decks — slides, layouts, and content extraction |
 | [`jira-integration`](productivity/jira-integration/SKILL.md) | Retrieve, analyze, update, and transition Jira tickets from your workflow |
 | [`confluence`](productivity/confluence/SKILL.md) | Confluence pages and spaces — documentation and knowledge management |
+| [`lark-doc`](productivity/lark-doc/SKILL.md) | Feishu/Lark docs and wiki — read, create, edit, media, whiteboards via lark-cli |
 
 ### Utilities `14 skills`
 
@@ -383,7 +388,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 
 ## Knowledge Graph
 
-This repo includes a graphify knowledge graph (`graphify-out/`) that maps relationships between all 202 skills — which ones share concepts, which cluster together, and which bridge multiple domains.
+This repo includes a graphify knowledge graph (`graphify-out/`) that maps relationships between all 207 skills — which ones share concepts, which cluster together, and which bridge multiple domains.
 
 Open `graphify-out/graph.html` in any browser to explore the interactive graph.
 
