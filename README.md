@@ -1,6 +1,6 @@
 # agentic-skills
 
-> A curated library of **207 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 23 domains.
+> A curated library of **228 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 23 domains.
 
 Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts. Each one encodes the expert knowledge, workflow, and guardrails for a single domain — like hiring a specialist for the task at hand. There is nothing to compile and no runtime: point Claude at the folder and invoke a skill by name.
 
@@ -11,7 +11,7 @@ Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts.
 
 ## Highlights
 
-- **207 skills across 23 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
+- **228 skills across 23 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
 - **Zero install** — each skill is a single markdown file. No dependencies, no build step, no lock-in.
 - **Stackable** — combine skills (for example, spec-driven + test-driven development) for compound expertise.
 - **Provenance-tracked** — every imported skill records its upstream source and stays syncable. See [Sources](#sources).
@@ -156,7 +156,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`docker-patterns`](docker/docker-patterns/SKILL.md) | Docker Compose, local-dev orchestration, networking, volumes, container security |
 | [`multi-stage-dockerfile`](docker/multi-stage-dockerfile/SKILL.md) | Optimized, secure multi-stage Dockerfiles for any language or framework |
 
-### AI & RAG `9 skills`
+### AI & RAG `10 skills`
 
 | Skill | What it does |
 |---|---|
@@ -169,6 +169,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`langgraph-persistence`](ai/langgraph-persistence/SKILL.md) | LangGraph state persistence — checkpointers, thread_id, time travel, Store |
 | [`ai-research-explore`](ai/ai-research-explore/SKILL.md) | Structured deep-learning research exploration — candidate generation and novelty checks |
 | [`ai-image-generation`](ai/ai-image-generation/SKILL.md) | Generate images with 50+ models (FLUX, GPT-Image, Gemini, Seedream) via the belt / inference.sh CLI |
+| [`retrieval-strategy`](ai/retrieval-strategy/SKILL.md) | Pick a retrieval strategy before buying a vector index — one-shot RAG vs agent loop vs BM25 vs MCP connectors vs compiled wiki |
 
 ### Database `7 skills`
 
@@ -230,7 +231,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`dataverse-python-usecase-builder`](python/dataverse-python-usecase-builder/SKILL.md) | Architecture framework for Dataverse use cases — 6 categories from CRM to compliance |
 | [`async-python-patterns`](python/async-python-patterns/SKILL.md) | Python asyncio, concurrency, and async/await patterns for I/O-bound apps |
 
-### Engineering Practices `43 skills`
+### Engineering Practices `61 skills`
 
 | Skill | What it does |
 |---|---|
@@ -277,6 +278,24 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`writing-shape`](engineering/writing-shape/SKILL.md) | Writing, exploit — shape raw material into an article, paragraph by paragraph |
 | [`writing-beats`](engineering/writing-beats/SKILL.md) | Writing, exploit — assemble material into a journey of grounded beats |
 | [`setup-matt-pocock-skills`](engineering/setup-matt-pocock-skills/SKILL.md) | One-time repo setup for the engineering skills — issue tracker, triage labels, domain docs |
+| [`domain-modeling`](engineering/domain-modeling/SKILL.md) | Build and sharpen the domain model — GLOSSARY.md ubiquitous language and ADRs |
+| [`prototype`](engineering/prototype/SKILL.md) | Throwaway prototype to settle an ungrillable design question (UI or logic) |
+| [`to-tickets`](engineering/to-tickets/SKILL.md) | Split a spec into tracer-bullet tickets with blocking edges, sized to one agent session |
+| [`implement-spec`](engineering/implement-spec/SKILL.md) | Build a whole spec in one run — ticket task graph, parallel worktree implementers, one integration branch |
+| [`retro`](engineering/retro/SKILL.md) | Retrospective on a coding session — suggests environment changes: pointers, deterministic checks, standards |
+| [`wayfinder`](engineering/wayfinder/SKILL.md) | Plan work too big for one session as a map of decision tickets, resolved one at a time |
+| [`to-questionnaire`](engineering/to-questionnaire/SKILL.md) | Turn a decision you cannot answer into a questionnaire for someone else to fill in |
+| [`wizard`](engineering/wizard/SKILL.md) | Generate an interactive bash wizard for steps only a human can perform (credentials, dashboards, CI secrets) |
+| [`writing-for-agents`](engineering/writing-for-agents/SKILL.md) | Writing documents for agents — skills, AGENTS.md, CLAUDE.md |
+| [`reverse-engineer-anything`](engineering/reverse-engineer-anything/SKILL.md) | REA — reverse engineer native, Electron/JS, .NET, Android and web targets via MCP; evidence, graph, limitations, unknowns |
+| [`agentic-build-primitives`](engineering/agentic-build-primitives/SKILL.md) | Primitives-first agentic app building — AGENTS.md rules, per-dependency skills, prompt order, durable workers |
+| [`grilling`](engineering/grilling/SKILL.md) | Grill the user relentlessly about a plan — maps the decision tree, asks the whole frontier each round |
+| [`handoff`](engineering/handoff/SKILL.md) | Compact the current conversation into a handoff document for another agent |
+| [`implement`](engineering/implement/SKILL.md) | Implement one ticket test-first via tdd, then code-review, in a fresh context |
+| [`code-review`](engineering/code-review/SKILL.md) | Two-axis review of a diff since a fixed point — Standards (code smells) and Spec — by fresh reviewers |
+| [`pr`](engineering/pr/SKILL.md) | PR body shape — smallest visual of the change, before/after evidence, merge-danger (one-way vs two-way door) |
+| [`triage`](engineering/triage/SKILL.md) | Move issues and external PRs through triage roles — categorise, verify, grill, write agent-ready briefs |
+| [`research`](engineering/research/SKILL.md) | Investigate a question against primary sources and capture findings as a Markdown file in the repo |
 
 ### Go `3 skills`
 
@@ -297,7 +316,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`react-doctor`](react/react-doctor/SKILL.md) | Scan and triage React diagnostics — lint, a11y, bundle size, architecture |
 | [`react-modernization`](react/react-modernization/SKILL.md) | Upgrade React — class-to-hooks migration, concurrent features, latest versions |
 
-### Frontend & Design `21 skills`
+### Frontend & Design `23 skills`
 
 | Skill | What it does |
 |---|---|
@@ -322,6 +341,8 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`apple-design`](frontend/apple-design/SKILL.md) | Apple's interface and fluid-motion principles translated for the web |
 | [`imagegen-frontend-mobile`](frontend/imagegen-frontend-mobile/SKILL.md) | Premium app-native mobile screen concepts and flows via image generation |
 | [`image-to-code`](frontend/image-to-code/SKILL.md) | Image-first web design — generate section design images, then implement to match |
+| [`hallmark`](frontend/hallmark/SKILL.md) | Anti-AI-slop design skill — structural variety, 21 themes, audit / redesign / study verbs, design.md export |
+| [`scroll-world`](frontend/scroll-world/SKILL.md) | Scroll-scrubbed cinematic "fly through the world" landing page from AI-generated clips (Higgsfield / Runway via MCP) |
 
 ### 3D & WebGL `4 skills`
 
@@ -481,4 +502,7 @@ Skills in this library are sourced from upstream authors (tracked in each `SKILL
 - [forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills) — LLM coding behavioral guidelines
 - [juliusbrussee/caveman](https://github.com/juliusbrussee/caveman) — Cavecrew subagent delegation, caveman stats
 - [nodnarbnitram/claude-code-extensions](https://github.com/nodnarbnitram/claude-code-extensions) — Tauri v2 development
+- [morluto/rea](https://github.com/morluto/rea) — Reverse Engineer Anything (REA) agent skill
+- [nutlope/hallmark](https://github.com/nutlope/hallmark) — Hallmark anti-AI-slop design skill
+- [oso95/scroll-world](https://github.com/oso95/scroll-world) — Scroll World cinematic scroll-scrubbed landing pages
 - Custom skills authored for this library — all `engineering/`, `utils/`, and others without a Source comment
