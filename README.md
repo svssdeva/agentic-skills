@@ -1,6 +1,6 @@
 # agentic-skills
 
-> A curated library of **228 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 23 domains.
+> A curated library of **230 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 23 domains.
 
 Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts. Each one encodes the expert knowledge, workflow, and guardrails for a single domain — like hiring a specialist for the task at hand. There is nothing to compile and no runtime: point Claude at the folder and invoke a skill by name.
 
@@ -11,7 +11,7 @@ Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts.
 
 ## Highlights
 
-- **228 skills across 23 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
+- **230 skills across 23 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
 - **Zero install** — each skill is a single markdown file. No dependencies, no build step, no lock-in.
 - **Stackable** — combine skills (for example, spec-driven + test-driven development) for compound expertise.
 - **Provenance-tracked** — every imported skill records its upstream source and stays syncable. See [Sources](#sources).
@@ -316,7 +316,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`react-doctor`](react/react-doctor/SKILL.md) | Scan and triage React diagnostics — lint, a11y, bundle size, architecture |
 | [`react-modernization`](react/react-modernization/SKILL.md) | Upgrade React — class-to-hooks migration, concurrent features, latest versions |
 
-### Frontend & Design `23 skills`
+### Frontend & Design `25 skills`
 
 | Skill | What it does |
 |---|---|
@@ -343,6 +343,8 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`image-to-code`](frontend/image-to-code/SKILL.md) | Image-first web design — generate section design images, then implement to match |
 | [`hallmark`](frontend/hallmark/SKILL.md) | Anti-AI-slop design skill — structural variety, 21 themes, audit / redesign / study verbs, design.md export |
 | [`scroll-world`](frontend/scroll-world/SKILL.md) | Scroll-scrubbed cinematic "fly through the world" landing page from AI-generated clips (Higgsfield / Runway via MCP) |
+| [`stitch`](frontend/stitch/SKILL.md) | Google Stitch from the terminal — generate screens and variants, capture a running route into Stitch, extract / upload DESIGN.md, review a live app against it (the official `stitch agent-skills add` skill) |
+| [`scrollytelling`](frontend/scrollytelling/SKILL.md) | Scroll-driven storytelling — pinned sections, progressive reveals, CSS scroll-timeline / IntersectionObserver / GSAP ScrollTrigger, reduced-motion and mobile rules |
 
 ### 3D & WebGL `4 skills`
 
@@ -505,4 +507,6 @@ Skills in this library are sourced from upstream authors (tracked in each `SKILL
 - [morluto/rea](https://github.com/morluto/rea) — Reverse Engineer Anything (REA) agent skill
 - [nutlope/hallmark](https://github.com/nutlope/hallmark) — Hallmark anti-AI-slop design skill
 - [oso95/scroll-world](https://github.com/oso95/scroll-world) — Scroll World cinematic scroll-scrubbed landing pages
+- [@google/stitch (npm)](https://www.npmjs.com/package/@google/stitch) — the official Stitch CLI skill (`skills/design/stitch`), Apache-2.0
+- [doodledood/claude-code-plugins](https://github.com/doodledood/claude-code-plugins) — scrollytelling skill (no licence file in the repo)
 - Custom skills authored for this library — all `engineering/`, `utils/`, and others without a Source comment
