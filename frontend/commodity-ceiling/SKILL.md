@@ -82,6 +82,11 @@ Visual craft is covered by `frontend/anti-ui-slop`, `frontend/interface-design` 
 - Cheaper model: drafts state-table cells, copy, empty-state text and documentation.
 - Reviewer: fresh context, read-only tools. Never let the builder review its own screens.
 - Pass file:line references and screenshots between agents, not prose summaries.
+- Delegate only work with a large working set (reviews, frames, long docs) or that must be a
+  fresh context (review). Measured 2026-10-18, two tasks: a 150-word summary cost 6.8k inline vs
+  0.4k main + 56k sub-agent; an 11-row claim-to-timestamp table cost 9.2k inline vs 0.4k main +
+  59k sub-agent (and the sub-agent found 6 of the 10 claims). A sub-agent has a fixed ~50k
+  startup cost, so small doc tasks are cheaper and better inline.
 
 ## Evidence
 
