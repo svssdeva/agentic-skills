@@ -288,7 +288,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`wizard`](engineering/wizard/SKILL.md) | Generate an interactive bash wizard for steps only a human can perform (credentials, dashboards, CI secrets) |
 | [`writing-for-agents`](engineering/writing-for-agents/SKILL.md) | Writing documents for agents — skills, AGENTS.md, CLAUDE.md |
 | [`reverse-engineer-anything`](engineering/reverse-engineer-anything/SKILL.md) | REA — reverse engineer native, Electron/JS, .NET, Android and web targets via MCP; evidence, graph, limitations, unknowns |
-| [`agentic-build-primitives`](engineering/agentic-build-primitives/SKILL.md) | Primitives-first agentic app building — AGENTS.md rules, per-dependency skills, prompt order, durable workers |
+| [`agentic-build-primitives`](engineering/agentic-build-primitives/SKILL.md) | Primitives-first agentic app building — AGENTS.md rules, per-dependency skills, prompt order, durable workers, API emulators and screenshot verification |
 | [`grilling`](engineering/grilling/SKILL.md) | Grill the user relentlessly about a plan — maps the decision tree, asks the whole frontier each round |
 | [`handoff`](engineering/handoff/SKILL.md) | Compact the current conversation into a handoff document for another agent |
 | [`implement`](engineering/implement/SKILL.md) | Implement one ticket test-first via tdd, then code-review, in a fresh context |

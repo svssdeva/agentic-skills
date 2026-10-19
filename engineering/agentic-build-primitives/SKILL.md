@@ -1,6 +1,6 @@
 ---
 name: agentic-build-primitives
-description: Primitives-first workflow for building a real product with a coding agent (Claude Code, Codex, Cursor) without AI slop. Use when scaffolding a project for agentic coding, writing AGENTS.md / CLAUDE.md rules, installing per-dependency skills, wiring deploys and env vars through the agent, or when agent output drifts into unrequested migrations, backwards-compat code or over-engineering.
+description: Primitives-first workflow for building a real product with a coding agent (Claude Code, Codex, Cursor) without AI slop. Use when scaffolding a project for agentic coding, writing AGENTS.md / CLAUDE.md rules, installing per-dependency skills, wiring deploys and env vars through the agent, when the agent needs to verify its own work against third-party APIs (local emulators, screenshot evidence), or when agent output drifts into unrequested migrations, backwards-compat code or over-engineering.
 ---
 
 # Agentic Build Primitives
@@ -90,7 +90,27 @@ follow them even when your prompt is sloppy. Early strictness buys later lenienc
 - Start every capability at its primitive level (one bot per turn, no handoff; a paid plan that
   gates everything, no ledger) and build the next level on top in a later prompt.
 
-## 6. Checkpoints
+## 6. Verification the agent can run on its own
+
+The agent finishes reliably only when it can prove its own work.
+
+- **Emulate every third-party API the agent can't run itself.** Postgres and Redis run locally;
+  real Gmail or Slack accounts block bots and rate-limit, and no live account resets to a known
+  state. Point the integration at a stateful local clone: `emulate` as a pinned devDependency
+  ([vercel-labs/emulate](https://github.com/vercel-labs/emulate): GitHub, Google, Slack, Stripe,
+  Resend, Clerk, Twilio, AWS S3/SQS/IAM and more), LocalStack for fuller AWS. When no emulator
+  exists, have the agent build one from the vendor's API docs: same routes and responses, an
+  in-memory store, on localhost. Put each integration behind an interface so the emulator and the
+  real service are interchangeable, and say so in AGENTS.md. A pass proves the code against the
+  clone, not the real service.
+- **Screenshots are the definition of done.** "Done" means a screenshot of every page and state
+  the change touches (web, desktop, mobile), not the agent's report. Put it in the long-run goal
+  ("not finished until every page has a screenshot") and later in CI, with screenshots attached to
+  each PR, so a reviewer checks only what changed.
+- **Never let an agent auto-merge outside contributions beyond trivial fixes.** PR text and diffs
+  are a prompt-injection channel; a human approves the rest from the screenshots.
+
+## 7. Checkpoints
 
 Stage and commit after every working slice, and before installing a skill or running a large
 generation, so the real diff stays visible. When the agent breaks its own rule (e.g. switches
