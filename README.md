@@ -1,6 +1,6 @@
 # agentic-skills
 
-> A curated library of **231 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 23 domains.
+> A curated library of **248 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 23 domains.
 
 Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts. Each one encodes the expert knowledge, workflow, and guardrails for a single domain — like hiring a specialist for the task at hand. There is nothing to compile and no runtime: point Claude at the folder and invoke a skill by name.
 
@@ -11,7 +11,7 @@ Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts.
 
 ## Highlights
 
-- **231 skills across 23 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
+- **248 skills across 23 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
 - **Zero install** — each skill is a single markdown file. No dependencies, no build step, no lock-in.
 - **Stackable** — combine skills (for example, spec-driven + test-driven development) for compound expertise.
 - **Provenance-tracked** — every imported skill records its upstream source and stays syncable. See [Sources](#sources).
@@ -126,7 +126,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`tailwind-design-system`](tailwind/tailwind-design-system/SKILL.md) | Design system authoring with Tailwind |
 | [`tailwindcss-advanced-layouts`](tailwind/tailwindcss-advanced-layouts/SKILL.md) | Grid, flex, and responsive layout mastery |
 
-### Mobile & Cross-Platform `6 skills`
+### Mobile & Cross-Platform `8 skills`
 
 | Skill | What it does |
 |---|---|
@@ -136,6 +136,8 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`expo-tailwind-setup`](mobile/expo-tailwind-setup/SKILL.md) | Expo + NativeWind (Tailwind) setup and patterns |
 | [`sleek-design-mobile-apps`](mobile/sleek-design-mobile-apps/SKILL.md) | AI-powered mobile app design via Sleek API |
 | [`vercel-react-native-skills`](mobile/vercel-react-native-skills/SKILL.md) | React Native and Expo best practices — lists, animations, navigation |
+| [`animate-expo`](mobile/animate-expo/SKILL.md) | Animations in React Native and Expo — decide whether to animate, which thread, then easing and duration |
+| [`write-swift`](mobile/write-swift/SKILL.md) | Modern Swift — value types, Swift 6 data-race safety and approachable concurrency |
 
 ### Cloud & DevOps `6 skills`
 
@@ -231,7 +233,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`dataverse-python-usecase-builder`](python/dataverse-python-usecase-builder/SKILL.md) | Architecture framework for Dataverse use cases — 6 categories from CRM to compliance |
 | [`async-python-patterns`](python/async-python-patterns/SKILL.md) | Python asyncio, concurrency, and async/await patterns for I/O-bound apps |
 
-### Engineering Practices `61 skills`
+### Engineering Practices `64 skills`
 
 | Skill | What it does |
 |---|---|
@@ -289,6 +291,9 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`writing-for-agents`](engineering/writing-for-agents/SKILL.md) | Writing documents for agents — skills, AGENTS.md, CLAUDE.md |
 | [`reverse-engineer-anything`](engineering/reverse-engineer-anything/SKILL.md) | REA — reverse engineer native, Electron/JS, .NET, Android and web targets via MCP; evidence, graph, limitations, unknowns |
 | [`agentic-build-primitives`](engineering/agentic-build-primitives/SKILL.md) | Primitives-first agentic app building — AGENTS.md rules, per-dependency skills, prompt order, durable workers, API emulators and screenshot verification |
+| [`principle-attack-the-premise`](engineering/principle-attack-the-premise/SKILL.md) | After two fixes on one premise fail the same gate, write the premise down and test it before fix three (pstack) |
+| [`principle-type-system-discipline`](engineering/principle-type-system-discipline/SKILL.md) | Make illegal states unrepresentable, brand primitives, parse at boundaries, exhaust variants (pstack) |
+| [`deslop`](engineering/deslop/SKILL.md) | Remove AI slop from a branch diff — needless comments, defensive try/catch, `any` casts, deep nesting (Cursor team kit, via pstack) |
 | [`grilling`](engineering/grilling/SKILL.md) | Grill the user relentlessly about a plan — maps the decision tree, asks the whole frontier each round |
 | [`handoff`](engineering/handoff/SKILL.md) | Compact the current conversation into a handoff document for another agent |
 | [`implement`](engineering/implement/SKILL.md) | Implement one ticket test-first via tdd, then code-review, in a fresh context |
@@ -316,7 +321,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`react-doctor`](react/react-doctor/SKILL.md) | Scan and triage React diagnostics — lint, a11y, bundle size, architecture |
 | [`react-modernization`](react/react-modernization/SKILL.md) | Upgrade React — class-to-hooks migration, concurrent features, latest versions |
 
-### Frontend & Design `26 skills`
+### Frontend & Design `38 skills`
 
 | Skill | What it does |
 |---|---|
@@ -346,6 +351,18 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`stitch`](frontend/stitch/SKILL.md) | Google Stitch from the terminal — generate screens and variants, capture a running route into Stitch, extract / upload DESIGN.md, review a live app against it (the official `stitch agent-skills add` skill) |
 | [`scrollytelling`](frontend/scrollytelling/SKILL.md) | Scroll-driven storytelling — pinned sections, progressive reveals, CSS scroll-timeline / IntersectionObserver / GSAP ScrollTrigger, reduced-motion and mobile rules |
 | [`commodity-ceiling`](frontend/commodity-ceiling/SKILL.md) | Make features and pages feel premium — state table before code, check agent claims on the running UI, cross-screen consistency walk, break-it-on-purpose failure states |
+| [`emil-design-eng`](frontend/emil-design-eng/SKILL.md) | Emil Kowalski's design-engineering philosophy — UI polish, component design, when and how to animate |
+| [`animate`](frontend/animate/SKILL.md) | Build an animation from scratch in the right order — should it animate, purpose, trigger, easing, duration |
+| [`review-animations`](frontend/review-animations/SKILL.md) | Review motion code against Emil's craft bar — ease-out, never ease-in, frequency-based durations, before/after/why notes |
+| [`improve-animations`](frontend/improve-animations/SKILL.md) | Audit a codebase's motion code and write prioritized, self-contained implementation plans |
+| [`find-animation-opportunities`](frontend/find-animation-opportunities/SKILL.md) | Read-only search for places that should animate (and the many that shouldn't), with exact values |
+| [`animation-vocabulary`](frontend/animation-vocabulary/SKILL.md) | Reverse glossary — turn "the bouncy thing when a popover opens" into the exact motion term |
+| [`animation-performance`](frontend/animation-performance/SKILL.md) | Keep web animations inside the frame budget — composite-only properties, off-main-thread motion, jank diagnosis |
+| [`break-ui`](frontend/break-ui/SKILL.md) | Feed UI its worst-case data (long names, zero items, huge counts) behind a dev toggle and report what broke |
+| [`ui-prototype`](frontend/ui-prototype/SKILL.md) | Build several genuinely different versions of a UI piece behind a live picker and promote the winner (Emil's `prototype`; installing it upstream as `prototype` collides with `engineering/prototype`) |
+| [`mobile-native`](frontend/mobile-native/SKILL.md) | Make a web app feel native on a phone — tap states, 16px inputs, safe areas, meta tags |
+| [`pick-ui-library`](frontend/pick-ui-library/SKILL.md) | Curated, opinionated library picks per frontend task — numbers, OTP, charts, command menus, drag and drop |
+| [`ask-sonner`](frontend/ask-sonner/SKILL.md) | Sonner toast library guide — Toaster setup, toast() variants, promise toasts, updating and dismissing |
 
 ### 3D & WebGL `4 skills`
 
@@ -475,6 +492,8 @@ Skills in this library are sourced from upstream authors (tracked in each `SKILL
 - [anthropics/skills](https://github.com/anthropics/skills) — Frontend design, DOCX
 - [obra/superpowers](https://github.com/obra/superpowers) — Brainstorming, TDD, debugging, planning, code review workflows
 - [mattpocock/skills](https://github.com/mattpocock/skills) — TDD, architecture, grilling, caveman mode
+- [emilkowalski/skills](https://github.com/emilkowalski/skills) — animation, motion review, UI polish, Sonner, Swift (MIT)
+- [michael-denyer/pstack-claude](https://github.com/michael-denyer/pstack-claude) — Claude port of Lauren Tan's Cursor pstack; only standalone skills imported, install the full plugin for the rest (MIT)
 - [sleekdotdesign/agent-skills](https://github.com/sleekdotdesign/agent-skills) — Mobile app design via Sleek
 - [juliusbrussee/caveman](https://github.com/juliusbrussee/caveman) — Caveman commit, review, compress
 - [currents-dev/playwright-best-practices-skill](https://github.com/currents-dev/playwright-best-practices-skill) — Playwright

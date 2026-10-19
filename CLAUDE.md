@@ -1,6 +1,6 @@
 # agentic-skills
 
-A curated library of 230 drop-in skills for Claude Code. Each skill is a `SKILL.md` file that encodes expert knowledge, workflows, and guardrails for a specific domain.
+A curated library of 248 drop-in skills for Claude Code. Each skill is a `SKILL.md` file that encodes expert knowledge, workflows, and guardrails for a specific domain.
 
 ## Structure
 
@@ -46,6 +46,7 @@ Skills live inside category folders at the repo root. Each category is a lowerca
 - Skill folder names: lowercase kebab-case (`golang-pro`, `extract-design-system`)
 - Each `SKILL.md` starts with an HTML source comment (`<!-- Source: ... -->`) and optionally YAML frontmatter
 - Source/Install comments track upstream provenance — do not modify them
+- Optional `<!-- License: ... -->` comment names the upstream licence; full texts live in `THIRD_PARTY_LICENSES.md`
 - Skill count in README headline must stay accurate when adding/removing skills
 
 ## Knowledge Graph
