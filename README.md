@@ -1,6 +1,6 @@
 # agentic-skills
 
-> A curated library of **248 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 23 domains.
+> A curated library of **249 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 23 domains.
 
 Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts. Each one encodes the expert knowledge, workflow, and guardrails for a single domain — like hiring a specialist for the task at hand. There is nothing to compile and no runtime: point Claude at the folder and invoke a skill by name.
 
@@ -11,7 +11,7 @@ Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts.
 
 ## Highlights
 
-- **248 skills across 23 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
+- **249 skills across 23 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
 - **Zero install** — each skill is a single markdown file. No dependencies, no build step, no lock-in.
 - **Stackable** — combine skills (for example, spec-driven + test-driven development) for compound expertise.
 - **Provenance-tracked** — every imported skill records its upstream source and stays syncable. See [Sources](#sources).
@@ -364,7 +364,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`pick-ui-library`](frontend/pick-ui-library/SKILL.md) | Curated, opinionated library picks per frontend task — numbers, OTP, charts, command menus, drag and drop |
 | [`ask-sonner`](frontend/ask-sonner/SKILL.md) | Sonner toast library guide — Toaster setup, toast() variants, promise toasts, updating and dismissing |
 
-### 3D & WebGL `4 skills`
+### 3D & WebGL `5 skills`
 
 | Skill | What it does |
 |---|---|
@@ -372,6 +372,7 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`web3d-integration-patterns`](3d/web3d-integration-patterns/SKILL.md) | Combine Three.js, GSAP ScrollTrigger, R3F, Motion, and React Spring in one app |
 | [`lightweight-3d-effects`](3d/lightweight-3d-effects/SKILL.md) | Decorative pseudo-3D with Zdog, Vanta.js, and Vanilla-Tilt.js |
 | [`threejs-3d-generator`](3d/threejs-3d-generator/SKILL.md) | Generate, texture, rig, and export 3D game assets via the Tripo API |
+| [`spline`](3d/spline/SKILL.md) | Build and edit live Spline 3D scenes and 2D designs through the Spline MCP server — routing, authoring guides, screenshot-and-refine loop (official, needs MCP) |
 
 ### Video `12 skills`
 
