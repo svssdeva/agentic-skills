@@ -81,4 +81,5 @@ Each headered `SKILL.md` tracks its origin via the `<!-- Source: -->` / `<!-- In
 2. Match the upstream `SKILL.md` by parent folder == `<name>`, excluding hidden mirror dirs (`.claude/`, `.gemini/`, `.cursor/`, `.kiro/`, `.agents/`) and `docs/`/locale translation copies; pick the largest candidate. Many skills were renamed on import — fall back to matching by frontmatter `name:` or topic.
 3. Normalize before diffing (strip CRLF, drop the 2 header comment lines, drop leading blanks) to avoid false diffs.
 4. To update: replace the body with upstream content but KEEP the local 2 header comment lines, and copy sibling files/dirs the SKILL.md references (`references/`, `scripts/`, `rules/`, `schemas/`, `AGENTS.md`). Skip cruft (LICENSE/README/metadata.json/eval*).
-5. Leave HEADERLESS custom composites (no Source/Install) untouched. If an upstream skill is gone or replaced by a "has moved"/signpost stub, keep the local content — never overwrite a real skill with a redirect.
+5. Re-add any reference-list line marked `(local addition)` after replacing a body; its file lives beside the upstream ones.
+6. Leave HEADERLESS custom composites (no Source/Install) untouched. If an upstream skill is gone or replaced by a "has moved"/signpost stub, keep the local content — never overwrite a real skill with a redirect.

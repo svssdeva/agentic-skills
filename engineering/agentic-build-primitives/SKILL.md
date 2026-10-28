@@ -1,6 +1,6 @@
 ---
 name: agentic-build-primitives
-description: Primitives-first workflow for building a real product with a coding agent (Claude Code, Codex, Cursor) without AI slop. Use when scaffolding a project for agentic coding, writing AGENTS.md / CLAUDE.md rules, installing per-dependency skills, wiring deploys and env vars through the agent, when the agent needs to verify its own work against third-party APIs (local emulators, screenshot evidence), or when agent output drifts into unrequested migrations, backwards-compat code or over-engineering.
+description: Primitives-first workflow for building a real product with a coding agent (Claude Code, Codex, Cursor) without AI slop. Use when scaffolding a project for agentic coding, writing AGENTS.md / CLAUDE.md rules, installing per-dependency skills, wiring deploys and env vars through the agent, when the agent needs to verify its own work against third-party APIs (local emulators, screenshot evidence), when per-turn token cost is high (unused tools, oversized agent/skill packs), or when agent output drifts into unrequested migrations, backwards-compat code or over-engineering.
 ---
 
 # Agentic Build Primitives
@@ -110,7 +110,22 @@ The agent finishes reliably only when it can prove its own work.
 - **Never let an agent auto-merge outside contributions beyond trivial fixes.** PR text and diffs
   are a prompt-injection channel; a human approves the rest from the screenshots.
 
-## 7. Checkpoints
+## 7. Context cost
+
+Every turn re-sends the instructions, every loaded tool's definition and the conversation.
+
+- **Prune tools the project never uses.** Every unused MCP tool's definition is per-turn cost.
+  Tools like Microsoft's TokenEconomizer automate this; they prune with little notice and start
+  cold per repo, so check the prune list when a tool "disappears".
+- **Learned facts are an injection channel.** Anything that turns command output into
+  always-loaded "facts" lets a cloned repo plant instructions. Enable such features only on your
+  own repos.
+- **Adopt big agent/skill packs one piece at a time.** Fork, read, copy only the planner and your
+  main language's rules, add reviewer and security next, cut what you don't use. If you can't say
+  what an agent is for, don't load it. Never stack two packs that both plan, test-first and review:
+  their triggers compete.
+
+## 8. Checkpoints
 
 Stage and commit after every working slice, and before installing a skill or running a large
 generation, so the real diff stays visible. When the agent breaks its own rule (e.g. switches

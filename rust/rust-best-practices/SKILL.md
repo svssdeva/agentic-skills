@@ -36,6 +36,7 @@ Before reviewing, familiarize yourself with Apollo's Rust best practices. Read A
 - [Chapter 7 - Type State Pattern](references/chapter_07.md): Compile-time state safety, when to use it
 - [Chapter 8 - Comments vs Documentation](references/chapter_08.md): When to comment, doc comments, rustdoc
 - [Chapter 9 - Understanding Pointers](references/chapter_09.md): Thread safety, Send/Sync, pointer types
+- [Google style delta](references/google-style-delta.md) (local addition): where Google's Rust guide conflicts with or adds to the above; read it for libraries other teams consume
 
 ## Quick Reference
 

@@ -58,6 +58,12 @@ Inside any loop, give the agent **BM25 / exact keyword search first** and vector
   latency or ranking demonstrably hurts.
 - **Compile knowledge** only when the corpus is stable and the citation quality is worth the
   build and per-query cost.
+- **Semantic search on one laptop (own mail, files, chats):** a recompute-at-query index such as
+  LEANN (stores a pruned graph, recomputes embeddings per search). Trades storage for query-time
+  compute.
+- **Long structured documents (books, manuals, specs):** retrieve by the table of contents before
+  chunks. Cheapest form: give the agent the ToC as a tool and let it open sections. STAIR
+  (arXiv 2609.03874) is the trained version.
 
 ## Checklist before paying for a vector index
 
