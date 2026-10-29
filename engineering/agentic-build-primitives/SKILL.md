@@ -107,6 +107,11 @@ The agent finishes reliably only when it can prove its own work.
   the change touches (web, desktop, mobile), not the agent's report. Put it in the long-run goal
   ("not finished until every page has a screenshot") and later in CI, with screenshots attached to
   each PR, so a reviewer checks only what changed.
+- **A long-run goal is only as good as its check.** Give it a pass/fail target the agent can run:
+  golden outputs from a pinned reference implementation (plus deliberately broken inputs), then
+  "N× faster on a fixed benchmark, with every check still passing"; for look and feel, a fresh
+  model compares fixed-state captures with reference footage. The reference picks the target, so
+  choose it on purpose.
 - **Never let an agent auto-merge outside contributions beyond trivial fixes.** PR text and diffs
   are a prompt-injection channel; a human approves the rest from the screenshots.
 
