@@ -1,6 +1,6 @@
 # agentic-skills
 
-> A curated library of **249 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 23 domains.
+> A curated library of **270 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 24 domains.
 
 Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts. Each one encodes the expert knowledge, workflow, and guardrails for a single domain — like hiring a specialist for the task at hand. There is nothing to compile and no runtime: point Claude at the folder and invoke a skill by name.
 
@@ -11,7 +11,7 @@ Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts.
 
 ## Highlights
 
-- **249 skills across 23 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
+- **270 skills across 24 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
 - **Zero install** — each skill is a single markdown file. No dependencies, no build step, no lock-in.
 - **Stackable** — combine skills (for example, spec-driven + test-driven development) for compound expertise.
 - **Provenance-tracked** — every imported skill records its upstream source and stays syncable. See [Sources](#sources).
@@ -374,6 +374,34 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`threejs-3d-generator`](3d/threejs-3d-generator/SKILL.md) | Generate, texture, rig, and export 3D game assets via the Tripo API |
 | [`spline`](3d/spline/SKILL.md) | Build and edit live Spline 3D scenes and 2D designs through the Spline MCP server — routing, authoring guides, screenshot-and-refine loop (official, needs MCP) |
 
+### Game Development `21 skills`
+
+Godot 4.7 subset of [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills) (Apache-2.0), picked for a GDScript, web/Android, single-player pipeline. Unity, Unreal, C#, multiplayer and the router are not imported; install the upstream plugin for those.
+
+| Skill | What it does |
+|---|---|
+| [`godot-gdscript`](gamedev/godot-gdscript/SKILL.md) | Idiomatic typed GDScript: node lifecycle, `@export`/`@onready`/`@tool`, signals, `await` |
+| [`godot-nodes-scenes`](gamedev/godot-nodes-scenes/SKILL.md) | Scene tree and node composition, instancing `PackedScene`, autoload singletons |
+| [`godot-signals-groups`](gamedev/godot-signals-groups/SKILL.md) | Event-driven gameplay with custom signals, Callables and node groups |
+| [`godot-2d-movement`](gamedev/godot-2d-movement/SKILL.md) | `CharacterBody2D` + `move_and_slide()`: platformer and top-down movement, slopes, collisions |
+| [`godot-tilemap`](gamedev/godot-tilemap/SKILL.md) | `TileMapLayer`/`TileSet`: terrain autotiling, collision/nav layers, cell access from code |
+| [`godot-physics`](gamedev/godot-physics/SKILL.md) | Rigid/Static/Area/Character bodies, layers vs masks, contact signals, raycasts |
+| [`godot-ui-control`](gamedev/godot-ui-control/SKILL.md) | `Control` UI: anchors, containers, themes, keyboard/gamepad focus |
+| [`godot-animation`](gamedev/godot-animation/SKILL.md) | `AnimationPlayer`, `AnimationTree` and `Tween` |
+| [`godot-shaders`](gamedev/godot-shaders/SKILL.md) | Godot shading language: `canvas_item` 2D and `spatial` 3D shaders, uniforms, screen reads |
+| [`godot-3d-essentials`](gamedev/godot-3d-essentials/SKILL.md) | `Node3D`, cameras, lights, `WorldEnvironment`, materials, `GridMap` |
+| [`godot-resources`](gamedev/godot-resources/SKILL.md) | Data-driven design with custom `Resource` classes and `.tres` files |
+| [`godot-audio`](gamedev/godot-audio/SKILL.md) | `AudioStreamPlayer` variants, buses and effects, music vs SFX, beat sync |
+| [`godot-export`](gamedev/godot-export/SKILL.md) | Export templates and presets (desktop, Web, Android), headless CLI builds, web COOP/COEP |
+| [`godot-gdscript-headless-testing`](gamedev/godot-gdscript-headless-testing/SKILL.md) | GDScript tests via `godot --headless` with non-zero exit on failure for CI |
+| [`game-feel`](gamedev/game-feel/SKILL.md) | Juice: screen shake, hit-stop, easing, squash and stretch, layered feedback |
+| [`create-game-assets`](gamedev/create-game-assets/SKILL.md) | Art direction for cohesive sprites, tiles, UI and 3D assets: lock a target, build families, normalise, check in-game |
+| [`procedural-gen`](gamedev/procedural-gen/SKILL.md) | Seeded RNG, noise, dungeon/grid generation (BSP, random walk, WFC), loot tables |
+| [`save-systems`](gamedev/save-systems/SKILL.md) | What to serialise, slots, atomic crash-safe writes, schema versioning, autosave |
+| [`puzzle`](gamedev/puzzle/SKILL.md) | Grid/board state, rule resolution (match-3, sokoban, tile logic), scoring, undo |
+| [`prototype-fast`](gamedev/prototype-fast/SKILL.md) | One-hour greybox prototype to answer "is it fun?", with keep/kill criteria |
+| [`steam-publish`](gamedev/steam-publish/SKILL.md) | Steamworks depots and packages, `steamcmd` uploads, branches, release checklist |
+
 ### Video `12 skills`
 
 | Skill | What it does |
@@ -495,6 +523,8 @@ Skills in this library are sourced from upstream authors (tracked in each `SKILL
 - [mattpocock/skills](https://github.com/mattpocock/skills) — TDD, architecture, grilling, caveman mode
 - [emilkowalski/skills](https://github.com/emilkowalski/skills) — animation, motion review, UI polish, Sonner, Swift (MIT)
 - [michael-denyer/pstack-claude](https://github.com/michael-denyer/pstack-claude) — Claude port of Lauren Tan's Cursor pstack; only standalone skills imported, install the full plugin for the rest (MIT)
+- [splinetool/spline-skills](https://github.com/splinetool/spline-skills) — Spline 3D scenes via the Spline MCP server (MIT)
+- [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills) — Godot 4.7 subset only; install the upstream plugin for the rest (Apache-2.0)
 - [sleekdotdesign/agent-skills](https://github.com/sleekdotdesign/agent-skills) — Mobile app design via Sleek
 - [juliusbrussee/caveman](https://github.com/juliusbrussee/caveman) — Caveman commit, review, compress
 - [currents-dev/playwright-best-practices-skill](https://github.com/currents-dev/playwright-best-practices-skill) — Playwright

@@ -1,6 +1,6 @@
 # agentic-skills
 
-A curated library of 249 drop-in skills for Claude Code. Each skill is a `SKILL.md` file that encodes expert knowledge, workflows, and guardrails for a specific domain.
+A curated library of 270 drop-in skills for Claude Code. Each skill is a `SKILL.md` file that encodes expert knowledge, workflows, and guardrails for a specific domain.
 
 ## Structure
 
@@ -26,6 +26,7 @@ Skills live inside category folders at the repo root. Each category is a lowerca
 | `docker/` | Docker, containerization, Compose, multi-stage builds |
 | `engineering/` | Development methodology and practices |
 | `frontend/` | UI engineering, design systems, performance |
+| `gamedev/` | Game development: Godot 4 engine skills, game feel, assets, publishing |
 | `golang/` | Go language skills |
 | `nestjs/` | NestJS framework skills |
 | `productivity/` | Office documents, Jira, Confluence, Feishu/Lark |
