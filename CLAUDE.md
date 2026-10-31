@@ -1,6 +1,6 @@
 # agentic-skills
 
-A curated library of 270 drop-in skills for Claude Code. Each skill is a `SKILL.md` file that encodes expert knowledge, workflows, and guardrails for a specific domain.
+A curated library of 271 drop-in skills for Claude Code. Each skill is a `SKILL.md` file that encodes expert knowledge, workflows, and guardrails for a specific domain.
 
 ## Structure
 

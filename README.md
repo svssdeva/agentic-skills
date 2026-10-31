@@ -1,6 +1,6 @@
 # agentic-skills
 
-> A curated library of **270 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 24 domains.
+> A curated library of **271 drop-in skills** for Claude Code — behavioral modules that make your AI agent smarter, faster, and domain-aware across 24 domains.
 
 Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts. Each one encodes the expert knowledge, workflow, and guardrails for a single domain — like hiring a specialist for the task at hand. There is nothing to compile and no runtime: point Claude at the folder and invoke a skill by name.
 
@@ -11,7 +11,7 @@ Skills are plain markdown (`SKILL.md`) files that Claude reads *before* it acts.
 
 ## Highlights
 
-- **270 skills across 24 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
+- **271 skills across 24 domains** — languages (Rust, Go, Python, TypeScript), frameworks (Angular, React, Astro, NestJS, Ionic), and disciplines (testing, SEO, engineering practice, design, AI/RAG).
 - **Zero install** — each skill is a single markdown file. No dependencies, no build step, no lock-in.
 - **Stackable** — combine skills (for example, spec-driven + test-driven development) for compound expertise.
 - **Provenance-tracked** — every imported skill records its upstream source and stays syncable. See [Sources](#sources).
@@ -346,7 +346,8 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 | [`apple-design`](frontend/apple-design/SKILL.md) | Apple's interface and fluid-motion principles translated for the web |
 | [`imagegen-frontend-mobile`](frontend/imagegen-frontend-mobile/SKILL.md) | Premium app-native mobile screen concepts and flows via image generation |
 | [`image-to-code`](frontend/image-to-code/SKILL.md) | Image-first web design — generate section design images, then implement to match |
-| [`hallmark`](frontend/hallmark/SKILL.md) | Anti-AI-slop design skill — structural variety, 21 themes, audit / redesign / study verbs, design.md export |
+| [`hallmark`](frontend/hallmark/SKILL.md) | Anti-AI-slop design skill (v2.0) — a non-waivable floor, 50 themes, 21 macrostructures, redesign / audit verbs, Node lint scripts (`sloplint`) |
+| [`subframe-motion`](frontend/subframe-motion/SKILL.md) | Subframe Motion catalogue — 309 copy-paste React animations, motion components and WebGL shaders, licence headers kept; optional no-account MCP |
 | [`scroll-world`](frontend/scroll-world/SKILL.md) | Scroll-scrubbed cinematic "fly through the world" landing page from AI-generated clips (Higgsfield / Runway via MCP) |
 | [`stitch`](frontend/stitch/SKILL.md) | Google Stitch from the terminal — generate screens and variants, capture a running route into Stitch, extract / upload DESIGN.md, review a live app against it (the official `stitch agent-skills add` skill) |
 | [`scrollytelling`](frontend/scrollytelling/SKILL.md) | Scroll-driven storytelling — pinned sections, progressive reveals, CSS scroll-timeline / IntersectionObserver / GSAP ScrollTrigger, reduced-motion and mobile rules |
