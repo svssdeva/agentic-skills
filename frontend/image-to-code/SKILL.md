@@ -1,5 +1,5 @@
-<!-- Source: https://www.skills.sh/leonxlnx/taste-skill/image-to-code -->
-<!-- Install: npx skills add https://github.com/leonxlnx/taste-skill --skill image-to-code -->
+<!-- Source: https://www.skills.sh/leonxlnx/imagegen-skills/image-to-code -->
+<!-- Install: npx skills add https://github.com/leonxlnx/imagegen-skills --skill image-to-code -->
 
 ---
 name: image-to-code

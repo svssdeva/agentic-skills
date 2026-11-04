@@ -13,7 +13,7 @@
 //
 // Flags: -o/--output (.wav → ffmpeg transcode; .mp3 → raw bytes), --words,
 //   --voice (starfish id), --speed, --lang, --list.
-// Requires: $HEYGEN_API_KEY / OAuth ~/.heygen credentials and ffmpeg for .wav output.
+// Requires: $HEYGEN_API_KEY / OAuth ~/.hyperframes credentials and ffmpeg for .wav output.
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
@@ -94,7 +94,7 @@ const voiceId = await resolveVoiceId({ provider: "heygen", userVoice, lang });
 if (!userVoice) console.error(`· using voice ${voiceId}`);
 
 // ---------- synthesize (shared engine code) ----------
-const { ok, words } = await synthesizeOne({
+const { ok, words, error } = await synthesizeOne({
   provider: "heygen",
   text,
   voiceId,
@@ -103,7 +103,8 @@ const { ok, words } = await synthesizeOne({
   wavAbs: output,
   hyperframesDir: process.cwd(),
 });
-if (!ok) die("synthesis failed (HeyGen request/transcode error)");
+// HeyGen's own refusal, verbatim: a caller shows it or acts on it (a deleted voice, a limit).
+if (!ok) die(error ?? "synthesis failed (HeyGen request/transcode error)");
 
 let wordCount = 0;
 if (wordsPath) {

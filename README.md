@@ -179,8 +179,8 @@ Using engineering/spec-driven-development + engineering/test-driven-development,
 |---|---|
 | [`neon-postgres`](database/neon-postgres/SKILL.md) | Neon Serverless Postgres — branching, autoscaling, pooling, SDKs, CLI/MCP |
 | [`postgresql-optimization`](database/postgresql-optimization/SKILL.md) | PostgreSQL-specific features — JSONB, arrays, custom types, full-text, tuning |
-| [`prisma-database-setup`](database/prisma-database-setup/SKILL.md) | Configure Prisma against Postgres, MySQL, SQLite, or MongoDB |
-| [`prisma-postgres`](database/prisma-postgres/SKILL.md) | Prisma Postgres — Console, create-db CLI, Management API and SDK |
+| [`prisma-orm-setup`](database/prisma-orm-setup/SKILL.md) | Set up Prisma ORM 8 against Postgres, MySQL, SQLite, or MongoDB |
+| [`prisma-postgres-setup`](database/prisma-postgres-setup/SKILL.md) | Prisma Postgres — Console, create-db CLI, Management API and SDK |
 | [`prisma-upgrade-v7`](database/prisma-upgrade-v7/SKILL.md) | Migrate Prisma ORM v6 → v7, covering every breaking change |
 | [`prisma-driver-adapter-implementation`](database/prisma-driver-adapter-implementation/SKILL.md) | Implement and modify Prisma 7 SQL driver adapters |
 | [`supabase`](database/supabase/SKILL.md) | Supabase end to end — Database, Auth, Edge Functions, Realtime, Storage, RLS |
@@ -452,7 +452,7 @@ Godot 4.7 subset of [gamedev-skills/awesome-gamedev-agent-skills](https://github
 | [`caveman`](utils/caveman/SKILL.md) | Ultra-compressed communication mode (~75% fewer tokens) |
 | [`cavecrew`](utils/cavecrew/SKILL.md) | Decide when to delegate to caveman-style subagents (investigator/builder/reviewer) |
 | [`caveman-stats`](utils/caveman-stats/SKILL.md) | Show real session token usage and estimated savings (/caveman-stats) |
-| [`webwright`](utils/webwright/SKILL.md) | Drive a local Playwright browser to solve web tasks code-as-action, with screenshots |
+| [`cuawright-web`](utils/cuawright-web/SKILL.md) | Drive a local Playwright browser to solve web tasks code-as-action, with screenshots |
 | [`apify-ultimate-scraper`](utils/apify-ultimate-scraper/SKILL.md) | AI-powered web scraper for 25+ platforms via Apify actors |
 
 ---
