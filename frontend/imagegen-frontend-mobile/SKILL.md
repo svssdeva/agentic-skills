@@ -1,5 +1,5 @@
-<!-- Source: https://www.skills.sh/leonxlnx/taste-skill/imagegen-frontend-mobile -->
-<!-- Install: npx skills add https://github.com/leonxlnx/taste-skill --skill imagegen-frontend-mobile -->
+<!-- Source: https://www.skills.sh/leonxlnx/imagegen-skills/imagegen-frontend-mobile -->
+<!-- Install: npx skills add https://github.com/leonxlnx/imagegen-skills --skill imagegen-frontend-mobile -->
 
 ---
 name: imagegen-frontend-mobile

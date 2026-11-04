@@ -1,9 +1,10 @@
-<!-- Source: https://skills.sh/leonxlnx/taste-skill/high-end-visual-design -->
-<!-- Install: npx skills add https://github.com/leonxlnx/taste-skill --skill high-end-visual-design -->
+<!-- Source: https://skills.sh/leonxlnx/taste-skill-classics/high-end-visual-design -->
+<!-- Install: npx skills add https://github.com/leonxlnx/taste-skill-classics --skill high-end-visual-design -->
 
 ---
 name: high-end-visual-design
-description: Teaches the AI to design like a high-end agency. Defines the exact fonts, spacing, shadows, card structures, and animations that make a website feel expensive. Blocks all the common defaults that make AI designs look cheap or generic.
+description: "Classic style skill, opt-in: it runs only when called by name. A calm, polished look with soft contrast, generous whitespace and spring motion."
+disable-model-invocation: true
 ---
 
 # Agent Skill: Principal UI/UX Architect & Motion Choreographer (Awwwards-Tier)
