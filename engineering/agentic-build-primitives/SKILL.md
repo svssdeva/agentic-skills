@@ -112,6 +112,12 @@ The agent finishes reliably only when it can prove its own work.
   "N× faster on a fixed benchmark, with every check still passing"; for look and feel, a fresh
   model compares fixed-state captures with reference footage. The reference picks the target, so
   choose it on purpose.
+- **Review in a fresh context, and make it converge.** The reviewer never built the change; scale
+  its depth by what a bug would cost a customer, and on risky changes a second model family tends
+  to catch different bugs. Keep what counts as failure in a short `REVIEW.md` and give it to the
+  reviewer; add a rule each time a bug slips through. After the first passes, review only the new
+  diff and never repeat a finding; name each finding's bug class so the fix covers every instance;
+  after three rounds, rethink the approach instead of patching.
 - **Never let an agent auto-merge outside contributions beyond trivial fixes.** PR text and diffs
   are a prompt-injection channel; a human approves the rest from the screenshots.
 
