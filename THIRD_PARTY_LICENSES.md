@@ -2,7 +2,7 @@
 
 Imported skills keep their upstream licence. Each imported `SKILL.md` names its source and licence in its header comments; the full texts follow.
 
-## emilkowalski/skills — frontend/{emil-design-eng, animate, review-animations, improve-animations, find-animation-opportunities, animation-vocabulary, animation-performance, break-ui, ui-prototype, mobile-native, pick-ui-library, ask-sonner, apple-design}, mobile/{animate-expo, write-swift}
+## emilkowalski/skills — frontend/{emil-design-eng, animate, review-animations, improve-animations, find-animation-opportunities, animation-vocabulary, animation-performance, break-ui, ui-prototype, mobile-native, pick-ui-library, ask-sonner, apple-design}
 
 ```
 MIT License

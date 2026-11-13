@@ -3,7 +3,7 @@
 
 ---
 name: astro-architecture
-description: Technical architecture for Astro lead generation websites. Use when setting up new projects, configuring build tools, or establishing project foundations. For images use astro-images skill. For SEO use astro-seo skill.
+description: Technical architecture for Astro lead generation websites. Use when setting up new projects, configuring build tools, or establishing project foundations. For images use astro-images skill. For SEO use the claude-seo plugin (claude-seo:seo).
 ---
 
 # Astro Architecture Skill
@@ -18,7 +18,7 @@ Technical foundation for high-performance, accessible, translation-ready lead ge
 4. **Mobile-first CSS** — Base styles for mobile, `md:` and up for larger
 5. **Performance is build-time** — No runtime optimization hacks
 6. **One source of truth** — All site data in `site.ts`
-7. **Skill boundaries** — Images via `astro-images`, SEO via `astro-seo`, forms via `astro-forms`
+7. **Skill boundaries** — Images via `astro-images`, SEO via `claude-seo:seo` (plugin), forms via `astro-forms`
 
 ## Forbidden (STOP)
 
@@ -29,7 +29,7 @@ STOP and reassess if any of these occur:
 - ❌ Inline business logic in `<script>` tags
 - ❌ Hardcoded translations in components
 - ❌ Images not using `astro-images` skill
-- ❌ SEO markup not using `astro-seo` skill
+- ❌ SEO markup not using the `claude-seo:seo` plugin skill
 - ❌ Missing required pages (404, Privacy Policy)
 - ❌ `client:load` without explicit justification
 - ❌ External fonts via Google Fonts API (self-host instead)
@@ -46,7 +46,7 @@ STOP and reassess if any of these occur:
 | Forms | `astro-forms` skill |
 | Calculator | `lead-gen-calculator` skill |
 | Images | `astro-images` skill |
-| SEO | `astro-seo` skill |
+| SEO | `claude-seo:seo` plugin skill |
 | UX | `astro-ux` skill |
 
 ## Performance Targets

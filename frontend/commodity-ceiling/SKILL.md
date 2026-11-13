@@ -9,7 +9,7 @@ description: Audit and build protocol that takes an app or site from "looks dece
 
 AI tools make the look a commodity; premium comes from product-specific states and recovery.
 Visual craft is covered by `frontend/anti-ui-slop`, `frontend/interface-design` and
-`frontend/high-end-visual-design`; this skill covers behaviour and states.
+`frontend/design-taste-frontend`; this skill covers behaviour and states.
 
 ## 1. Core flow hand-holding (the part AI leaves out)
 

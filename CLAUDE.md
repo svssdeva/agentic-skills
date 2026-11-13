@@ -1,6 +1,6 @@
 # agentic-skills
 
-A curated library of 271 drop-in skills for Claude Code. Each skill is a `SKILL.md` file that encodes expert knowledge, workflows, and guardrails for a specific domain.
+A curated library of 204 drop-in skills for Claude Code. Each skill is a `SKILL.md` file that encodes expert knowledge, workflows, and guardrails for a specific domain.
 
 ## Structure
 
@@ -32,13 +32,13 @@ Skills live inside category folders at the repo root. Each category is a lowerca
 | `productivity/` | Office documents, Jira, Confluence, Feishu/Lark |
 | `python/` | Python language skills |
 | `react/` | React and Next.js skills |
-| `mobile/` | Ionic, Capacitor, Expo |
+| `mobile/` | Capacitor, mobile app design |
 | `rust/` | Rust language skills |
 | `seo/` | SEO, content strategy, marketing |
 | `tailwind/` | Tailwind CSS skills |
 | `testing/` | Testing tools and practices |
 | `typescript/` | TypeScript skills |
-| `utils/` | Utilities and meta-skills (compression, skill discovery, site audit) |
+| `utils/` | Utilities and meta-skills (compression, site audit, browser automation, scraping) |
 | `video/` | HTML video composition (HyperFrames), video editing and generation |
 
 ## Conventions
@@ -50,29 +50,14 @@ Skills live inside category folders at the repo root. Each category is a lowerca
 - Optional `<!-- License: ... -->` comment names the upstream licence; full texts live in `THIRD_PARTY_LICENSES.md`
 - Skill count in README headline must stay accurate when adding/removing skills
 
-## Knowledge Graph
-
-This repo has a graphify knowledge graph at `graphify-out/` that maps relationships between all skills.
-
-- `graphify-out/graph.json` — structured graph data
-- `graphify-out/graph.html` — interactive visualization (open in browser)
-- `graphify-out/GRAPH_REPORT.md` — audit report with god nodes, surprising connections, suggested questions
-
-**Before answering questions about skill relationships, clusters, or cross-cutting concerns, consult the graph first** — it's faster and more accurate than re-reading individual files.
-
-Rebuild after adding skills:
-
-```
-/graphify . --update
-```
-
 ## Adding a Skill
 
+0. If a skill with the same `name:` is already installed in `~/.claude/skills` or by a plugin, don't copy it here — add a row to `INSTALL-EXTERNAL.md` instead.
 1. Place the skill in the appropriate category: `<category>/my-skill/SKILL.md`
 2. Add `<!-- Source: ... -->` and `<!-- Install: ... -->` header comments
 3. Add the skill to the appropriate category table in `README.md` with the nested path link
 4. Bump the skill count in the README headline
-5. Run `/graphify . --update` to refresh the knowledge graph
+5. Run `python3 scripts/check_skills.py` (any Python 3.11+; on Windows not the Store stub) — every check must pass
 
 ## Updating Skills from Upstream
 
@@ -84,3 +69,4 @@ Each headered `SKILL.md` tracks its origin via the `<!-- Source: -->` / `<!-- In
 4. To update: replace the body with upstream content but KEEP the local 2 header comment lines, and copy sibling files/dirs the SKILL.md references (`references/`, `scripts/`, `rules/`, `schemas/`, `AGENTS.md`). Skip cruft (LICENSE/README/metadata.json/eval*).
 5. Re-add any reference-list line marked `(local addition)` after replacing a body; its file lives beside the upstream ones.
 6. Leave HEADERLESS custom composites (no Source/Install) untouched. If an upstream skill is gone or replaced by a "has moved"/signpost stub, keep the local content — never overwrite a real skill with a redirect.
+7. Locally split skills — frontend/scroll-world, frontend/design-taste-frontend, frontend/imagegen-frontend-mobile, frontend/image-to-code, engineering/reverse-engineer-anything, frontend/interface-design — had sections moved verbatim into references/ to cut load cost. On resync, apply upstream changes, then redo the same split (same section → same references file), keep each SKILL.md body ≤2,500 words, and diff to confirm no upstream line was dropped.

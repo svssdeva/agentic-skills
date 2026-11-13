@@ -1,5 +1,9 @@
 <!-- Source: https://skills.sh/site/bun.sh/bun -->
 <!-- Install: npx skills add https://github.com/svssdeva/agentic-skills --skill bun -->
+---
+name: bun
+description: Bun runtime, package manager, bundler and test runner - CLI reference, when to choose Bun vs Node, migration from Node/npm. Deeper guides in references/bun-runtime.md and references/bun-development.md.
+---
 
 # Bun Skill Reference
 
@@ -194,3 +198,8 @@ Before submitting work with Bun:
 ---
 
 > For additional documentation and navigation, see: https://bun.com/docs/llms.txt
+
+## More
+
+- [Bun runtime, Bun vs Node, migration](references/bun-runtime.md)
+- [Bun development workflow](references/bun-development.md)
