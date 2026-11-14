@@ -47,3 +47,6 @@ Desktop.ini
 
 .claude
 .cursor
+
+# local-only adaptations of third-party skills without a licence (do not publish)
+video/stickman-story-shorts/
